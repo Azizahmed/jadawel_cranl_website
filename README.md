@@ -107,6 +107,63 @@ isolated and correctly ordered inside RTL prose.
   device come from the identity system. The diamond only marks focus; it is never
   used as a logo or an app icon.
 
+## The platform stage
+
+`02` on the home page is a single composed diagram: the headline over a Saudi
+map field, the five segments as cards on either side, connector lines running
+into a Jadawel window, the deployment and security strip below, and the promise
+wedge in the corner.
+
+Every part of it is HTML, CSS, and inline SVG. There is not one raster image in
+the section, which is why it replaced five photographs and made the page lighter
+at the same time. One hidden `<svg>` sprite holds the five segment illustrations
+and every UI glyph, so each shape is defined once and referenced with `<use>`.
+
+The app window is real markup, so the Arabic, the RTL column order, and the
+Western digits stay correct at any density instead of being baked into pixels.
+The map is a public-domain [Natural Earth](https://www.naturalearthdata.com/)
+outline projected to a flat path, not a traced or invented shape.
+
+Rebuild the section after editing its copy:
+
+```bash
+python3 tools/build-stage.py     # rewrites the section inside src/pages/index.html
+node tools/build.mjs
+```
+
+## Performance
+
+Measured on this machine, cold cache, same nginx and the same gzip settings,
+previous commit against the current one:
+
+| | Before | After | |
+| --- | ---: | ---: | --- |
+| Initial load, desktop | 346 kB | **98 kB** | −72% |
+| Initial load, mobile | 345 kB | **93 kB** | −73% |
+| Whole page after scrolling | 1058 kB | **159 kB** | −85% |
+| Requests | 15 | **11** | |
+| First contentful paint | 844 ms | **572 ms** | −32% |
+
+What produced it:
+
+- **The five segment photographs are gone from the page.** They were 726 kB and
+  used to load on scroll. The composed stage replaced them with markup.
+- **Fonts: 197 kB to 43 kB.** `tools/subset-fonts.py` trims the bundled Noto
+  Sans Arabic to the 132 characters this site actually renders, keeping the
+  variable weight axis and every Arabic shaping feature. The full-width
+  originals live in `tools/fonts/` and are never deployed.
+- **The header logo: 115 kB to 9 kB.** It is displayed 120 px wide, so
+  `tools/optimize-logo.mjs` renders a 240 px asset for 2x screens. That script
+  also builds the favicon from the approved wordmark.
+- **The deployed tree is 389 kB**, down from roughly 3.5 MB. Source material
+  (`assets/photography/`, `tools/fonts/`, `docs/`) is excluded by
+  `tools/deploy.sh` and stays in the repository.
+
+A trimmed font can silently drop a glyph, so that risk is closed mechanically:
+every build re-reads the pages, extracts the characters they render, and fails
+with the offending codepoint and the fix if any of them is missing from
+`assets/fonts/coverage.txt`.
+
 ## Imagery
 
 Five sector photographs, one sovereignty field, and the social cover are new
@@ -172,7 +229,10 @@ npm run audit                             # WCAG AA contrast, alt text, heading 
 5. **The contact form does not transmit.** It is a static demo: submitting shows
    a status message that points the visitor to `info@jadawl.site`. Wire it to a
    real endpoint before launch.
-6. **Not tested:** real screen readers, actual mobile browsers, and printing.
+6. **The fonts are trimmed to the copy that exists today.** Adding text needs
+   `python3 tools/subset-fonts.py` before committing. Forgetting is not silent:
+   the build fails and names the missing codepoint.
+7. **Not tested:** real screen readers, actual mobile browsers, and printing.
    `prefers-reduced-motion` and `prefers-color-scheme: light` are handled in CSS.
 
 ## Brand provenance

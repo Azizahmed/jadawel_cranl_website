@@ -37,6 +37,7 @@ rsync -a --delete \
   --exclude 'src' \
   --exclude 'tools' \
   --exclude 'docs' \
+  --exclude 'assets/photography' \
   --exclude 'package.json' \
   --exclude 'package-lock.json' \
   --exclude 'README.md' \

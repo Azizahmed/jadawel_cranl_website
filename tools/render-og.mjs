@@ -20,7 +20,7 @@ import { fileURLToPath } from "node:url";
 
 const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const base = process.argv[2] || "http://127.0.0.1:8899";
+const base = process.argv[2] || "http://127.0.0.1";
 const target = path.join(root, "assets/img/og-cover.jpg");
 
 const chrome = process.env.CHROMIUM || "/usr/bin/chromium";

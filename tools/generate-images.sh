@@ -14,7 +14,8 @@ set -uo pipefail
 
 cd "$(dirname "$0")/.."
 OUT="assets/img"
-mkdir -p "$OUT"
+PHOTO="assets/photography"   # segment photography: kept as source, not deployed
+mkdir -p "$OUT" "$PHOTO"
 
 set -a
 # shellcheck disable=SC1091
@@ -51,7 +52,9 @@ EOF
 fail=0
 while IFS='|' read -r name size prompt; do
   [ -z "$name" ] && continue
-  [ -s "$OUT/$name.jpg" ] && [ "$(stat -c%s "$OUT/$name.jpg")" -gt 20000 ] && { echo "skip $name (exists)"; continue; }
+  [ -s "$dest" ] && [ "$(stat -c%s "$dest")" -gt 20000 ] && { echo "skip $name (exists)"; continue; }
+  dest="$OUT/$name.jpg"
+  case "$name" in sector-*) dest="$PHOTO/$name.jpg";; esac
   attempt=0
   while [ $attempt -lt 4 ]; do
     attempt=$((attempt + 1))
@@ -65,17 +68,17 @@ except Exception:
     if [ -n "$url" ]; then
       # The download endpoint intermittently returns a tiny error body, so the
       # size gate is what makes this loop correct rather than optimistic.
-      curl -s -m 180 -o "$OUT/$name.tmp" "$url"
-      if [ -s "$OUT/$name.tmp" ] && [ "$(stat -c%s "$OUT/$name.tmp")" -gt 20000 ]; then
-        mv "$OUT/$name.tmp" "$OUT/$name.jpg"
-        echo "ok   $name ($(stat -c%s "$OUT/$name.jpg") bytes, attempt $attempt)"
+      curl -s -m 180 -o "$dest.tmp" "$url"
+      if [ -s "$dest.tmp" ] && [ "$(stat -c%s "$dest.tmp")" -gt 20000 ]; then
+        mv "$dest.tmp" "$dest"
+        echo "ok   $name ($(stat -c%s "$dest") bytes, attempt $attempt)"
         break
       fi
     fi
     echo "retry $name (attempt $attempt)"
     sleep 3
   done
-  [ -s "$OUT/$name.jpg" ] || { echo "FAIL $name"; fail=1; }
+  [ -s "$dest" ] || { echo "FAIL $name"; fail=1; }
 done <<< "$JOBS"
 
 echo "done (exit $fail)"

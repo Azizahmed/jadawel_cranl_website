@@ -92,3 +92,55 @@ const robots = [
 await writeFile(path.join(root, "robots.txt"), robots, "utf8");
 
 console.log(`built sitemap.xml and robots.txt for ${SITE_URL}`);
+
+// --- font coverage guard ---------------------------------------------------
+// assets/fonts holds fonts trimmed to the characters the site renders, which is
+// what took the page from 197 kB of fonts to 43 kB. That trim is only safe if
+// something notices when new copy needs a character the font no longer has, so
+// every build checks the pages against the coverage record.
+const coverageFile = path.join(root, "assets/fonts/coverage.txt");
+let covered = null;
+try {
+  covered = new Set(
+    (await readFile(coverageFile, "utf8"))
+      .trim()
+      .split(/\s+/)
+      .map((hex) => parseInt(hex, 16)),
+  );
+} catch {
+  console.warn("warning: assets/fonts/coverage.txt missing, skipping the font coverage check");
+}
+
+const rendered = new Set();
+for (const page of PAGES) {
+  let text = await readFile(path.join(root, page.out), "utf8");
+  text += await readFile(path.join(root, "assets/js/i18n.js"), "utf8");
+  // Ignore markup, so tag and attribute names do not count as rendered text.
+  text = text
+    .replace(/<svg\b[\s\S]*?<\/svg>/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/url\([^)]*\)/g, " ");
+  for (const char of text) rendered.add(char.codePointAt(0));
+}
+
+// Whitespace and bidi controls carry meaning but have no glyph of their own.
+const noGlyphNeeded = (cp) =>
+  (cp >= 0x0000 && cp <= 0x0020) ||
+  (cp >= 0x007f && cp <= 0x009f) ||
+  (cp >= 0x200b && cp <= 0x2010) ||
+  cp === 0xfeff ||
+  cp === 0x00ad;
+
+const uncovered = covered
+  ? [...rendered].filter((cp) => !noGlyphNeeded(cp) && !covered.has(cp)).sort((a, b) => a - b)
+  : [];
+
+if (uncovered.length) {
+  console.error(
+    `\nfont coverage FAILED: ${uncovered.length} character(s) in the pages are not in the shipped fonts:\n  ` +
+      uncovered.map((cp) => `${String.fromCodePoint(cp)} (U+${cp.toString(16).toUpperCase().padStart(4, "0")})`).join(", ") +
+      "\nRun: python3 tools/subset-fonts.py",
+  );
+  process.exit(1);
+}
+if (covered) console.log(`font coverage ok (${covered.size} codepoints shipped)`);

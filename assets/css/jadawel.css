@@ -415,6 +415,7 @@ p { margin: 0; }
 .chip-blue { background: var(--blue); border-color: var(--blue); color: var(--white); }
 .chip-mint { background: rgba(131, 215, 194, 0.24); border-color: rgba(19, 122, 96, 0.24); color: #0f6b53; }
 .chip-amber { background: rgba(246, 200, 95, 0.26); border-color: rgba(146, 104, 12, 0.24); color: #8a5d05; }
+.chip-coral { background: rgba(227, 93, 106, 0.16); border-color: rgba(178, 52, 66, 0.28); color: #97303c; }
 .chip-plain { background: var(--cloud); }
 
 .mock-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
@@ -497,6 +498,9 @@ p { margin: 0; }
 
 /* --- Section scaffolding ------------------------------------------------- */
 .section { padding-block: 84px; }
+
+/* Keep anchored sections clear of the sticky header. */
+section[id] { scroll-margin-top: 104px; }
 .section-cloud { background: var(--cloud); border-block: 1px solid var(--hairline); }
 .section-ink { background: var(--ink); color: var(--white); }
 .section-ink .section-lede { color: rgba(255, 255, 255, 0.72); }
@@ -622,33 +626,344 @@ p { margin: 0; }
 .pillars b { font-size: 15.5px; font-weight: 700; }
 .pillars span { font-size: 14.5px; color: var(--slate); line-height: 1.65; }
 
-/* --- Segments ------------------------------------------------------------ */
-.segment {
+/* --- Platform stage (segment overview) -----------------------------------
+   One composed diagram instead of five photographs: the map, the connectors,
+   the five segment cards and the product window are all HTML, CSS and inline
+   SVG. Nothing here is a raster image, so the section costs a few kilobytes
+   and the Arabic stays crisp at any density.
+   ------------------------------------------------------------------------ */
+.stage-section { position: relative; overflow: hidden; padding-block-start: 56px; }
+.stage-section .section-num { justify-content: center; }
+.stage-shell { position: relative; }
+
+.stage-title {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.35rem);
+  max-width: 22ch;
+  margin-inline: auto;
+}
+
+/* Decorative field behind the whole composition. */
+.stage-map {
+  position: absolute;
+  z-index: 0;
+  inset-block-start: 0;
+  inset-inline: 0;
+  margin-inline: auto;
+  width: min(720px, 68%);
+  height: auto;
+  fill: #d3e1fa;
+  pointer-events: none;
+}
+.stage-bloom {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(720px 320px at 50% 4%, rgba(37, 99, 235, 0.12), transparent 70%),
+    radial-gradient(420px 260px at 6% 92%, rgba(37, 99, 235, 0.09), transparent 72%),
+    radial-gradient(420px 260px at 96% 86%, rgba(37, 99, 235, 0.09), transparent 72%);
+}
+.stage-swoosh {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+}
+.stage-swoosh--br { inset-block-end: -18px; inset-inline-end: -40px; width: 260px; height: 190px; }
+.stage-swoosh--bl { inset-block-end: -26px; inset-inline-start: -46px; width: 190px; height: 150px; opacity: 0.5; }
+
+.stage {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 212px minmax(0, 1fr) 212px;
+  gap: 22px;
+  align-items: center;
+  margin-block-start: 34px;
+}
+.stage-side { display: flex; flex-direction: column; gap: 22px; }
+.stage-side--end { justify-content: center; gap: 46px; }
+
+/* Connector layer: decorative lines only. */
+.stage-links {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 1.7;
+  opacity: 0.55;
+}
+.stage-links circle { fill: var(--white); stroke-width: 2.4; }
+
+/* --- Segment cards ------------------------------------------------------- */
+.seg-card {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   background: var(--white);
   border: 1px solid var(--hairline);
   border-radius: var(--radius);
+  padding: 14px 16px;
+  box-shadow: 0 1px 2px rgba(11, 15, 25, 0.04), 0 10px 24px rgba(11, 15, 25, 0.05);
+}
+.seg-copy { min-width: 0; }
+.seg-copy b {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+.seg-copy span {
+  display: block;
+  margin-block-start: 3px;
+  font-size: 12.5px;
+  color: var(--slate);
+  line-height: 1.5;
+}
+.seg-art {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  background: linear-gradient(160deg, #f3f6fd, #e6eefc);
+  display: grid;
+  place-items: center;
+}
+.seg-art svg { width: 42px; height: 42px; display: block; }
+
+/* --- Product window ------------------------------------------------------ */
+.appwin {
+  position: relative;
+  z-index: 2;
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(11, 15, 25, 0.05), 0 26px 60px rgba(11, 15, 25, 0.13);
   overflow: hidden;
+}
+.appwin-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-block-end: 1px solid var(--hairline);
+}
+.appwin-new {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--blue);
+  color: var(--white);
+  border-radius: 8px;
+  padding: 7px 13px;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.appwin-new i { font-style: normal; font-size: 15px; line-height: 1; }
+.appwin-ic {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  color: var(--slate);
+  flex-shrink: 0;
+}
+.appwin-ic svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; }
+.appwin-search {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 6px 11px;
+  font-size: 12px;
+  color: var(--slate);
+  background: var(--white);
+}
+.appwin-search svg { width: 14px; height: 14px; fill: none; stroke: var(--slate); stroke-width: 1.8; flex-shrink: 0; }
+.appwin-search span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.appwin-body { display: grid; grid-template-columns: 138px minmax(0, 1fr); }
+.appwin-side {
+  border-inline-end: 1px solid var(--hairline);
+  background: var(--ink);
+  padding: 12px 10px;
   display: flex;
   flex-direction: column;
+  gap: 2px;
+  line-height: 1.4;
 }
-.segment img {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
+.appwin-side > span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.66);
+  white-space: nowrap;
+}
+.appwin-side > span.is-active { background: var(--blue); color: var(--white); }
+.appwin-side svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.7; flex-shrink: 0; }
+
+.appwin-table { min-width: 0; }
+.appwin-scroll { overflow-x: auto; }
+.apptbl { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.apptbl th,
+.apptbl td {
+  text-align: start;
+  padding: 11px 10px;
+  line-height: 1.5;
+  border-block-end: 1px solid var(--hairline);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.apptbl th {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--slate);
   background: var(--cloud);
 }
-.segment-body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 9px; }
-.segment-body h3 { font-size: 17.5px; }
-.segment-body p { color: var(--slate); font-size: 15px; }
-
-.segments-grid {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 22px;
+.apptbl td { font-size: 12px; font-weight: 500; }
+.apptbl tr:last-child td { border-block-end: 0; }
+.apptbl .c-check { width: 34px; }
+.apptbl .c-type { width: 46px; }
+.apptbl .c-org { width: 46px; }
+.apptbl .c-state { width: 112px; }
+.apptbl .c-date { width: 90px; }
+.apptbl .box {
+  display: block;
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid #cdd4e2;
+  border-radius: 3.5px;
 }
-.segments-grid > .segment { grid-column: span 2; }
-.segments-grid > .segment:nth-child(4),
-.segments-grid > .segment:nth-child(5) { grid-column: span 3; }
+.apptbl .tick { border-color: var(--blue); background: var(--blue); }
+.apptbl .ty,
+.apptbl .og {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--cloud);
+  color: var(--ink);
+}
+.apptbl .ty svg,
+.apptbl .og svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.7; }
+.apptbl td.date { color: var(--slate); font-variant-numeric: tabular-nums; }
+
+/* --- Trust strip + promise wedge ---------------------------------------- */
+.trust-strip {
+  position: relative;
+  z-index: 2;
+  margin-block-start: 34px;
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  padding: 16px 22px;
+  box-shadow: var(--shadow-card);
+}
+.trust-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  padding-inline: 18px;
+}
+.trust-item + .trust-item { border-inline-start: 1px solid var(--hairline); }
+.trust-item svg { width: 26px; height: 26px; flex-shrink: 0; fill: none; stroke: var(--blue-dark); stroke-width: 1.7; }
+.trust-item b { display: block; font-size: 14px; font-weight: 800; line-height: 1.4; color: var(--ink); }
+.trust-item span { display: block; font-size: 12.5px; color: var(--slate); }
+.trust-item code {
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 800;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.promise-wedge {
+  position: relative;
+  z-index: 2;
+  margin-block-start: 26px;
+  margin-inline-end: auto;
+  width: min(100%, 380px);
+  background: var(--ink);
+  color: var(--white);
+  border-start-start-radius: 26px;
+  border-start-end-radius: 4px;
+  border-end-start-radius: 4px;
+  border-end-end-radius: 4px;
+  padding: 20px 26px;
+  text-align: center;
+}
+.promise-wedge b { font-size: 20px; font-weight: 800; line-height: 1.45; display: block; }
+.promise-wedge i {
+  display: block;
+  width: 34px;
+  height: 3px;
+  background: var(--blue);
+  border-radius: 2px;
+  margin: 12px auto 0;
+}
+
+/* --- Stage responsiveness ----------------------------------------------- */
+@media (max-width: 1120px) {
+  .stage { grid-template-columns: 190px minmax(0, 1fr) 190px; gap: 16px; }
+  .stage-links { display: none; }
+}
+@media (max-width: 900px) {
+  .stage {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-block-start: 26px;
+  }
+  .stage-links { display: none; }
+  .appwin { grid-column: 1 / -1; order: -1; }
+  .stage-side { display: contents; }
+  .stage-title { margin-block-end: 6px; }
+  .stage-map { width: 92%; inset-block-start: -6%; }
+  .trust-strip { flex-direction: column; gap: 0; padding: 8px 20px; }
+  .trust-item { justify-content: flex-start; padding: 14px 0; }
+  .trust-item + .trust-item { border-inline-start: 0; border-block-start: 1px solid var(--hairline); }
+  .promise-wedge { margin-inline: auto; }
+}
+@media (max-width: 560px) {
+  .stage { grid-template-columns: minmax(0, 1fr); }
+  /* The panel would eat two thirds of a phone's width and leave the table
+     unreadable, so it steps aside; the table then scrolls horizontally. */
+  .appwin-body { grid-template-columns: minmax(0, 1fr); }
+  .appwin-side { display: none; }
+  .appwin-table { border-inline-start: 0; }
+  .apptbl th, .apptbl td { padding: 10px 9px; }
+  .apptbl .c-check, .apptbl .c-type { display: none; }
+  .apptbl .c-state { width: 104px; }
+  .apptbl .c-org { width: 42px; }
+  .apptbl .c-date { width: 86px; }
+  .seg-card { padding: 12px 14px; }
+  .seg-art { width: 46px; height: 46px; }
+  .seg-art svg { width: 34px; height: 34px; }
+}
 
 /* --- Lifecycle ----------------------------------------------------------- */
 .steps { counter-reset: step; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
@@ -1042,11 +1357,6 @@ p { margin: 0; }
   .shell { padding-inline: 16px; }
   .header-inner { gap: 12px; min-height: 78px; }
   .header-actions .btn-login { display: none; }
-  .segments-grid { grid-template-columns: minmax(0, 1fr); }
-  .segments-grid > .segment,
-  .segments-grid > .segment:nth-child(4),
-  .segments-grid > .segment:nth-child(5),
-  .segments-grid > .segment:last-child { grid-column: span 1; }
   .steps { grid-template-columns: minmax(0, 1fr); }
   .tpl-grid { grid-template-columns: minmax(0, 1fr); }
   .form-grid { grid-template-columns: minmax(0, 1fr); }
