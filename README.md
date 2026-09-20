@@ -4,7 +4,11 @@ A bilingual (Arabic-first) marketing site for **جداول**, built to the appro
 Jadawel Visual Identity v1.0. The Arabic content is a rewrite of the material on
 `jadawl.site`; the English is an authored parallel, not a back-translation.
 
-Open `index.html` directly, or serve the folder:
+**Live on this VPS:** <http://76.13.5.113/> (also <http://srv1278373.hstgr.cloud/>).
+nginx serves `/var/www/jadawel` on port 80 and is enabled in the OpenRC `default`
+runlevel, so it comes back after a reboot.
+
+To view the site without nginx:
 
 ```bash
 python3 -m http.server 8899      # then visit http://127.0.0.1:8899/
@@ -12,6 +16,41 @@ python3 -m http.server 8899      # then visit http://127.0.0.1:8899/
 
 No build step is required to view the site. Everything under the repository root
 (`*.html`, `assets/`) is the deliverable and works as static files.
+
+## Deploying on this machine
+
+Alpine 3.22 / OpenRC, no systemd. nginx 1.28 is installed from `apk`:
+
+```bash
+apk add nginx && rc-update add nginx default
+npm run deploy                                  # or: tools/deploy.sh
+SITE_URL=https://jadawl.site npm run deploy      # when a domain is attached
+```
+
+`tools/deploy.sh` rebuilds the pages for the target origin, mirrors the static
+files into `/var/www/jadawel`, makes them readable by the unprivileged `nginx`
+worker, installs the server block from `tools/nginx-jadawel.conf` into
+`/etc/nginx/http.d/default.conf`, validates the configuration, and reloads the
+service. It refuses to mirror into a system directory.
+
+Serving detail:
+
+- `SITE_URL` is baked into canonical URLs, `og:url`, `og:image` (absolute, as
+  scrapers require), `sitemap.xml`, and `robots.txt`
+- gzip is on for text, CSS, JS, JSON, XML, and SVG; woff2 and the JPEG artwork are
+  already compressed and are excluded
+- HTML is sent `Cache-Control: no-cache` so a deploy is visible immediately;
+  `/assets/` is `max-age=604800`; the fonts are `font/woff2`
+- every location sends `X-Content-Type-Options`, `Referrer-Policy`,
+  `X-Frame-Options`, and a `Content-Security-Policy` limited to local scripts,
+  stylesheets, fonts, and images. A 404 returns the branded `404.html` with a real
+  404 status.
+- `add_header` is not inherited once a nested block sets its own, so the shared
+  headers live in `tools/nginx-jadawel-common.conf` and every location includes it
+
+HTTPS is not configured: Let's Encrypt needs a domain pointed at this host. Once
+DNS resolves here, run `apk add certbot certbot-nginx`, issue the certificate, and
+the HTTP block can redirect.
 
 ## Pages
 
@@ -21,6 +60,7 @@ No build step is required to view the site. Everything under the repository root
 | `templates.html` | Template library, nine ready-to-copy bases with structure previews |
 | `releases.html` | Documented release notes for three releases |
 | `contact.html` | Walkthrough request form, contact channels, data-location note |
+| `404.html` | Branded not-found page, served by nginx with a real 404 status |
 
 Navigation collapses to a menu button below **1120 px**, where the language
 switch moves inside the opened panel.
@@ -100,6 +140,8 @@ Arabic RTL and English LTR:
 - the language switch flips `dir`, `lang`, translated content, and title
 - both fonts report `loaded`, and Arabic renders with the real Arabic subset
 - keyboard focus is visible on every interactive element (3 px blue outline)
+- the `Content-Security-Policy` sent by nginx produces no console violations
+- the site answers on the public IP, confirmed from outside the machine
 
 Re-run the checks against a local server with:
 
@@ -112,20 +154,21 @@ npm run audit                             # WCAG AA contrast, alt text, heading 
 
 ## Deviations and open items
 
-1. **Thmanyah Sans is not licensed on this host.** The site self-hosts
+1. **No HTTPS yet.** The deployment is plain HTTP on port 80. Certificates need a
+   domain whose DNS resolves to this host, and there is none; the origin is only
+   reachable by IP today.
+2. **Thmanyah Sans is not licensed on this host.** The site self-hosts
    **Noto Sans Arabic** (SIL OFL 1.1, licence text in `assets/fonts/OFL.txt`) and
    keeps `"Thmanyah Sans"` first in every font stack, so a licensed install wins
    automatically. Shipping without a licensed Thmanyah Sans is a disclosed
    production exception, not a replacement identity. Every screenshot and
    rendered measurement in this repository was taken in the fallback face.
-2. **The logo is raster.** The packaged master is a 1774x887 PNG. It is placed
+3. **The logo is raster.** The packaged master is a 1774x887 PNG. It is placed
    within its native dimensions, but true vector output needs the approved
    outlined SVG, AI, or PDF source.
-3. **The public site is not scraped.** The rewrite covers the positioning,
+4. **The source site was not scraped.** The rewrite covers the positioning,
    deployment options, lifecycle, sovereignty, FAQ, template, and release
    material. Claims were carried over, not invented or extended.
-4. **`og:image` uses a relative URL.** Social scrapers need an absolute URL;
-   set it once the production domain is known, in `src/layout.html`.
 5. **The contact form does not transmit.** It is a static demo: submitting shows
    a status message that points the visitor to `info@jadawl.site`. Wire it to a
    real endpoint before launch.

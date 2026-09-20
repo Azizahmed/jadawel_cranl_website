@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-title-key="nf.title">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,8 +27,7 @@
     <meta property="og:locale" content="ar_SA" />
     <meta property="og:locale:alternate" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="canonical" href="http://srv1278373.hstgr.cloud/contact.html" />
-    <meta property="og:url" content="http://srv1278373.hstgr.cloud/contact.html" />
+    <meta name="robots" content="noindex, follow" />
 
     <link rel="preload" as="font" type="font/woff2" href="assets/fonts/NotoSansArabic-arabic.woff2" crossorigin />
     <link rel="stylesheet" href="assets/css/jadawel-brand.css" />
@@ -85,111 +84,40 @@
     <main id="main">
       <section class="page-head">
         <div class="shell">
-          <p class="section-num" data-i18n="contact.eyebrow">الردّ خلال يوم عمل</p>
-          <h1 data-i18n="contact.pageTitle">تواصل مع فريق جداول</h1>
-          <p class="section-lede" data-i18n="contact.pageLede">
-            أخبرنا بنوع الجهة ونطاق الاستخدام المطلوب: هل تبدأ سحابيًا داخل المملكة، أم تحتاج إلى تركيب محلي داخل مركز
-            بياناتك؟ وسنعود إليك بالمسار المناسب والخطوات التالية.
+          <p class="section-num" data-i18n="nf.eyebrow">404 — الصفحة غير موجودة</p>
+          <h1 data-i18n="nf.title">لم نجد هذه الصفحة</h1>
+          <p class="section-lede" data-i18n="nf.lede">
+            قد يكون الرابط قديمًا أو مكتوبًا بشكل غير صحيح. هذه أقرب المسارات إلى ما تبحث عنه.
           </p>
         </div>
       </section>
 
       <section class="section">
-        <div class="shell grid grid-2" style="grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: start">
-          <div class="card reveal" style="padding: 32px 30px">
-            <h2 style="font-size: 22px" data-i18n="contact.formTitle">طلب عرض توضيحي</h2>
-
-            <form data-jadawel-form novalidate>
-              <div class="form-grid">
-                <div class="field">
-                  <label for="cf-name" data-i18n="contact.f1">الاسم الكامل</label>
-                  <input id="cf-name" name="name" type="text" autocomplete="name" required />
-                </div>
-                <div class="field">
-                  <label for="cf-org" data-i18n="contact.f2">اسم الجهة أو المنشأة</label>
-                  <input id="cf-org" name="organization" type="text" autocomplete="organization" required />
-                </div>
-                <div class="field">
-                  <label for="cf-email" data-i18n="contact.f3">البريد الإلكتروني في العمل</label>
-                  <input id="cf-email" name="email" type="email" autocomplete="email" dir="ltr" required />
-                </div>
-                <div class="field">
-                  <label for="cf-type" data-i18n="contact.f4">نوع الجهة</label>
-                  <select id="cf-type" name="entityType">
-                    <option value="" data-i18n="contact.f4a">اختر النوع</option>
-                    <option value="government" data-i18n="contact.f4b">جهة حكومية</option>
-                    <option value="large" data-i18n="contact.f4c">منشأة كبيرة أو مؤسسة</option>
-                    <option value="medium" data-i18n="contact.f4d">منشأة متوسطة</option>
-                    <option value="small" data-i18n="contact.f4e">منشأة صغيرة</option>
-                    <option value="specialized" data-i18n="contact.f4f">قطاع متخصّص (مالية، صحة، تعليم، غير ربحي)</option>
-                  </select>
-                </div>
-                <div class="field field-full">
-                  <label for="cf-deploy" data-i18n="contact.f5">خيار النشر المفضّل</label>
-                  <select id="cf-deploy" name="deployment">
-                    <option value="" data-i18n="contact.f5a">اختر الخيار</option>
-                    <option value="cloud" data-i18n="contact.f5b">سحابي داخل المملكة</option>
-                    <option value="onprem" data-i18n="contact.f5c">تركيب محلي (On-premises)</option>
-                    <option value="undecided" data-i18n="contact.f5d">لم نحدّد بعد</option>
-                  </select>
-                </div>
-                <div class="field field-full">
-                  <label for="cf-scope" data-i18n="contact.f6">نطاق الاستخدام والاحتياج</label>
-                  <span class="hint" data-i18n="contact.f6hint">
-                    مثال: عدد المستخدمين المتوقّعين، البيانات المراد نقلها، متطلبات الحوكمة أو التكامل.
-                  </span>
-                  <textarea id="cf-scope" name="scope"></textarea>
-                </div>
-              </div>
-
-              <div style="margin-block-start: 24px; display: flex; flex-direction: column; gap: 16px">
-                <button class="btn btn-primary btn-lg" type="submit" data-i18n="contact.submit">أرسل الطلب</button>
-                <p class="form-note" data-i18n="contact.note">
-                  يُستخدم ما تكتبه هنا للردّ على طلبك فقط. لا تُشارك بيانات دقيقة أو مصنّفة في هذا النموذج؛ للترتيبات
-                  التعاقدية ننتقل إلى قناة رسمية.
-                </p>
-                <p class="form-status" role="status" tabindex="-1" data-i18n="contact.ok">
-                  وصلنا طلبك. هذه صفحة عرض ثابتة لا ترسل بيانات، لذا راسلنا مباشرة على البريد أدناه وسنؤكّد الاستلام خلال
-                  يوم عمل.
-                </p>
-              </div>
-            </form>
+        <div class="shell">
+          <div class="grid grid-3">
+            <article class="card reveal">
+              <span class="card-mark" aria-hidden="true"></span>
+              <h2 data-i18n="nav.product">المنصّة</h2>
+              <p data-i18n="nf.platform">خيارا النشر، القطاعات، دورة حياة البيانات، والسيادة الرقمية.</p>
+              <a class="btn btn-ghost btn-sm" href="index.html#platform" data-i18n="nf.openPlatform">افتح المنصّة</a>
+            </article>
+            <article class="card reveal">
+              <span class="card-mark" aria-hidden="true"></span>
+              <h3 data-i18n="nav.templates">مكتبة القوالب</h2>
+              <p data-i18n="nf.templates">قواعد جاهزة تُنسخ إلى مساحة عملك ثم تُعدَّل كما يلزم.</p>
+              <a class="btn btn-ghost btn-sm" href="templates.html" data-i18n="nf.openTemplates">تصفّح القوالب</a>
+            </article>
+            <article class="card reveal">
+              <span class="card-mark" aria-hidden="true"></span>
+              <h3 data-i18n="nav.contact">تواصل معنا</h2>
+              <p data-i18n="nf.contact">اطلب عرضًا توضيحيًا أو ابدأ مجانًا خلال المرحلة التجريبية.</p>
+              <a class="btn btn-ghost btn-sm" href="contact.html" data-i18n="nf.openContact">تواصل مع الفريق</a>
+            </article>
           </div>
 
-          <aside class="contact-aside reveal">
-            <div class="card" style="gap: 18px">
-              <h3 style="font-size: 17.5px" data-i18n="contact.asideTitle">قنوات التواصل</h3>
-              <div class="contact-line">
-                <b data-i18n="contact.asideMail">البريد العام</b>
-                <a href="mailto:info@jadawl.site" dir="ltr">info@jadawl.site</a>
-              </div>
-              <div class="contact-line">
-                <b data-i18n="contact.asideOffice">الموقع</b>
-                <span data-i18n="contact.asideOfficeValue">الرياض، المملكة العربية السعودية</span>
-              </div>
-              <div class="contact-line">
-                <b data-i18n="contact.asideHours">ساعات الردّ</b>
-                <span data-i18n="contact.asideHoursValue">الأحد إلى الخميس، 9:00 — 17:00 بتوقيت الرياض</span>
-              </div>
-              <div class="contact-line">
-                <b data-i18n="contact.asideResp">الاستجابة</b>
-                <span data-i18n="contact.asideRespValue">يوم عمل واحد لطلبات العرض التوضيحي.</span>
-              </div>
-              <div class="contact-line" style="border: 0; padding: 0">
-                <b data-i18n="contact.asideDataLabel">موقع البيانات</b>
-                <span data-i18n="contact.asideDataValue">داخل المملكة العربية السعودية.</span>
-              </div>
-            </div>
-
-            <div class="card" style="background: var(--cloud); border-color: var(--hairline); gap: 10px">
-              <p class="eyebrow" style="align-self: flex-start" data-i18n="nav.start">ابدأ مجانًا</p>
-              <p style="font-size: 15.5px; color: var(--slate)" data-i18n="cta.p">
-                جرّب «جداول» وابدأ بأول قاعدة بيانات. وإذا كانت لديك متطلبات خاصة للاستضافة أو الامتثال أو التركيب الداخلي،
-                فسنساعدك على اختيار المسار المناسب.
-              </p>
-              <a class="btn btn-primary" href="https://app.jadawl.site/signup" rel="noopener" data-i18n="cta.primary">ابدأ مجانًا</a>
-            </div>
-          </aside>
+          <p style="margin-block-start: 30px; display: flex; flex-wrap: wrap; gap: 12px">
+            <a class="btn btn-primary" href="index.html" data-i18n="nf.home">العودة إلى الصفحة الرئيسية</a>
+          </p>
         </div>
       </section>
     </main>

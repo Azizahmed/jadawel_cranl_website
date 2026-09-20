@@ -8,8 +8,9 @@
     "build": "node tools/build.mjs",
     "og": "node tools/render-og.mjs",
     "serve": "python3 -m http.server 8899",
-    "verify": "node tools/verify.mjs http://127.0.0.1:8899 ./out",
-    "audit": "node tools/audit.mjs http://127.0.0.1:8899"
+    "verify": "node tools/verify.mjs ${SITE:-http://127.0.0.1} ./out",
+    "audit": "node tools/audit.mjs ${SITE:-http://127.0.0.1}",
+    "deploy": "tools/deploy.sh"
   },
   "devDependencies": {
     "puppeteer-core": "^23.0.0"

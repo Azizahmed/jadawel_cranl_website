@@ -11,7 +11,7 @@
 import puppeteer from "puppeteer-core";
 
 const BASE = process.argv[2] || "http://127.0.0.1:8899";
-const PAGES = ["index.html", "templates.html", "releases.html", "contact.html"];
+const PAGES = ["index.html", "templates.html", "releases.html", "contact.html", "404.html"];
 
 const browser = await puppeteer.launch({
   executablePath: "/usr/bin/chromium",

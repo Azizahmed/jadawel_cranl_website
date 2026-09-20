@@ -38,7 +38,9 @@
       });
     });
 
-    var title = t(lang, "meta.title");
+    // Pages may name their own title key; the 404 uses this so it does not
+    // inherit the home page title.
+    var title = t(lang, root.getAttribute("data-title-key") || "meta.title");
     if (title) document.title = title;
     var desc = document.querySelector('meta[name="description"]');
     var descValue = t(lang, "meta.description");

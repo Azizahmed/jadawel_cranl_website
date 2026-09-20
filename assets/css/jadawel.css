@@ -545,6 +545,7 @@ p { margin: 0; }
   flex-direction: column;
   gap: 12px;
 }
+.card h2,
 .card h3 { font-size: 18.5px; font-weight: 700; }
 .card p { color: var(--slate); font-size: 15.5px; }
 .card-mark {

@@ -6,6 +6,17 @@
    ========================================================================== */
 window.JADWEL_I18N = {
   ar: {
+    "nf.eyebrow": "404 — الصفحة غير موجودة",
+    "nf.title": "لم نجد هذه الصفحة",
+    "nf.lede": "قد يكون الرابط قديمًا أو مكتوبًا بشكل غير صحيح. هذه أقرب المسارات إلى ما تبحث عنه.",
+    "nf.platform": "خيارا النشر، القطاعات، دورة حياة البيانات، والسيادة الرقمية.",
+    "nf.openPlatform": "افتح المنصّة",
+    "nf.templates": "قواعد جاهزة تُنسخ إلى مساحة عملك ثم تُعدَّل كما يلزم.",
+    "nf.openTemplates": "تصفّح القوالب",
+    "nf.contact": "اطلب عرضًا توضيحيًا أو ابدأ مجانًا خلال المرحلة التجريبية.",
+    "nf.openContact": "تواصل مع الفريق",
+    "nf.home": "العودة إلى الصفحة الرئيسية",
+
     "meta.title": "جداول — منصّة عربية للبيانات، مستضافة داخل المملكة",
     "meta.description":
       "جداول منصّة سحابية عربية لإدارة البيانات والعمليات، تجري كل عملياتها داخل المملكة العربية السعودية، مع خيار التركيب المحلي داخل مركز بيانات الجهة.",
@@ -282,6 +293,17 @@ window.JADWEL_I18N = {
   },
 
   en: {
+    "nf.eyebrow": "404 — Page not found",
+    "nf.title": "We could not find that page",
+    "nf.lede": "The link may be old or mistyped. These are the closest paths to what you were looking for.",
+    "nf.platform": "Deployment options, who it fits, data lifecycle, and digital sovereignty.",
+    "nf.openPlatform": "Open the platform",
+    "nf.templates": "Ready-made bases to copy into your workspace and adjust.",
+    "nf.openTemplates": "Browse templates",
+    "nf.contact": "Request a walkthrough or start free during the trial stage.",
+    "nf.openContact": "Contact the team",
+    "nf.home": "Back to the home page",
+
     "meta.title": "Jadawel — an Arabic-first data platform hosted inside the Kingdom",
     "meta.description":
       "Jadawel is an Arabic data and operations platform that runs entirely in Saudi Arabian data centres, with an on-premises option inside your own environment.",
