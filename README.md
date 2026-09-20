@@ -105,7 +105,9 @@ Re-run the checks against a local server with:
 
 ```bash
 python3 -m http.server 8899 &
-node tools/build.mjs          # confirm the committed HTML matches src/
+node tools/build.mjs                       # confirm the committed HTML matches src/
+npm install && npm run verify             # overflow, console/network, fonts, language switch
+npm run audit                             # WCAG AA contrast, alt text, heading order, focus, clipping
 ```
 
 ## Deviations and open items

@@ -1,0 +1,17 @@
+{
+  "name": "jadawel-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bilingual Arabic-first marketing site for Jadawel (جداول), built to Jadawel Visual Identity v1.0.",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "og": "node tools/render-og.mjs",
+    "serve": "python3 -m http.server 8899",
+    "verify": "node tools/verify.mjs http://127.0.0.1:8899 ./out",
+    "audit": "node tools/audit.mjs http://127.0.0.1:8899"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^23.0.0"
+  }
+}
