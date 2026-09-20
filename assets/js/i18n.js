@@ -77,10 +77,9 @@ window.JADWEL_I18N = {
     "nav.langLabel": "اختيار اللغة",
 
     "hero.eyebrow": "منصّة سعودية لجميع الجهات والمنشآت",
-    "hero.h1a": "أدِر بياناتك بالعربية،",
-    "hero.h1b": "على منصّة مستضافة داخل المملكة",
-    "hero.lede":
-      "«جداول» منصّة سحابية تبني فيها الفرق جداولها ولوحاتها ومسارات عملها بنفسها، وتعمل بالكامل من مراكز بيانات داخل المملكة العربية السعودية. ولمن يفضّل تشغيل المنصّة داخل بيئته التقنية، يتوفّر خيار التركيب المحلي داخل مركز بيانات الجهة أو المنشأة.",
+    "hero.h1a": "بياناتك بالعربية...",
+    "hero.h1b": "باستضافة محلية آمنة",
+    "hero.lede": "تُمكّن منصة «جداول» الفرق من التعاون في إدارة البيانات وابتكار لوحات المعلومات ومسارات العمل الخاصة بكل سهولة. نضمن لك سيادة وأمان البيانات عبر استضافة سحابية داخل المملكة، أو خيار التشغيل المباشر داخل البنية التحتية لمنشأتك.",
     "hero.ctaPrimary": "ابدأ مجانًا",
     "hero.ctaSecondary": "اطلب عرضًا توضيحيًا",
     "hero.trust1": "مجاني خلال المرحلة التجريبية",
@@ -114,7 +113,7 @@ window.JADWEL_I18N = {
     "mock.owner3": "خدمة العملاء",
     "mock.owner4": "الشؤون المالية",
 
-    "options.num": "01 — خيارا النشر",
+    "options.num": "02 — خيارا النشر",
     "options.h2": "سحابيًا داخل المملكة، أو محليًا داخل منشأتك",
     "options.lede":
       "تبدأ بالخيار السحابي في دقائق، أو تنتقل إلى التركيب المحلي عندما تقتضي السياسات الداخلية ذلك. الواجهة والصلاحيات والبيانات نفسها في الخيارين، بلا نسخة منقوصة.",
@@ -141,8 +140,7 @@ window.JADWEL_I18N = {
     "options.p4b": "واجهة عربية أصيلة",
     "options.p4s": "بنية عربية من اليمين إلى اليسار، مع عشر لغات تُختار لكل مستخدم على حدة.",
 
-    "segments.num": "02 — منصّة تناسب عملك في كل مرحلة",
-
+    "segments.num": "01 — منصّة تناسب عملك في كل مرحلة",
     "life.num": "03 — دورة حياة البيانات",
     "life.h2": "ابدأ ببياناتك القائمة، وابقَ مالكًا لها",
     "life.lede":
@@ -387,10 +385,9 @@ window.JADWEL_I18N = {
     "nav.langLabel": "Choose language",
 
     "hero.eyebrow": "A Saudi platform for public entities and businesses",
-    "hero.h1a": "Run your data in Arabic,",
-    "hero.h1b": "on a platform hosted inside the Kingdom",
-    "hero.lede":
-      "Jadawel is a cloud platform where teams build their own tables, views, and workflows, running entirely from data centres inside Saudi Arabia. If you would rather keep the platform in your own environment, the on-premises option installs inside your entity's data centre.",
+    "hero.h1a": "Your data in Arabic...",
+    "hero.h1b": "on secure in-country hosting",
+    "hero.lede": "Jadawel lets teams collaborate on their data and build their own dashboards and workflows with ease. Your data sovereignty and security are assured, whether you run on our cloud inside the Kingdom or directly on your own infrastructure.",
     "hero.ctaPrimary": "Start free",
     "hero.ctaSecondary": "Request a walkthrough",
     "hero.trust1": "Free during the trial stage",
@@ -424,7 +421,7 @@ window.JADWEL_I18N = {
     "mock.owner3": "Service",
     "mock.owner4": "Finance",
 
-    "options.num": "01 — Deployment options",
+    "options.num": "02 — Deployment options",
     "options.h2": "In-Kingdom cloud, or on-premises inside your entity",
     "options.lede":
       "Start on the cloud option in minutes, or move to an on-premises install when internal policy requires it. The interface, permissions, and data model are the same in both, with no reduced edition.",
@@ -451,8 +448,7 @@ window.JADWEL_I18N = {
     "options.p4b": "A genuine Arabic interface",
     "options.p4s": "Arabic-first right-to-left structure, with ten languages chosen per user.",
 
-    "segments.num": "02 — Fits your work at every stage",
-
+    "segments.num": "01 — Fits your work at every stage",
     "life.num": "03 — Data lifecycle",
     "life.h2": "Start with the data you already have, and keep owning it",
     "life.lede":

@@ -317,6 +317,7 @@ p { margin: 0; }
 .hero h1 .accent {
   color: var(--blue);
   display: block;
+  text-wrap: balance;
 }
 .hero-lede {
   font-size: 18px;
