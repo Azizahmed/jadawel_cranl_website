@@ -2,48 +2,66 @@
 
 Provider: Zhipu CogView-4 (`cogview-4-250304`) through https://api.z.ai/api/paas/v4/images/generations.
 Copyright status: model output, generated for this project. Not sourced from stock libraries.
-All files are JPEG (the provider returns JPEG even when the URL ends in .png) at the stated pixel size.
-Regenerate with `tools/generate-images.sh`; redo a single file with `tools/regenerate-image.sh <name> <prompt>`.
-`assets/img/og-cover.jpg` is not from the model: it is rendered from `tools/og-card.html` by `tools/render-og.mjs`.
+Files are JPEG (the provider returns JPEG even when the URL ends in .png) at the stated pixel size.
+
+Art direction: the same idea is staged at five scales. The units that make up each kind of
+organisation are arranged in strict rows and columns, so the subject itself reads as a table, and
+one restrained blue element runs through each frame as a single thread. No people appear in any
+frame. The Arabic table shown in the interface is real markup layered over the photograph, not
+generated pixels, so it stays correct and crisp.
+
+Source images are 1440x720. The card crops them to 16:10 with object-fit: cover, trimming 12.5%
+from each side and keeping the full height, which is why every composition is centred with
+generous space above and below.
+
+Regenerate everything: `tools/generate-images.sh` (skips files that already exist).
+Redo one file: `tools/regenerate-image.sh <name> "<prompt>"`.
+`assets/img/og-cover.jpg` is not from the model: it is composed in `tools/og-card.html` and
+rendered by `tools/render-og.mjs`.
 
 ## sector-government.jpg
-- size: 1024x1024
-- sha256: f27a4e4a24bd9560
-- prompt: Candid documentary photograph inside a modern Saudi government programme office in Riyadh. Two Saudi colleagues, a man in a crisp white thobe and ghutra and a woman in a black abaya and hijab, stand at a large wall-mounted display showing abstract charts and progress bars, pointing at it and discussing naturally. Bright daylight from floor-to-ceiling windows, minimal interior, neutral grey and white surfaces, cool calm colour grading, shallow depth of field, editorial reportage style, no text, no logos, no visible brand names, no watermark.
+- size: 1440x720
+- bytes: 178520
+- sha256: 187688ac76318006
+- review note: First pass accepted. A records hall whose shelving reads as the grid itself.
+- prompt: A vast government records hall in Riyadh, seen straight down a single central aisle: floor-to-ceiling shelving packed with identical plain beige document boxes and bound dossiers, arranged in an absolutely strict grid of rows and columns that recedes in perfect one-point perspective, so the wall of files itself reads as a table. One single horizontal band of the shelving holds dossiers with clear blue spines, drawing a thin straight blue line across the whole grid. Monumental institutional scale, polished pale stone floor, cool neutral daylight, pale grey and off-white palette. Wide horizontal composition, subject centred with generous space above and below. No people, no human figures, no silhouettes, no vehicles. Absolutely no text, no letters, no numbers, no writing, no printing, no labels, no markings on any object, no signs, no logos and no symbols. Empty, unpopulated, silent.
 
 ## sector-small-business.jpg
-- size: 1024x1024
-- sha256: 9946fd6e08a3e1aa
-- review note: Regenerated twice: no computer, laptop, screen or phone in frame, so no third-party device branding appears.
-- prompt: Candid documentary photograph of a small Saudi retail business owner inside a tidy modern shop in Riyadh, standing behind a counter with a laptop and a tablet, smiling while serving a customer. Warm natural window light, simple shelves of neatly arranged goods softly out of focus in the background, cool neutral colour grading, authentic unposed reportage style, no text, no logos, no visible brand names, no watermark.
+- size: 1440x720
+- bytes: 132427
+- sha256: cc944a05d2741ca4
+- review note: Fourth pass. Earlier attempts produced a home-kitchen still life, then a shop with a blue band that did not read, then pseudo-text on packaging. The stockroom grid landed.
+- prompt: The stockroom of one small neighbourhood grocery shop in Riyadh: a single narrow room whose walls are lined with plain wooden shelving, floor to ceiling, filled with identical plain unlabelled cardboard boxes and wooden crates stacked in a perfectly regular grid of even rows and columns, every column the same height and every gap the same width, so the whole wall of stock reads like one table of cells. On the bare concrete floor a single thin clear-blue line is painted dead straight from the doorway to the far wall. Modest single-room scale, warm daylight from the open door, plain wood and cardboard tones with one restrained blue accent. Wide horizontal composition, subject centred with generous space above and below. No people, no human figures, no silhouettes, no vehicles. Absolutely no text, no letters, no numbers, no writing, no printing, no labels, no markings on any object, no signs, no logos and no symbols. Empty, unpopulated, silent.
 
 ## sector-medium.jpg
-- size: 1024x1024
-- sha256: b21bd881bbe97850
-- review note: Regenerated: same scene but with a plain clean glass partition, no written text, diagrams, doodles or symbols anywhere.
-- prompt: Candid documentary photograph of a Saudi operations team meeting in a bright modern Riyadh office. Four colleagues, men in white thobes with ghutras and women in abayas with hijabs, sit around a light oak table reviewing printed tables and a laptop, one person sketching a process on a glass wall. Wide daylight, calm neutral palette, shallow depth of field, editorial reportage style, no text, no logos, no visible brand names, no watermark.
+- size: 1440x720
+- bytes: 135455
+- sha256: 42ade7b003f86e0b
+- review note: First pass accepted. Overhead view, so the desks read as cells and the blue line as a route.
+- prompt: Aerial top-down drone view of one open-plan office floor, completely empty: rows of plain desks, monitors and glass partitions arranged in a flawless orthogonal grid across the entire frame, every desk perfectly aligned, every chair pushed in. Across the floor a single continuous luminous clear-blue line runs in straight right-angled segments from desk to desk, like a route traced over the grid, and the desk at the end of the route is lit by a soft blue glow. Single storey, low ceiling, cool neutral daylight, pale grey and off-white palette. Wide horizontal composition, subject centred with generous space above and below. No people, no human figures, no silhouettes, no vehicles. Absolutely no text, no letters, no numbers, no writing, no printing, no labels, no markings on any object, no signs, no logos and no symbols. Empty, unpopulated, silent.
 
 ## sector-enterprise.jpg
-- size: 1024x1024
-- sha256: 8474951ed7ad56e5
-- prompt: Candid documentary photograph of a large Saudi enterprise headquarters atriums in Riyadh, viewed along a corridor of glass meeting rooms where teams work at desks with large monitors showing abstract charts. One Saudi woman in an abaya and hijab walks past carrying a laptop, mid-stride, naturally. Cool architectural daylight, deep neutral greys with one clear blue accent from a screen, wide editorial architectural photography, no text, no logos, no visible brand names, no watermark.
+- size: 1440x720
+- bytes: 145316
+- sha256: 3e45f32b42c242c0
+- review note: Third pass. The first had people and cars in the plaza and the blue read as road paint; the second lost the connecting thread.
+- prompt: A wide architectural view of three enormous identical corporate towers in Riyadh standing in a row and filling the frame: each facade is an unbroken grid of hundreds of identical windows in perfectly regular rows and columns, sheer and monumental. At ground level one thin clear-blue line is inlaid perfectly flush into the pale stone plaza, running dead straight along the base of all three towers and linking their entrances into a single thread. Cool neutral midday light, vast scale, absolute regularity, the plaza completely empty and bare. Wide horizontal composition, subject centred with generous space above and below. No people, no human figures, no silhouettes, no vehicles. Absolutely no text, no letters, no numbers, no writing, no printing, no labels, no markings on any object, no signs, no logos and no symbols. Empty, unpopulated, silent.
 
 ## sector-specialized.jpg
-- size: 1024x1024
-- sha256: 99727a07223c2d2f
-- prompt: Candid documentary photograph inside a modern Saudi hospital administrative wing: a Saudi woman in a black abaya and hijab who is a health information officer reviews abstract data tables on a large monitor while a Saudi male colleague in a white thobe stands beside her holding a clipboard, both focused on the screen. Clean white and pale grey surfaces, soft daylight, shallow depth of field, calm clinical neutral palette, no text, no logos, no visible brand names, no watermark.
+- size: 1440x720
+- bytes: 136386
+- sha256: 9b3bf8e876cf1f95
+- review note: Second pass. The first had heavy pseudo-text printed across the packaging.
+- prompt: The bright sterile supply store of a modern hospital: floor-to-ceiling bays of identical white steel shelving arranged in a strict repeating grid, each bay filled with perfectly aligned plain opaque storage trays sorted into three carefully separated colour groups, pale mint, warm amber and clear blue, evenly spaced and lined up with clinical precision. Narrow room, glossy pale floor, cool even light from above, one plain doorway at the far end marking the edge of the room, and every tray completely plain and unmarked. Wide horizontal composition, subject centred with generous space above and below. No people, no human figures, no silhouettes, no vehicles. Absolutely no text, no letters, no numbers, no writing, no printing, no labels, no markings on any object, no signs, no logos and no symbols. Empty, unpopulated, silent.
 
 ## sovereignty.jpg
 - size: 1440x720
+- bytes: 61577
 - sha256: e574303ed4b48383
 - prompt: Minimal fine-art abstract illustration on a flat deep navy #0B0F19 background: layered translucent geometric planes and thin precise grid lines glowing in clear blue #2563EB, forming a wide horizontal composition that narrows to a single bright blue diamond point on the right. Clean vector-like geometry, generous dark space, soft blue atmospheric glow, calm and technical, no text, no people, no logos, no watermark.
 
 ## og-cover.jpg
-- size: 1440x720
-- sha256: 3eaed9f2aceca951
-- prompt: Minimal fine-art abstract illustration on an off-white #F6F7FB background: a wide horizontal arrangement of thin precise blue #2563EB grid lines and rectangles forming the partial structure of a data table, dissolving into scattered small blue squares toward the right, with a single solid blue diamond as the focal point. Flat clean vector-like geometry, large areas of empty off-white space, editorial and restrained, no text, no people, no logos, no watermark.
-## og-cover.jpg
 - size: 1200x630
 - composed from: assets/logos/jadawel-logo-white-transparent.png, assets/img/sovereignty.jpg (texture field), tools/og-card.html
 - rendered by: tools/render-og.mjs (headless chromium, 1x)
-- note: hand-composed rather than model-generated so the Arabic headline and the approved logo stay exact.
+- note: hand-composed rather than model-generated, so the Arabic headline and the approved logo stay exact.
