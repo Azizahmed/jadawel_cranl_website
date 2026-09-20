@@ -178,13 +178,6 @@ SECTION = f'''      <!-- ================= 02 Platform stage ================= -
         <div class="shell stage-shell">
           <div class="stage-bloom" aria-hidden="true"></div>
 
-          <svg class="stage-swoosh stage-swoosh--br" viewBox="0 0 260 190" aria-hidden="true" focusable="false">
-            <path d="M260 0v190H0A260 190 0 0 0 260 0Z" fill="#2563eb" opacity=".1"></path>
-          </svg>
-          <svg class="stage-swoosh stage-swoosh--bl" viewBox="0 0 190 150" aria-hidden="true" focusable="false">
-            <path d="M0 0v150h190A190 150 0 0 0 0 0Z" fill="#2563eb" opacity=".07"></path>
-          </svg>
-
           <svg class="stage-map" viewBox="{SAUDI_BOX}" aria-hidden="true" focusable="false">
             <path d="{SAUDI_PATH}"></path>
           </svg>
@@ -196,19 +189,6 @@ SECTION = f'''      <!-- ================= 02 Platform stage ================= -
           <h2 class="stage-title reveal" data-i18n="stage.title">منصّة بيانات سعودية للأعمال</h2>
 
           <div class="stage">
-            <svg class="stage-links" viewBox="0 0 1160 560" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-              <path d="M170 92C260 92 300 150 430 168"></path>
-              <path d="M170 280C280 280 320 268 430 268"></path>
-              <path d="M170 468C270 468 310 390 430 356"></path>
-              <path d="M990 176C900 176 860 172 730 176"></path>
-              <path d="M990 392C880 392 850 356 730 340"></path>
-              <circle cx="192" cy="92" r="4"></circle>
-              <circle cx="192" cy="280" r="4"></circle>
-              <circle cx="192" cy="468" r="4"></circle>
-              <circle cx="968" cy="176" r="4"></circle>
-              <circle cx="968" cy="392" r="4"></circle>
-            </svg>
-
             <div class="stage-side">
 {card(*by_key("gov"))}
 
@@ -293,10 +273,6 @@ SECTION = f'''      <!-- ================= 02 Platform stage ================= -
             </li>
           </ul>
 
-          <div class="promise-wedge reveal">
-            <b data-i18n="stage.wedge">بياناتك تدعم مستقبلك</b>
-            <i aria-hidden="true"></i>
-          </div>
         </div>
       </section>
 '''

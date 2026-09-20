@@ -56,7 +56,6 @@ window.JADWEL_I18N = {
     "stage.t2s": "للمؤسسات الكبرى",
     "stage.t3b": "وتشفير",
     "stage.t3s": "أمان على أعلى مستوى",
-    "stage.wedge": "بياناتك تدعم مستقبلك",
     "meta.title": "جداول — منصّة عربية للبيانات، مستضافة داخل المملكة",
     "meta.description":
       "جداول منصّة سحابية عربية لإدارة البيانات والعمليات، تجري كل عملياتها داخل المملكة العربية السعودية، مع خيار التركيب المحلي داخل مركز بيانات الجهة.",
@@ -367,7 +366,6 @@ window.JADWEL_I18N = {
     "stage.t2s": "For large organisations",
     "stage.t3b": "and encryption",
     "stage.t3s": "Security at the highest level",
-    "stage.wedge": "Your data carries your future",
     "meta.title": "Jadawel — an Arabic-first data platform hosted inside the Kingdom",
     "meta.description":
       "Jadawel is an Arabic data and operations platform that runs entirely in Saudi Arabian data centres, with an on-premises option inside your own environment.",

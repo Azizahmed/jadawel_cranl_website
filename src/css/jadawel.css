@@ -668,14 +668,6 @@ section[id] { scroll-margin-top: 104px; }
     radial-gradient(420px 260px at 6% 92%, rgba(37, 99, 235, 0.09), transparent 72%),
     radial-gradient(420px 260px at 96% 86%, rgba(37, 99, 235, 0.09), transparent 72%);
 }
-.stage-swoosh {
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-  display: block;
-}
-.stage-swoosh--br { inset-block-end: -18px; inset-inline-end: -40px; width: 260px; height: 190px; }
-.stage-swoosh--bl { inset-block-end: -26px; inset-inline-start: -46px; width: 190px; height: 150px; opacity: 0.5; }
 
 .stage {
   position: relative;
@@ -686,23 +678,9 @@ section[id] { scroll-margin-top: 104px; }
   align-items: center;
   margin-block-start: 26px;
 }
-.stage-side { display: flex; flex-direction: column; gap: 22px; }
+.stage-side { display: flex; flex-direction: column; justify-content: center; gap: 22px; }
 .stage-side--end { justify-content: center; gap: 46px; }
 
-/* Connector layer: decorative lines only. */
-.stage-links {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  fill: none;
-  stroke: var(--blue);
-  stroke-width: 1.7;
-  opacity: 0.55;
-}
-.stage-links circle { fill: var(--white); stroke-width: 2.4; }
 
 /* --- Segment cards ------------------------------------------------------- */
 .seg-card {
@@ -741,6 +719,38 @@ section[id] { scroll-margin-top: 104px; }
   place-items: center;
 }
 .seg-art svg { width: 42px; height: 42px; display: block; }
+
+
+/* Each card draws its own connector into the gap. Anchoring the line to the
+   card is what keeps it centred on the card at every width, which a single
+   fixed-coordinate overlay could not do. */
+.seg-card::after {
+  content: "";
+  position: absolute;
+  inset-block-start: calc(50% - 1px);
+  width: 30px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--blue);
+  opacity: 0.5;
+}
+.seg-card::before {
+  content: "";
+  position: absolute;
+  inset-block-start: calc(50% - 4px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--blue);
+  background: var(--white);
+  opacity: 0.85;
+}
+/* The card column ahead of the window points into it... */
+.stage-side > .seg-card::after,
+.stage-side > .seg-card::before { inset-inline-end: -26px; }
+/* ...and the column after it points back the other way. */
+.stage-side--end > .seg-card::after,
+.stage-side--end > .seg-card::before { inset-inline-start: -26px; }
 
 /* --- Product window ------------------------------------------------------ */
 .appwin {
@@ -903,52 +913,25 @@ section[id] { scroll-margin-top: 104px; }
   unicode-bidi: isolate;
 }
 
-.promise-wedge {
-  position: relative;
-  z-index: 2;
-  margin-block-start: 26px;
-  margin-inline-end: auto;
-  width: min(100%, 380px);
-  background: var(--ink);
-  color: var(--white);
-  border-start-start-radius: 26px;
-  border-start-end-radius: 4px;
-  border-end-start-radius: 4px;
-  border-end-end-radius: 4px;
-  padding: 20px 26px;
-  text-align: center;
-}
-.promise-wedge b { font-size: 20px; font-weight: 800; line-height: 1.45; display: block; }
-.promise-wedge i {
-  display: block;
-  width: 34px;
-  height: 3px;
-  background: var(--blue);
-  border-radius: 2px;
-  margin: 12px auto 0;
-}
 
 /* --- Stage responsiveness ----------------------------------------------- */
 @media (max-width: 1120px) {
   .stage { grid-template-columns: 190px minmax(0, 1fr) 190px; gap: 16px; }
-  .stage-links { display: none; }
-}
+  }
 @media (max-width: 900px) {
   .stage {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
     margin-block-start: 26px;
   }
-  .stage-links { display: none; }
-  .appwin { grid-column: 1 / -1; order: -1; }
+    .appwin { grid-column: 1 / -1; order: -1; }
   .stage-side { display: contents; }
   .stage-title { margin-block-end: 6px; }
   .stage-map { width: 92%; inset-block-start: -6%; }
   .trust-strip { flex-direction: column; gap: 0; padding: 8px 20px; }
   .trust-item { justify-content: flex-start; padding: 14px 0; }
   .trust-item + .trust-item { border-inline-start: 0; border-block-start: 1px solid var(--hairline); }
-  .promise-wedge { margin-inline: auto; }
-}
+  }
 @media (max-width: 560px) {
   .stage { grid-template-columns: minmax(0, 1fr); }
   /* The panel would eat two thirds of a phone's width and leave the table
@@ -1344,6 +1327,7 @@ section[id] { scroll-margin-top: 104px; }
 }
 
 @media (max-width: 900px) {
+  .seg-card::before, .seg-card::after { display: none; }
   .grid-3, .grid-2 { grid-template-columns: minmax(0, 1fr); }
   .cta-band { grid-template-columns: minmax(0, 1fr); padding: 38px 28px; }
   .band { padding: 30px 26px; }
