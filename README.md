@@ -122,7 +122,10 @@ and every UI glyph, so each shape is defined once and referenced with `<use>`.
 The app window is real markup, so the Arabic, the RTL column order, and the
 Western digits stay correct at any density instead of being baked into pixels.
 The map is a public-domain [Natural Earth](https://www.naturalearthdata.com/)
-outline projected to a flat path, not a traced or invented shape.
+outline projected to a flat path, not a traced or invented shape. It is sized
+and positioned so that roughly three quarters of the country stays visible above
+the product window; at its original size only a third showed and the outline
+read as an abstract blob rather than a country.
 
 Rebuild the section after editing its copy:
 
@@ -141,7 +144,7 @@ previous commit against the current one:
 | Initial load, desktop | 346 kB | **98 kB** | −72% |
 | Initial load, mobile | 345 kB | **93 kB** | −73% |
 | Whole page after scrolling | 1058 kB | **159 kB** | −85% |
-| Requests | 15 | **11** | |
+| Requests | 15 | **8** | |
 | First contentful paint | 844 ms | **572 ms** | −32% |
 
 What produced it:
@@ -158,6 +161,24 @@ What produced it:
 - **The deployed tree is 389 kB**, down from roughly 3.5 MB. Source material
   (`assets/photography/`, `tools/fonts/`, `docs/`) is excluded by
   `tools/deploy.sh` and stays in the repository.
+- **One stylesheet instead of two.** The build concatenates the brand tokens and
+  the site stylesheet into `assets/css/site.css`, so the critical path has one
+  fewer round trip. Only the generated bundle is deployed; the sources live in
+  `src/css/`.
+
+### Asset caching
+
+Assets ship with `Cache-Control: max-age=604800` while the HTML revalidates on
+every request. With fixed asset URLs that combination is a bug: a returning
+visitor gets fresh markup against a week-old stylesheet, and the page renders
+with mismatched CSS.
+
+Every asset reference is therefore stamped with a short content hash at build
+time, `assets/css/site.css?v=e1e2963424`, and the font URLs inside the
+stylesheet are stamped the same way. Changing an asset changes its URL, so a
+deploy can never serve a stale one and the long `max-age` becomes safe. The
+`og:image` is deliberately left unversioned because social scrapers cache by
+URL and it does not affect rendering.
 
 A trimmed font can silently drop a glyph, so that risk is closed mechanically:
 every build re-reads the pages, extracts the characters they render, and fails

@@ -178,6 +178,13 @@ SECTION = f'''      <!-- ================= 02 Platform stage ================= -
         <div class="shell stage-shell">
           <div class="stage-bloom" aria-hidden="true"></div>
 
+          <svg class="stage-swoosh stage-swoosh--br" viewBox="0 0 260 190" aria-hidden="true" focusable="false">
+            <path d="M260 0v190H0A260 190 0 0 0 260 0Z" fill="#2563eb" opacity=".1"></path>
+          </svg>
+          <svg class="stage-swoosh stage-swoosh--bl" viewBox="0 0 190 150" aria-hidden="true" focusable="false">
+            <path d="M0 0v150h190A190 150 0 0 0 0 0Z" fill="#2563eb" opacity=".07"></path>
+          </svg>
+
           <svg class="stage-map" viewBox="{SAUDI_BOX}" aria-hidden="true" focusable="false">
             <path d="{SAUDI_PATH}"></path>
           </svg>

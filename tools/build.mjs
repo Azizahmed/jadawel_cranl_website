@@ -10,6 +10,7 @@
  *   node tools/build.mjs
  */
 import { readFile, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -42,11 +43,80 @@ function markCurrent(nav, current) {
   );
 }
 
+
+// --- asset versioning -------------------------------------------------------
+// Assets ship with a long max-age, so their URLs must change whenever their
+// bytes do. Without this a returning visitor keeps an old stylesheet for a week
+// while the HTML revalidates, which renders the page with mismatched CSS. Every
+// asset reference is stamped with a short content hash at build time.
+
+const hashCache = new Map();
+
+async function assetVersion(relPath) {
+  if (hashCache.has(relPath)) return hashCache.get(relPath);
+  let version = null;
+  try {
+    const bytes = await readFile(path.join(root, relPath));
+    version = createHash("sha256").update(bytes).digest("hex").slice(0, 10);
+  } catch {
+    version = null; // not a local file, leave the reference alone
+  }
+  hashCache.set(relPath, version);
+  return version;
+}
+
+/** Stamps every relative assets/... reference with ?v=<content hash>. */
+async function stampAssets(html) {
+  const refs = new Set();
+  for (const m of html.matchAll(/(?:src|href)="(assets\/[^"?#]+)"/g)) refs.add(m[1]);
+  for (const m of html.matchAll(/url\((['"]?)(assets\/[^'")?#]+)\1\)/g)) refs.add(m[2]);
+
+  let out = html;
+  for (const ref of refs) {
+    const version = await assetVersion(ref);
+    if (!version) continue;
+    out = out.split(`"${ref}"`).join(`"${ref}?v=${version}"`);
+    out = out.split(`url("${ref}")`).join(`url("${ref}?v=${version}")`);
+    out = out.split(`url('${ref}')`).join(`url('${ref}?v=${version}')`);
+    out = out.split(`url(${ref})`).join(`url(${ref}?v=${version})`);
+  }
+  return out;
+}
+
+// --- one stylesheet, with its font URLs versioned ---------------------------
+// Concatenating the brand tokens and the site stylesheet removes a round trip
+// from the critical path, and rewriting the font URLs here is what lets the
+// fonts be cached hard without ever going stale.
+async function buildStylesheet() {
+  // Sources live under src/css; only the generated bundle is deployed.
+  const parts = [];
+  for (const name of ["jadawel-brand.css", "jadawel.css"]) {
+    parts.push(await readFile(path.join(root, "src/css", name), "utf8"));
+  }
+  let css = parts.join("\n");
+
+  const fontRefs = new Set();
+  for (const m of css.matchAll(/url\((['"]?)(\.\.\/fonts\/[^'")?#]+)\1\)/g)) fontRefs.add(m[2]);
+  for (const ref of fontRefs) {
+    const version = await assetVersion(path.posix.normalize(path.posix.join("assets/css", ref)));
+    if (!version) continue;
+    css = css.split(`url("${ref}")`).join(`url("${ref}?v=${version}")`);
+    css = css.split(`url('${ref}')`).join(`url('${ref}?v=${version}')`);
+    css = css.split(`url(${ref})`).join(`url(${ref}?v=${version})`);
+  }
+
+  await writeFile(path.join(root, "assets/css/site.css"), css, "utf8");
+  const version = createHash("sha256").update(Buffer.from(css, "utf8")).digest("hex").slice(0, 10);
+  console.log(`built assets/css/site.css (${(Buffer.byteLength(css) / 1024).toFixed(1)} kB, v=${version})`);
+}
+
 const [layout, header, footer] = await Promise.all([
   read("src/layout.html"),
   read("src/partials/header.html"),
   read("src/partials/footer.html"),
 ]);
+
+await buildStylesheet();
 
 for (const page of PAGES) {
   const body = await read(path.join("src/pages", page.src));
@@ -62,7 +132,7 @@ for (const page of PAGES) {
     .replace("{{HEADER}}", markCurrent(header, page.nav))
     .replace("{{CONTENT}}", body.trimEnd())
     .replace("{{FOOTER}}", footer.trimEnd());
-  await writeFile(path.join(root, page.out), html, "utf8");
+  await writeFile(path.join(root, page.out), await stampAssets(html), "utf8");
   const kb = (Buffer.byteLength(html, "utf8") / 1024).toFixed(1);
   console.log(`built ${page.out} (${kb} kB)`);
 }
