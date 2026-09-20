@@ -800,25 +800,19 @@ section[id] { scroll-margin-top: 104px; }
   font-variant-numeric: tabular-nums;
 }
 .stat-value .ltr { display: inline; }
+/* A drawn arrow, not a glyph: neither bundled font subset carries U+2192, and
+   logical borders flip shape unpredictably across writing modes. The SVG is
+   inline in the markup and strokes with currentColor, so nothing depends on a
+   data: URI, which the site's own img-src CSP would refuse. It points right and
+   is mirrored in RTL, so "5 -> 1" reads forward in both directions. */
 .stat-flow {
   display: block;
-  width: 20px;
-  height: 2px;
-  background: var(--blue);
-  position: relative;
+  width: 24px;
+  height: 10px;
   flex-shrink: 0;
+  color: var(--blue);
 }
-.stat-flow::after {
-  content: "";
-  position: absolute;
-  inset-inline-start: 0;
-  inset-block-start: -3px;
-  width: 8px;
-  height: 8px;
-  border-inline-start: 2px solid var(--blue);
-  border-block-end: 2px solid var(--blue);
-  transform: rotate(45deg);
-}
+[dir="rtl"] .stat-flow { transform: scaleX(-1); }
 .stat p { font-size: 15.5px; color: var(--ink); font-weight: 600; line-height: 1.55; }
 .stat span.src {
   margin-block-start: auto;

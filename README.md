@@ -163,7 +163,10 @@ Arabic RTL and English LTR:
 - no horizontal overflow at any breakpoint
 - no console errors, page errors, failed requests, or 4xx/5xx responses
 - the header stays on a single line, and the logo keeps its 120 px minimum width
-- the language switch flips `dir`, `lang`, translated content, and title
+- the language switch flips `dir`, `lang`, translated content, and title, and an
+  explicit `?lang=` overrides a previously stored choice
+- the drawn arrow in the impact section points forward in both directions, and
+  the section renders identically in RTL and LTR
 - both fonts report `loaded`, and Arabic renders with the real Arabic subset
 - keyboard focus is visible on every interactive element (3 px blue outline)
 - the anchor targets (`#platform`, `#segments`, `#impact`) land clear of the sticky header
