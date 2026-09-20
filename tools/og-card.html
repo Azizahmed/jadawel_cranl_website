@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <title>Jadawel — social cover source</title>
+    <!--
+      Source for assets/img/og-cover.jpg (1200x630).
+      Rendered headlessly, not authored by hand:
+        node tools/render-og.mjs [baseUrl]
+      Composition follows the identity principle of a clear, confident mass plus
+      deliberate open space: an Ink panel carrying the approved white logo and
+      the brand idea, and a light reading panel carrying the message.
+    -->
+    <link rel="stylesheet" href="../assets/css/jadawel-brand.css" />
+    <style>
+      @font-face {
+        font-family: "Noto Sans Arabic";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: block;
+        src: url("../assets/fonts/NotoSansArabic-arabic.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Noto Sans Arabic";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: block;
+        src: url("../assets/fonts/NotoSansArabic-latin.woff2") format("woff2");
+      }
+
+      * { box-sizing: border-box; margin: 0; }
+      html, body { width: 1200px; height: 630px; overflow: hidden; }
+      body {
+        font-family: "Thmanyah Sans", "Noto Sans Arabic", Arial, sans-serif;
+        background: var(--jadawel-white);
+        color: var(--jadawel-ink);
+        display: grid;
+        grid-template-columns: 418px minmax(0, 1fr);
+      }
+
+      /* --- Ink mass (visually on the left in RTL) ---------------------------- */
+      .art {
+        position: relative;
+        background: var(--jadawel-ink);
+        padding: 54px 48px 50px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .art img.texture {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 62% 50%;
+        opacity: 0.5;
+      }
+      .art::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(420px 300px at 22% 8%, rgba(37, 99, 235, 0.42), transparent 68%),
+          linear-gradient(to top, rgba(11, 15, 25, 0.92) 6%, rgba(11, 15, 25, 0.42) 60%, rgba(11, 15, 25, 0.72));
+      }
+      .art > * { position: relative; z-index: 1; }
+      .logo { width: 148px; height: auto; align-self: flex-start; }
+
+      .art-foot { margin-top: auto; color: var(--jadawel-white); }
+      .art-foot .diamond {
+        width: 14px;
+        height: 14px;
+        background: #7aa2ff;
+        transform: rotate(45deg);
+        margin-bottom: 18px;
+      }
+      .art-foot p {
+        font-size: 26px;
+        font-weight: 800;
+        line-height: 1.5;
+      }
+      .art-foot span {
+        display: block;
+        margin-top: 12px;
+        font-size: 15px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      /* --- Reading panel ----------------------------------------------------- */
+      .panel {
+        padding: 62px 60px 56px;
+        display: flex;
+        flex-direction: column;
+        background:
+          radial-gradient(700px 280px at 8% -14%, rgba(37, 99, 235, 0.09), transparent 72%),
+          var(--jadawel-white);
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        align-self: flex-start;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--jadawel-blue-dark);
+        border: 1px solid var(--jadawel-blue-light);
+        border-radius: 999px;
+        padding: 7px 16px;
+      }
+      .eyebrow i { width: 8px; height: 8px; background: var(--jadawel-blue); transform: rotate(45deg); }
+
+      h1 {
+        margin-top: 26px;
+        font-size: 45px;
+        font-weight: 800;
+        line-height: 1.36;
+        letter-spacing: -0.01em;
+      }
+      h1 .accent { color: var(--jadawel-blue); }
+
+      .lede {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1.62;
+        color: var(--jadawel-slate);
+        max-width: 34ch;
+      }
+
+      .rule {
+        margin-top: auto;
+        width: 52px;
+        height: 5px;
+        background: var(--jadawel-blue);
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="art">
+      <img class="texture" src="../assets/img/sovereignty.jpg" alt="" />
+      <img class="logo" src="../assets/logos/jadawel-logo-white-transparent.png" alt="جداول" />
+      <div class="art-foot">
+        <div class="diamond"></div>
+        <p>من البيانات تُبنى الإمكانات</p>
+        <span>jadawl.site</span>
+      </div>
+    </aside>
+
+    <section class="panel">
+      <p class="eyebrow"><i></i>منصّة سعودية لجميع الجهات والمنشآت</p>
+      <h1>
+        أدِر بياناتك بالعربية،
+        <span class="accent">على منصّة مستضافة داخل المملكة</span>
+      </h1>
+      <p class="lede">سحابيًا داخل المملكة، أو محليًا داخل منشأتك. بياناتك تبقى حيث تقرّر أن تبقى.</p>
+      <div class="rule"></div>
+    </section>
+  </body>
+</html>

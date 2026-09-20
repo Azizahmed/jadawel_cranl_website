@@ -1,0 +1,25 @@
+:root {
+  --jadawel-ink: #0b0f19;
+  --jadawel-blue: #2563eb;
+  --jadawel-blue-dark: #1746b5;
+  --jadawel-blue-light: #dce7ff;
+  --jadawel-cloud: #f6f7fb;
+  --jadawel-white: #ffffff;
+  --jadawel-slate: #566072;
+  --jadawel-mint: #83d7c2;
+  --jadawel-amber: #f6c85f;
+  --jadawel-coral: #e35d6a;
+  --jadawel-font: "Thmanyah Sans", "Noto Sans Arabic", Arial, sans-serif;
+}
+
+html[lang="ar"],
+[dir="rtl"] {
+  direction: rtl;
+  font-family: var(--jadawel-font);
+}
+
+html[lang="en"],
+[dir="ltr"] {
+  direction: ltr;
+  font-family: var(--jadawel-font);
+}

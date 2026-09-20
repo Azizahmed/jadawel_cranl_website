@@ -1,0 +1,5 @@
+# Nothing generated should be ignored: the built HTML in the root is the
+# deliverable. Scratch output from local verification runs is ignored here.
+/out/
+/node_modules/
+*.tmp
