@@ -56,7 +56,7 @@ the HTTP block can redirect.
 
 | File | Content |
 | --- | --- |
-| `index.html` | Hero with a live product mock, deployment options, pillars, who it fits, impact benchmark, data lifecycle, digital sovereignty, FAQ, closing CTA |
+| `index.html` | Hero with a live product mock, deployment options, pillars, who it fits, data lifecycle, digital sovereignty, FAQ, closing CTA |
 | `templates.html` | Template library, nine ready-to-copy bases with structure previews |
 | `releases.html` | Documented release notes for three releases |
 | `contact.html` | Walkthrough request form, contact channels, data-location note |
@@ -109,24 +109,16 @@ isolated and correctly ordered inside RTL prose.
 
 ## Imagery
 
-Five segment photographs, one sovereignty field, and the social cover are new
+Five sector photographs, one sovereignty field, and the social cover are new
 artwork generated for this project. `image-prompts.txt` records the provider, the
 exact prompt, the pixel size, and a SHA-256 prefix for every file.
 `assets/img/og-cover.jpg` is hand-composed in `tools/og-card.html` and rendered by
 `tools/render-og.mjs` so the Arabic headline and the approved logo stay exact.
 
-The segment photography states **the scale and nature of each entity type** —
-a single-room shop, one office floor, a ministry atrium, a corporate atrium with
-bridges across several floors, a hospital corridor — rather than showing staged
-people. Every frame excludes people, text, logos, plaques, labels, and device
-branding. Earlier passes were rejected during review for a third-party logo on a
-laptop lid, gibberish whiteboard pseudo-text, and recognisable computer
-silhouettes; those files were regenerated and the exclusions are now explicit in
-the shared prompt suffix. Review notes are kept in the manifest.
-
-**The table in each segment card is not part of the photograph.** It is real HTML
-layered over the lower part of the frame, so the Arabic, the RTL column order, and
-the numbers stay correct and crisp at every pixel density.
+Scope of the photographic direction: credible Saudi work contexts, natural
+behaviour, and no clichés, per the identity's imagery rule. Device branding,
+pseudo-text, and hand-drawn artifacts were rejected during review and the affected
+files were regenerated.
 
 ```bash
 tools/generate-images.sh                          # all images, skips existing files
@@ -137,24 +129,6 @@ node tools/render-og.mjs http://127.0.0.1:8899     # social cover from tools/og-
 Both image scripts read `ZHIPU_API_KEY` from `/root/.config/jcode/zai.env`, which
 is specific to this machine. Supply the key another way if you move the project.
 
-## The impact benchmark
-
-The `03 — Impact in numbers` section states a workload-reduction ratio. Those
-figures are **third-party outcomes published by Airtable about its own customers**
-on `airtable.com`, retrieved September 2026:
-
-| Figure | Claim as published | Customer |
-| --- | --- | --- |
-| 60% | reduction in creative brief processing time | MGA |
-| 70% | faster turnaround time | Publicis Media |
-| 5 → 1 | five tools to one system of record | Highspot |
-| +10,000 | hours saved after consolidating tooling | Code and Theory |
-
-They are presented as a sector reference and labelled as such in the page copy and
-in a source note under the figures, in both languages. They are **not** Jadawel
-results, and the page says so. Do not remove that attribution while the section is
-in place, and replace the figures with Jadawel's own measurements once they exist.
-
 ## Verification
 
 Verified in headless Chromium at 1440, 1024, 900, 768, 390, and 360 px in both
@@ -163,13 +137,9 @@ Arabic RTL and English LTR:
 - no horizontal overflow at any breakpoint
 - no console errors, page errors, failed requests, or 4xx/5xx responses
 - the header stays on a single line, and the logo keeps its 120 px minimum width
-- the language switch flips `dir`, `lang`, translated content, and title, and an
-  explicit `?lang=` overrides a previously stored choice
-- the drawn arrow in the impact section points forward in both directions, and
-  the section renders identically in RTL and LTR
+- the language switch flips `dir`, `lang`, translated content, and title
 - both fonts report `loaded`, and Arabic renders with the real Arabic subset
 - keyboard focus is visible on every interactive element (3 px blue outline)
-- the anchor targets (`#platform`, `#segments`, `#impact`) land clear of the sticky header
 - the `Content-Security-Policy` sent by nginx produces no console violations
 - the site answers on the public IP, confirmed from outside the machine
 
@@ -180,7 +150,6 @@ python3 -m http.server 8899 &
 node tools/build.mjs                       # confirm the committed HTML matches src/
 npm install && npm run verify             # overflow, console/network, fonts, language switch
 npm run audit                             # WCAG AA contrast, alt text, heading order, focus, clipping
-node tools/write-manifest.mjs             # refresh image-prompts.txt after regenerating artwork
 ```
 
 ## Deviations and open items
@@ -200,13 +169,10 @@ node tools/write-manifest.mjs             # refresh image-prompts.txt after rege
 4. **The source site was not scraped.** The rewrite covers the positioning,
    deployment options, lifecycle, sovereignty, FAQ, template, and release
    material. Claims were carried over, not invented or extended.
-5. **The impact figures are third-party.** They are Airtable's published customer
-   outcomes, used as a sector reference with visible attribution in both languages.
-   Substituting Jadawel's own measurements is the obvious next step.
-6. **The contact form does not transmit.** It is a static demo: submitting shows
+5. **The contact form does not transmit.** It is a static demo: submitting shows
    a status message that points the visitor to `info@jadawl.site`. Wire it to a
    real endpoint before launch.
-7. **Not tested:** real screen readers, actual mobile browsers, and printing.
+6. **Not tested:** real screen readers, actual mobile browsers, and printing.
    `prefers-reduced-motion` and `prefers-color-scheme: light` are handled in CSS.
 
 ## Brand provenance

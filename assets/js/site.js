@@ -54,16 +54,13 @@
   }
 
   function initialLanguage() {
-    // An explicit ?lang= is a deliberate, shareable intent, so it wins over a
-    // remembered choice; the remembered choice wins over the browser locale.
+    var stored = null;
+    try { stored = window.localStorage.getItem(STORAGE_KEY); } catch (e) { /* ignore */ }
+    if (stored && DICT[stored]) return stored;
     var qs = new URLSearchParams(window.location.search).get("lang");
     if (qs && DICT[qs]) return qs;
-    var stored = null;
-    try { stored = window.localStorage.getItem(STORAGE_KEY); } catch (e) { /* private mode */ }
-    if (stored && DICT[stored]) return stored;
-    // Arabic is the default locale even on an English browser profile: this is
-    // an Arabic-first product, and the switch is one click away.
-    return "ar";
+    var nav = (navigator.language || "ar").toLowerCase();
+    return nav.indexOf("ar") === 0 ? "ar" : "ar";
   }
 
   /* --- Mobile navigation -------------------------------------------------- */

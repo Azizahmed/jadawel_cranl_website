@@ -111,8 +111,6 @@ for (const path of PAGES) {
       for (const el of document.querySelectorAll("p, h1, h2, h3, span, a, li, td, th, label, summary, button")) {
         const st = getComputedStyle(el);
         if (st.display === "none" || st.overflow === "visible") continue;
-        // Visually-hidden text is clipped on purpose.
-        if (el.classList.contains("sr-only") || el.closest(".sr-only")) continue;
         if (st.textOverflow === "ellipsis" || st.overflowX === "auto" || st.overflowX === "scroll") continue;
         if (el.scrollHeight > el.clientHeight + 2 && el.clientHeight > 0) {
           out.clipped.push(`${el.tagName.toLowerCase()}.${el.className}`.slice(0, 70));

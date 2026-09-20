@@ -1,20 +1,22 @@
 /**
  * Headless verification harness for the Jadawel website.
+ *
+ * Requires puppeteer-core and a system chromium:
+ *   npm install && node tools/verify.mjs http://127.0.0.1:8899 ./out
  * Drives the locally served site with puppeteer-core + the system chromium:
  *  - collects console errors, page errors, and failed requests
  *  - reports horizontal overflow at several widths
  *  - checks the language/direction toggle really flips dir + content
  *  - writes per-section screenshots for visual review
  *
- * Requires puppeteer-core and a system chromium:
- *   npm install && node tools/verify.mjs http://127.0.0.1 ./out
+ *   node verify.mjs <baseUrl> <outDir>
  */
 import puppeteer from "puppeteer-core";
 import { mkdir } from "node:fs/promises";
 
 const BASE = process.argv[2] || "http://127.0.0.1:8899";
 const OUT = process.argv[3] || "./out";
-const PAGES = ["index.html", "templates.html", "releases.html", "contact.html"];
+const PAGES = ["index.html", "templates.html", "releases.html", "contact.html", "404.html"];
 const WIDTHS = [1440, 1024, 768, 390];
 
 await mkdir(OUT, { recursive: true });
@@ -118,7 +120,7 @@ for (const path of PAGES) {
   await page.screenshot({ path: `${OUT}/${name}-ar-full.png`, fullPage: true });
 
   if (path === "index.html") {
-    const sectionIds = ["platform", "segments", "impact", "lifecycle", "sovereignty", "faq"];
+    const sectionIds = ["platform", "segments", "lifecycle", "sovereignty", "faq"];
     await shoot(page, ".hero", `${OUT}/hero-ar.png`);
     for (const id of sectionIds) await shoot(page, `#${id}`, `${OUT}/sec-${id}-ar.png`);
     await shoot(page, ".cta-band", `${OUT}/cta-ar.png`);
@@ -130,7 +132,6 @@ for (const path of PAGES) {
     await shoot(page, ".hero", `${OUT}/hero-en.png`);
     await shoot(page, "#sovereignty", `${OUT}/sec-sovereignty-en.png`);
     await shoot(page, "#segments", `${OUT}/sec-segments-en.png`);
-    await shoot(page, "#impact", `${OUT}/sec-impact-en.png`);
     await page.click('.header-actions [data-lang-set="ar"]');
   }
 
