@@ -2,48 +2,60 @@
 
 Provider: Zhipu CogView-4 (`cogview-4-250304`) through https://api.z.ai/api/paas/v4/images/generations.
 Copyright status: model output, generated for this project. Not sourced from stock libraries.
-All files are JPEG (the provider returns JPEG even when the URL ends in .png) at the stated pixel size.
-Regenerate with `tools/generate-images.sh`; redo a single file with `tools/regenerate-image.sh <name> <prompt>`.
-`assets/img/og-cover.jpg` is not from the model: it is rendered from `tools/og-card.html` by `tools/render-og.mjs`.
+Files are JPEG (the provider returns JPEG even when the URL ends in .png) at the stated pixel size.
+
+Direction: the segment photographs show the scale and nature of each entity type rather than
+people. No people, text, logos, plaques, labels, or device branding appear in any frame. The
+table shown in each card is real markup layered over the photograph, not generated pixels, so
+the Arabic stays correct and crisp.
+
+Regenerate everything: `tools/generate-images.sh` (skips files that already exist).
+Redo one file: `tools/regenerate-image.sh <name> "<prompt>"`.
+`assets/img/og-cover.jpg` is not from the model: it is composed in `tools/og-card.html` and
+rendered by `tools/render-og.mjs`, using the approved white logo and the sovereignty artwork as
+a texture field.
 
 ## sector-government.jpg
 - size: 1024x1024
-- sha256: f27a4e4a24bd9560
-- prompt: Candid documentary photograph inside a modern Saudi government programme office in Riyadh. Two Saudi colleagues, a man in a crisp white thobe and ghutra and a woman in a black abaya and hijab, stand at a large wall-mounted display showing abstract charts and progress bars, pointing at it and discussing naturally. Bright daylight from floor-to-ceiling windows, minimal interior, neutral grey and white surfaces, cool calm colour grading, shallow depth of field, editorial reportage style, no text, no logos, no visible brand names, no watermark.
+- bytes: 156265
+- sha256: 6f62e0bf9d5a1249
+- prompt: A vast modern Saudi government ministry complex in Riyadh seen from inside its grand entrance atrium: many floors of glazed balconies rising above, a long polished floor, tall columns and floor-to-ceiling glass. The scale feels institutional and large. No people anywhere in the frame. Absolutely no text, no letters, no numbers, no signs, no plaques, no labels, no door plates, no logos and no symbols. No device branding. Cool neutral daylight, calm grey and off-white palette with one restrained blue accent, wide editorial architectural photography, generous uncluttered space across the lower half, sharp and clean.
 
 ## sector-small-business.jpg
 - size: 1024x1024
-- sha256: 9946fd6e08a3e1aa
-- review note: Regenerated twice: no computer, laptop, screen or phone in frame, so no third-party device branding appears.
-- prompt: Candid documentary photograph of a small Saudi retail business owner inside a tidy modern shop in Riyadh, standing behind a counter with a laptop and a tablet, smiling while serving a customer. Warm natural window light, simple shelves of neatly arranged goods softly out of focus in the background, cool neutral colour grading, authentic unposed reportage style, no text, no logos, no visible brand names, no watermark.
+- bytes: 108201
+- sha256: 356add27c94aa0e8
+- review note: Two earlier passes showed people, and one showed a laptop with a third-party logo on the lid. The final prompt removes people and devices entirely.
+- prompt: The compact interior of a small Saudi neighbourhood grocery shop: one narrow room, wooden shelves of plain unlabelled goods, a simple wooden counter, a small window with warm light. The scale feels modest and single-room. No people anywhere in the frame. Absolutely no text, no letters, no numbers, no signs, no plaques, no labels, no door plates, no logos and no symbols. No device branding. Cool neutral daylight, calm grey and off-white palette with one restrained blue accent, wide editorial architectural photography, generous uncluttered space across the lower half, sharp and clean.
 
 ## sector-medium.jpg
 - size: 1024x1024
-- sha256: b21bd881bbe97850
-- review note: Regenerated: same scene but with a plain clean glass partition, no written text, diagrams, doodles or symbols anywhere.
-- prompt: Candid documentary photograph of a Saudi operations team meeting in a bright modern Riyadh office. Four colleagues, men in white thobes with ghutras and women in abayas with hijabs, sit around a light oak table reviewing printed tables and a laptop, one person sketching a process on a glass wall. Wide daylight, calm neutral palette, shallow depth of field, editorial reportage style, no text, no logos, no visible brand names, no watermark.
+- bytes: 116676
+- sha256: 90765b4b1acb1d76
+- review note: Regenerated during review: the first pass showed a whiteboard with gibberish pseudo-text, and the second pass showed recognisable all-in-one computer silhouettes. Both are excluded in the final prompt.
+- prompt: One open-plan office floor of a mid-sized company, empty: rows of plain desks with dark blank screens on simple thin stands, glass partitions, a low ceiling with linear lights, a single storey only. The scale feels like one floor of one building. No people anywhere in the frame. Absolutely no text, no letters, no numbers, no signs, no plaques, no labels, no door plates, no logos and no symbols. No device branding. Cool neutral daylight, calm grey and off-white palette with one restrained blue accent, wide editorial architectural photography, generous uncluttered space across the lower half, sharp and clean.
 
 ## sector-enterprise.jpg
 - size: 1024x1024
-- sha256: 8474951ed7ad56e5
-- prompt: Candid documentary photograph of a large Saudi enterprise headquarters atriums in Riyadh, viewed along a corridor of glass meeting rooms where teams work at desks with large monitors showing abstract charts. One Saudi woman in an abaya and hijab walks past carrying a laptop, mid-stride, naturally. Cool architectural daylight, deep neutral greys with one clear blue accent from a screen, wide editorial architectural photography, no text, no logos, no visible brand names, no watermark.
+- bytes: 167809
+- sha256: 57ab06c576c90cf6
+- prompt: A very large Saudi corporate headquarters: a soaring multi-storey glass atrium with several bridges crossing between towers, escalators and long sightlines, the scale vast and corporate. No people anywhere in the frame. Absolutely no text, no letters, no numbers, no signs, no plaques, no labels, no door plates, no logos and no symbols. No device branding. Cool neutral daylight, calm grey and off-white palette with one restrained blue accent, wide editorial architectural photography, generous uncluttered space across the lower half, sharp and clean.
 
 ## sector-specialized.jpg
 - size: 1024x1024
-- sha256: 99727a07223c2d2f
-- prompt: Candid documentary photograph inside a modern Saudi hospital administrative wing: a Saudi woman in a black abaya and hijab who is a health information officer reviews abstract data tables on a large monitor while a Saudi male colleague in a white thobe stands beside her holding a clipboard, both focused on the screen. Clean white and pale grey surfaces, soft daylight, shallow depth of field, calm clinical neutral palette, no text, no logos, no visible brand names, no watermark.
+- bytes: 105328
+- sha256: 00a0f98b39518f10
+- review note: Regenerated during review: the first pass had small door plaques carrying pseudo-text.
+- prompt: The bright long administrative corridor of a modern hospital: pale walls completely bare, glazed office windows along one side, a soft skylight running the length of the ceiling, handrails, and a plain reception counter far in the distance. No people anywhere in the frame. Absolutely no text, no letters, no numbers, no signs, no plaques, no labels, no door plates, no logos and no symbols. No device branding. Cool neutral daylight, calm grey and off-white palette with one restrained blue accent, wide editorial architectural photography, generous uncluttered space across the lower half, sharp and clean.
 
 ## sovereignty.jpg
 - size: 1440x720
+- bytes: 61577
 - sha256: e574303ed4b48383
 - prompt: Minimal fine-art abstract illustration on a flat deep navy #0B0F19 background: layered translucent geometric planes and thin precise grid lines glowing in clear blue #2563EB, forming a wide horizontal composition that narrows to a single bright blue diamond point on the right. Clean vector-like geometry, generous dark space, soft blue atmospheric glow, calm and technical, no text, no people, no logos, no watermark.
 
 ## og-cover.jpg
-- size: 1440x720
-- sha256: 3eaed9f2aceca951
-- prompt: Minimal fine-art abstract illustration on an off-white #F6F7FB background: a wide horizontal arrangement of thin precise blue #2563EB grid lines and rectangles forming the partial structure of a data table, dissolving into scattered small blue squares toward the right, with a single solid blue diamond as the focal point. Flat clean vector-like geometry, large areas of empty off-white space, editorial and restrained, no text, no people, no logos, no watermark.
-## og-cover.jpg
 - size: 1200x630
 - composed from: assets/logos/jadawel-logo-white-transparent.png, assets/img/sovereignty.jpg (texture field), tools/og-card.html
 - rendered by: tools/render-og.mjs (headless chromium, 1x)
-- note: hand-composed rather than model-generated so the Arabic headline and the approved logo stay exact.
+- note: hand-composed rather than model-generated, so the Arabic headline and the approved logo stay exact.
