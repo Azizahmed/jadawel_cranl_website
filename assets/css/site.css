@@ -604,32 +604,125 @@ section[id] { scroll-margin-top: 104px; }
 .card-onink .card-mark { background: rgba(0, 89, 252, 0.28); }
 .card-onink .card-mark::after { background: #6f9bff; }
 
-/* Deployment options */
-.option-card { padding: 30px 28px; gap: 16px; }
-.option-card .tagline {
-  font-size: 13px;
+/* --- Deployment options: the two designed cards ---------------------------
+   Each card is a tag pill, an illustration beside the copy, a rule, a row of
+   circled feature icons, and a full-width call to action. The blue outline is
+   the design's, drawn with the brand blue.
+   -------------------------------------------------------------------------- */
+.offer-card {
+  padding: 28px 26px 22px;
+  gap: 20px;
+  border: 2px solid var(--blue);
+}
+
+.offer-card__tag {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 9px;
+  padding: 8px 16px 9px;
+  border-radius: 999px;
+  background: var(--blue-light);
+  color: var(--blue-dark);
+  font-size: 14.5px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  line-height: 1.2;
+}
+.offer-card__tag svg {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+}
+
+.offer-card__main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(112px, 0.66fr);
+  gap: 18px;
+  align-items: center;
+}
+.offer-card__copy { min-width: 0; }
+.offer-card__copy h3 { font-size: 21px; }
+.offer-card__copy p { margin-block-start: 8px; }
+.offer-card__art { display: block; min-width: 0; }
+.offer-card__art svg { width: 100%; max-width: 198px; height: auto; margin-inline-start: auto; }
+
+.offer-card__rule {
+  height: 1px;
+  margin: 2px 0;
+  border: 0;
+  background: var(--hairline);
+}
+
+.offer-features { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.offer-features--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.offer-features--four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.offer-features li {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  min-width: 0;
+  text-align: center;
+  color: var(--slate);
+  font-size: 14.5px;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+.offer-feature__icon {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--blue-light);
   color: var(--blue-dark);
 }
-.option-card .btn { align-self: flex-start; }
-.option-card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.option-card li {
+.offer-feature__icon svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+}
+
+.offer-cta {
   display: flex;
-  gap: 11px;
-  font-size: 15.5px;
-  color: var(--slate);
-  line-height: 1.65;
-}
-.option-card li::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  margin-block-start: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 68px;
+  margin-block-start: auto;
+  padding: 16px 22px;
+  border-radius: var(--radius-sm);
   background: var(--blue);
-  transform: rotate(45deg);
-  flex-shrink: 0;
+  color: var(--white);
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+  transition: background-color 0.16s ease, transform 0.16s ease;
 }
+.offer-cta:hover { background: var(--blue-dark); transform: translateY(-1px); }
+.offer-cta__text {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.offer-cta__text span { font-weight: 500; }
+.offer-cta__arrow {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+}
+/* The arrow is drawn pointing left, which is forward in Arabic. */
+[dir="ltr"] .offer-cta__arrow { transform: scaleX(-1); }
 
 /* Pillars strip */
 .pillars {
@@ -975,6 +1068,18 @@ section[id] { scroll-margin-top: 104px; }
   .seg-card { padding: 12px 14px; }
   .seg-art { width: 46px; height: 46px; }
   .seg-art svg { width: 34px; height: 34px; }
+
+  /* Below this width the illustration would squeeze the copy, so it moves
+     above it and the feature icons step down a size. */
+  .offer-card { padding: 20px 18px 18px; }
+  .offer-card__main { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .offer-card__art svg { max-width: 132px; margin-inline: auto; }
+  .offer-card__copy h3 { font-size: 19px; }
+  .offer-features { gap: 8px; }
+  .offer-features li { font-size: 13.5px; }
+  .offer-feature__icon { width: 46px; height: 46px; }
+  .offer-feature__icon svg { width: 21px; height: 21px; }
+  .offer-cta { min-height: 52px; padding: 12px 14px; font-size: 15px; }
 }
 
 /* --- Lifecycle ----------------------------------------------------------- */
@@ -1375,6 +1480,8 @@ section[id] { scroll-margin-top: 104px; }
   .cta-band { grid-template-columns: minmax(0, 1fr); padding: 38px 28px; }
   .band { padding: 30px 26px; }
   .section { padding-block: 64px; }
+  /* The cards stack here, so their illustrations can stay beside the copy. */
+  .offer-card__art svg { max-width: 168px; }
 }
 
 @media (max-width: 720px) {
@@ -1392,4 +1499,7 @@ section[id] { scroll-margin-top: 104px; }
   .mock-table { min-width: 440px; }
   .mock-scroll { margin-inline: -10px; padding-inline: 10px; }
   .hero h1 { font-size: 1.95rem; }
+  .offer-features--four { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 16px; }
+  .offer-features li { font-size: 14px; }
+  .offer-cta { font-size: 15.5px; }
 }
