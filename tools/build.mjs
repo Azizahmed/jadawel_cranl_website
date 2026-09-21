@@ -13,6 +13,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { buildLegal, DOCUMENTS as LEGAL_DOCUMENTS } from "./build-legal.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -24,13 +25,40 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
  */
 const SITE_URL = (process.env.SITE_URL || "http://srv1278373.hstgr.cloud").replace(/\/+$/, "");
 
+/**
+ * The legal documents are generated from tools/legal/*.mjs, so their entries are
+ * derived from the same source rather than written out again here. Each carries
+ * its own static title and description (a crawler reads the HTML, not the
+ * dictionary) plus the fragment that holds its other language.
+ */
+const LEGAL_PAGES = LEGAL_DOCUMENTS.map((doc) => ({
+  out: `${doc.slug}.html`,
+  src: `${doc.slug}.html`,
+  nav: null,
+  path: `/${doc.slug}.html`,
+  priority: "0.3",
+  titleKey: `${doc.key}.title`,
+  descKey: `${doc.key}.desc`,
+  title: `${doc.title.ar} — جداول`,
+  description: doc.desc.ar,
+  scripts: [`assets/js/i18n-${doc.slug}.js`],
+}));
+
 const PAGES = [
   { out: "index.html", src: "index.html", nav: "product", path: "/", priority: "1.0" },
   { out: "templates.html", src: "templates.html", nav: "templates", path: "/templates.html", priority: "0.8" },
   { out: "releases.html", src: "releases.html", nav: "releases", path: "/releases.html", priority: "0.6" },
+  ...LEGAL_PAGES,
   { out: "contact.html", src: "contact.html", nav: "contact", path: "/contact.html", priority: "0.7" },
   { out: "404.html", src: "404.html", nav: null, path: null, noindex: true, titleKey: "nf.title" },
 ];
+
+/** What a page carries when it names nothing of its own. */
+const HOME_TITLE = "جداول — منصّة عربية للبيانات، مستضافة داخل المملكة";
+const HOME_DESCRIPTION =
+  "جداول منصّة سحابية عربية لإدارة البيانات والعمليات، تجري كل عملياتها داخل المملكة العربية السعودية، مع خيار التركيب المحلي داخل مركز بيانات الجهة.";
+const HOME_OG_DESCRIPTION =
+  "أدِر بياناتك بالعربية على منصّة مستضافة داخل المملكة، مع خيار التركيب المحلي داخل مركز بيانات الجهة.";
 
 const read = (p) => readFile(path.join(root, p), "utf8");
 
@@ -117,6 +145,7 @@ const [layout, header, footer] = await Promise.all([
 ]);
 
 await buildStylesheet();
+await buildLegal();
 
 for (const page of PAGES) {
   const body = await read(path.join("src/pages", page.src));
@@ -124,14 +153,22 @@ for (const page of PAGES) {
     ? `    <meta name="robots" content="noindex, follow" />`
     : `    <link rel="canonical" href="${SITE_URL}${page.path}" />\n` +
       `    <meta property="og:url" content="${SITE_URL}${page.path}" />`;
-  const htmlAttrs = page.titleKey ? ` data-title-key="${page.titleKey}"` : "";
+  const htmlAttrs =
+    (page.titleKey ? ` data-title-key="${page.titleKey}"` : "") +
+    (page.descKey ? ` data-desc-key="${page.descKey}"` : "");
+  const pageScripts = (page.scripts || []).map((src) => `    <script src="${src}"></script>`).join("\n");
   const html = layout
     .replace("{{HTML_ATTRS}}", htmlAttrs)
     .replaceAll("__SITE_URL__", SITE_URL)
+    .replaceAll("{{TITLE}}", page.title || HOME_TITLE)
+    .replaceAll("{{DESCRIPTION}}", page.description || HOME_DESCRIPTION)
+    .replaceAll("{{OG_TITLE}}", page.title || HOME_TITLE)
+    .replaceAll("{{OG_DESCRIPTION}}", page.description || HOME_OG_DESCRIPTION)
     .replace("{{SEO}}", seo)
     .replace("{{HEADER}}", markCurrent(header, page.nav))
     .replace("{{CONTENT}}", body.trimEnd())
-    .replace("{{FOOTER}}", footer.trimEnd());
+    .replace("{{FOOTER}}", footer.trimEnd())
+    .replace("{{PAGE_SCRIPTS}}", pageScripts);
   await writeFile(path.join(root, page.out), await stampAssets(html), "utf8");
   const kb = (Buffer.byteLength(html, "utf8") / 1024).toFixed(1);
   console.log(`built ${page.out} (${kb} kB)`);

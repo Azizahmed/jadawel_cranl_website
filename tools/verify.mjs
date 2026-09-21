@@ -16,7 +16,16 @@ import { mkdir } from "node:fs/promises";
 
 const BASE = process.argv[2] || "http://127.0.0.1:8899";
 const OUT = process.argv[3] || "./out";
-const PAGES = ["index.html", "templates.html", "releases.html", "contact.html", "404.html"];
+const PAGES = [
+  "index.html",
+  "templates.html",
+  "releases.html",
+  "privacy.html",
+  "security.html",
+  "terms.html",
+  "contact.html",
+  "404.html",
+];
 const WIDTHS = [1440, 1024, 768, 390];
 
 await mkdir(OUT, { recursive: true });

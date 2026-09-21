@@ -13,6 +13,18 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://jadawel.azoz.cloud/privacy.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://jadawel.azoz.cloud/security.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://jadawel.azoz.cloud/terms.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://jadawel.azoz.cloud/contact.html</loc>
     <priority>0.7</priority>
   </url>

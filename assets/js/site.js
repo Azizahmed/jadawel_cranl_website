@@ -42,8 +42,10 @@
     // inherit the home page title.
     var title = t(lang, root.getAttribute("data-title-key") || "meta.title");
     if (title) document.title = title;
+    // A page may name its own description key too, the way it names its title,
+    // so a document page does not inherit the home page's description.
     var desc = document.querySelector('meta[name="description"]');
-    var descValue = t(lang, "meta.description");
+    var descValue = t(lang, root.getAttribute("data-desc-key") || "meta.description");
     if (desc && descValue) desc.setAttribute("content", descValue);
 
     document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
@@ -54,11 +56,13 @@
   }
 
   function initialLanguage() {
+    // An explicit ?lang= wins over the stored choice: it is what a shared link
+    // carries, and a link that names a language should open in that language.
+    var qs = new URLSearchParams(window.location.search).get("lang");
+    if (qs && DICT[qs]) return qs;
     var stored = null;
     try { stored = window.localStorage.getItem(STORAGE_KEY); } catch (e) { /* ignore */ }
     if (stored && DICT[stored]) return stored;
-    var qs = new URLSearchParams(window.location.search).get("lang");
-    if (qs && DICT[qs]) return qs;
     var nav = (navigator.language || "ar").toLowerCase();
     return nav.indexOf("ar") === 0 ? "ar" : "ar";
   }

@@ -83,9 +83,12 @@ redeploy.
 
 | File | Content |
 | --- | --- |
-| `index.html` | Hero with a live product mock, deployment options, pillars, who it fits, data lifecycle, digital sovereignty, FAQ, closing CTA |
+| `index.html` | Hero with a live product mock, who it fits, what the data does, digital sovereignty, deployment options, FAQ, closing band |
 | `templates.html` | Template library, nine ready-to-copy bases with structure previews |
 | `releases.html` | Documented release notes for three releases |
+| `privacy.html` | Privacy and data protection, under the Saudi personal data protection law |
+| `security.html` | Security and compliance: controls, national frameworks, shared responsibility |
+| `terms.html` | Terms of use, with Saudi law as the governing law |
 | `contact.html` | Walkthrough request form, contact channels, data-location note |
 | `404.html` | Branded not-found page, served by nginx with a real 404 status |
 
@@ -101,11 +104,14 @@ src/layout.html            document shell (head, direction, asset links)
 src/partials/header.html   logo, navigation, language switch, CTAs
 src/partials/footer.html   brand block, three link columns, legal row
 src/pages/*.html           page bodies, wrapped by the layout
-tools/build.mjs            writes src/pages/*.html into the four root pages
+tools/build.mjs            writes src/pages/*.html into the root pages
+tools/legal/*.mjs          the three legal documents, Arabic and English together
+tools/build-legal.mjs       generates the legal pages and their dictionary
 ```
 
 ```bash
-node tools/build.mjs        # rebuild the four root pages after editing src/
+node tools/build.mjs        # rebuild every root page after editing src/ or tools/legal/
+node tools/build-legal.mjs  # generate just the legal pages and their fragments
 ```
 
 ## Bilingual behaviour
@@ -119,6 +125,40 @@ Strings live in `assets/js/i18n.js`; markup carries `data-i18n` keys, plus
 `data-i18n-attr="attr:key"` for attributes. Latin technical tokens (`TLS 1.3`,
 `AES-256`, `CSV`, `PostgreSQL`, `2FA`) sit in `<span class="ltr">` so they stay
 isolated and correctly ordered inside RTL prose.
+
+## Legal documents
+
+`privacy.html`, `security.html`, and `terms.html` are generated, not hand-written
+in `src/pages`. The text lives once in `tools/legal/{privacy,security,terms}.mjs`,
+Arabic and English in the same block, and `tools/build-legal.mjs` turns each
+document into:
+
+- `src/pages/<slug>.html` — Arabic inline, every visible string carrying a
+  `data-i18n` key, wrapped by the layout like any other page
+- `assets/js/i18n-<slug>.js` — that page's dictionary fragment, both languages
+
+The page loads its own fragment after `i18n.js` and before `site.js`, so a
+document costs one extra request and no reader downloads the other two. Both
+languages are generated from the same block, which is what keeps the Arabic page
+and the English switch from drifting apart.
+
+Each page carries its own static `<title>` and description, and names the
+dictionary keys that replace them at runtime (`data-title-key`, `data-desc-key`),
+so a shared link and a crawler both see the document's own title.
+
+The documents are written against the Kingdom's instruments, and each one is
+generated from a single file, so an update is one edit and one build:
+
+- `privacy.html` — نظام حماية البيانات الشخصية ولائحته التنفيذية (سدايا)، ولائحة
+  تنظيم نقل البيانات الشخصية خارج المملكة
+- `security.html` — ECC 2-2024، CCC 2-2024، DCC-1:2022 (الهيئة الوطنية للأمن
+  السيبراني)، نظام الأمن السيبراني، والإطار التنظيمي لخدمات الحوسبة السحابية
+- `terms.html` — نظام التعاملات الإلكترونية، نظام مكافحة الجرائم المعلوماتية،
+  وأنظمة المملكة كقانون واجب التطبيق
+
+Where a number is a commercial choice rather than a legal one (the liability cap,
+the 60-day price notice, the 30-day export window, retention periods), it is
+stated in the text and can be changed in the source file alone.
 
 ## Brand application
 

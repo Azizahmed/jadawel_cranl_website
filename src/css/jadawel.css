@@ -1463,3 +1463,118 @@ section[id] { scroll-margin-top: 104px; }
   .offer-features li { font-size: 14px; }
   .offer-cta { font-size: 15.5px; }
 }
+
+/* --- Legal documents ------------------------------------------------------
+   The three documents share one layout: a contents column that stays in view
+   while the reader moves down the page, and a body set at a comfortable
+   measure. Everything is written in logical properties, so the Arabic (rtl)
+   and the English (ltr) version are the same markup. */
+
+.doc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 26px;
+  margin-block-start: 20px;
+  font-size: 14.5px;
+  color: var(--slate);
+}
+.doc-meta b { color: var(--ink); font-weight: 700; margin-inline-end: 4px; }
+.doc-meta a { color: var(--blue-dark); font-weight: 600; }
+
+.doc { display: grid; grid-template-columns: minmax(0, 1fr); gap: 34px; align-items: start; }
+@media (min-width: 1000px) {
+  .doc { grid-template-columns: 272px minmax(0, 1fr); gap: 56px; }
+}
+
+.doc-toc {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--white);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+}
+@media (min-width: 1000px) {
+  .doc-toc { position: sticky; top: 96px; max-height: calc(100vh - 132px); overflow: auto; }
+}
+.doc-toc b { display: block; font-size: 15px; margin-block-end: 10px; }
+.doc-toc ol { margin: 0; padding-inline-start: 20px; display: grid; gap: 7px; font-size: 14.5px; }
+.doc-toc a { color: var(--slate); text-decoration: none; }
+.doc-toc a:hover { color: var(--blue-dark); text-decoration: underline; }
+.doc-top { margin: 14px 0 0; font-size: 13.5px; }
+.doc-top a { color: var(--slate); }
+
+.doc-body { min-width: 0; }
+.doc-section {
+  scroll-margin-top: 96px;
+  padding-block-end: 26px;
+  margin-block-end: 26px;
+  border-block-end: 1px solid var(--hairline);
+}
+.doc-section:last-of-type { border-block-end: 0; margin-block-end: 18px; }
+.doc-body h2 { font-size: clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem); font-weight: 800; margin: 0 0 12px; }
+.doc-body h3 { font-size: 1.03rem; font-weight: 700; margin: 22px 0 8px; color: var(--ink); }
+.doc-body p,
+.doc-body li,
+.doc-body dt,
+.doc-body dd { font-size: 15.5px; line-height: 1.85; color: var(--slate); }
+.doc-body p { margin: 0 0 12px; max-width: 78ch; }
+.doc-list { margin: 0 0 12px; padding-inline-start: 22px; display: grid; gap: 8px; max-width: 78ch; }
+.doc-list li::marker { color: var(--blue); }
+.doc-dl { margin: 0 0 12px; display: grid; gap: 14px; max-width: 78ch; }
+.doc-dl dt { font-weight: 700; color: var(--ink); }
+.doc-dl dd { margin: 4px 0 0; }
+.doc-note {
+  background: var(--blue-light);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin: 0 0 14px;
+  max-width: 78ch;
+}
+.doc-note p { margin: 0; color: var(--ink); }
+.doc-more { margin: 0 0 12px; }
+
+.doc-table-wrap {
+  overflow-x: auto;
+  margin: 0 0 16px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+}
+.doc-table { width: 100%; border-collapse: collapse; }
+.doc-table caption {
+  text-align: start;
+  padding: 12px 14px 4px;
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+.doc-table th,
+.doc-table td {
+  padding: 11px 14px;
+  border-block-start: 1px solid var(--hairline);
+  border-inline-end: 1px solid var(--hairline);
+  text-align: start;
+  vertical-align: top;
+  font-size: 15px;
+  line-height: 1.75;
+}
+.doc-table th { background: var(--cloud); color: var(--ink); font-weight: 700; font-size: 14.5px; }
+.doc-table th:last-child,
+.doc-table td:last-child { border-inline-end: 0; }
+.doc-table td { color: var(--slate); }
+
+.doc-related {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--cloud);
+  padding: 18px 20px;
+}
+.doc-related b { font-size: 15px; }
+.doc-related p { margin: 6px 0 10px; font-size: 14.5px; color: var(--slate); }
+.doc-related ul { margin: 0; padding-inline-start: 20px; display: grid; gap: 6px; font-size: 14.5px; }
+.doc-related a { color: var(--blue-dark); font-weight: 600; }
+
+@media (max-width: 720px) {
+  .doc-table th,
+  .doc-table td { padding: 9px 10px; font-size: 14.5px; }
+}

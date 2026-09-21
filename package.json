@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "node tools/build.mjs",
+    "legal": "node tools/build-legal.mjs",
     "og": "node tools/render-og.mjs",
     "serve": "python3 -m http.server 8899",
     "verify": "node tools/verify.mjs ${SITE:-http://127.0.0.1} ./out",
