@@ -299,32 +299,6 @@ p { margin: 0; }
   color: var(--slate);
   max-width: 56ch;
 }
-.hero-cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-block-start: 30px;
-}
-.hero-trust {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 22px;
-  margin-block-start: 26px;
-  padding: 0;
-  list-style: none;
-  font-size: 14.5px;
-  color: var(--slate);
-}
-.hero-trust li { display: flex; align-items: center; gap: 8px; }
-.hero-trust li::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  background: var(--mint);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
 /* --- Product mock (hero visual) ----------------------------------------- */
 .mock {
   background: var(--white);

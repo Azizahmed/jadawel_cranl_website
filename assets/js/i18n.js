@@ -78,11 +78,6 @@ window.JADWEL_I18N = {
     "hero.h1a": "بياناتك بالعربية...",
     "hero.h1b": "باستضافة محلية آمنة",
     "hero.lede": "تُمكّن منصة «جداول» الفرق من التعاون في إدارة البيانات وابتكار لوحات المعلومات ومسارات العمل الخاصة بكل سهولة. نضمن لك سيادة وأمان البيانات عبر استضافة سحابية داخل المملكة، أو خيار التشغيل المباشر داخل البنية التحتية لمنشأتك.",
-    "hero.ctaPrimary": "تجربة المنصة",
-    "hero.ctaSecondary": "اطلب عرضًا توضيحيًا",
-    "hero.trust1": "نسخ احتياطي يومي",
-    "hero.trust2": "استضافة داخل المملكة",
-    "hero.trust3": "صدّر بياناتك متى شئت",
 
     "mock.workspace": "إدارة العمل · المشاريع",
     "mock.workspaceLabel": "مساحة العمل",
@@ -380,11 +375,6 @@ window.JADWEL_I18N = {
     "hero.h1a": "Your data in Arabic...",
     "hero.h1b": "on secure in-country hosting",
     "hero.lede": "Jadawel lets teams collaborate on their data and build their own dashboards and workflows with ease. Your data sovereignty and security are assured, whether you run on our cloud inside the Kingdom or directly on your own infrastructure.",
-    "hero.ctaPrimary": "Try the platform",
-    "hero.ctaSecondary": "Request a walkthrough",
-    "hero.trust1": "Daily backups",
-    "hero.trust2": "In-Kingdom hosting",
-    "hero.trust3": "Export your data any time",
 
     "mock.workspace": "Work management · Programmes",
     "mock.workspaceLabel": "Workspace",
