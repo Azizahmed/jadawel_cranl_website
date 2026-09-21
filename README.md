@@ -4,9 +4,18 @@ A bilingual (Arabic-first) marketing site for **جداول**, built to the appro
 Jadawel Visual Identity **v1.1**. The Arabic content is a rewrite of the material on
 `jadawl.site`; the English is an authored parallel, not a back-translation.
 
-**Live on this VPS:** <http://76.13.5.113/> (also <http://srv1278373.hstgr.cloud/>).
-nginx serves `/var/www/jadawel` on port 80 and is enabled in the OpenRC `default`
-runlevel, so it comes back after a reboot.
+**Live on this VPS:** <https://jadawel.azoz.cloud/> — the host name that resolves
+to this machine for the site, over TLS. Plain HTTP still answers on
+<http://76.13.5.113/> and on any other name pointed here, because the `:80` block
+is the default server. nginx serves `/var/www/jadawel` and is enabled in the
+OpenRC `default` runlevel, so it comes back after a reboot.
+
+Deploy for that host name, so canonical URLs, `og:url`, the sitemap, and
+`robots.txt` name it:
+
+```bash
+SITE_URL=https://jadawel.azoz.cloud bash tools/deploy.sh
+```
 
 To view the site without nginx:
 
@@ -48,9 +57,27 @@ Serving detail:
 - `add_header` is not inherited once a nested block sets its own, so the shared
   headers live in `tools/nginx-jadawel-common.conf` and every location includes it
 
-HTTPS is not configured: Let's Encrypt needs a domain pointed at this host. Once
-DNS resolves here, run `apk add certbot certbot-nginx`, issue the certificate, and
-the HTTP block can redirect.
+HTTPS runs on `jadawel.azoz.cloud` with a Let's Encrypt certificate issued and
+renewed by `acme.sh` (EC-256, HTTP-01 through `/var/www/acme`), installed at
+`/etc/nginx/certs/jadawel.azoz.cloud.{crt,key}` and served by
+`tools/nginx-jadawel-tls.conf`. `tools/deploy.sh` installs that vhost only once
+the certificate exists, because an `ssl_certificate` pointing at a missing file
+stops nginx from starting:
+
+```bash
+acme.sh --issue -d jadawel.azoz.cloud --webroot /var/www/acme --keylength ec-256
+acme.sh --install-cert -d jadawel.azoz.cloud --ecc \
+  --key-file       /etc/nginx/certs/jadawel.azoz.cloud.key \
+  --fullchain-file /etc/nginx/certs/jadawel.azoz.cloud.crt \
+  --reloadcmd      "rc-service nginx reload"
+```
+
+The `:80` default server keeps a `/.well-known/acme-challenge/` location pointed
+at `/var/www/acme`. Every certificate on this machine validates through it, so
+removing that location does not fail a deploy — it breaks renewal weeks later, on
+the next scheduled run. Adding another host name means: point its DNS here, issue
+a certificate the same way, add the name to `server_name` in the TLS vhost, and
+redeploy.
 
 ## Pages
 
@@ -242,9 +269,10 @@ npm run audit                             # WCAG AA contrast, alt text, heading 
 
 ## Deviations and open items
 
-1. **No HTTPS yet.** The deployment is plain HTTP on port 80. Certificates need a
-   domain whose DNS resolves to this host, and there is none; the origin is only
-   reachable by IP today.
+1. **The public domain is not this machine.** `jadawl.site` still serves the older
+   site (an Astro build published through Bunny/CranL), so this build is verified
+   on `https://jadawel.azoz.cloud/` only. Moving to production means pointing that
+   domain here, or publishing this build to the host that serves it.
 2. **Thmanyah Sans is not licensed on this host.** The site self-hosts
    **Noto Sans Arabic** (SIL OFL 1.1, licence text in `assets/fonts/OFL.txt`) and
    keeps `"Thmanyah Sans"` first in every font stack, so a licensed install wins
