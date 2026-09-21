@@ -52,7 +52,24 @@ find "$DEST" -type f -exec chmod 0644 {} +
 echo "==> installing nginx configuration"
 install -d -m 0755 "$NGINX_SNIPPETS" "$NGINX_SITES"
 install -m 0644 tools/nginx-jadawel-common.conf "$NGINX_SNIPPETS/jadawel-common.conf"
+install -m 0644 tools/nginx-jadawel-site.conf "$NGINX_SNIPPETS/jadawel-site.conf"
 install -m 0644 tools/nginx-jadawel.conf "$NGINX_SITES/default.conf"
+
+# The HTTPS vhost is installed only once acme.sh has issued a certificate for
+# the host name it names: nginx refuses to start if ssl_certificate points at a
+# file that is not there. Issue one with
+#   acme.sh --issue -d <host> --webroot /var/www/acme --keylength ec-256
+#   acme.sh --install-cert -d <host> --ecc \
+#     --key-file       /etc/nginx/certs/<host>.key \
+#     --fullchain-file /etc/nginx/certs/<host>.crt \
+#     --reloadcmd      "rc-service nginx reload"
+TLS_HOST="$(awk '/^[[:space:]]*server_name/ { gsub(/;/, "", $2); print $2; exit }' tools/nginx-jadawel-tls.conf)"
+if [ -n "$TLS_HOST" ] && [ -f "/etc/nginx/certs/$TLS_HOST.crt" ]; then
+  install -m 0644 tools/nginx-jadawel-tls.conf "$NGINX_SITES/jadawel-tls.conf"
+  echo "    TLS vhost installed for $TLS_HOST"
+else
+  echo "    no certificate for ${TLS_HOST:-the TLS host name} yet; HTTPS vhost skipped"
+fi
 
 nginx -t
 

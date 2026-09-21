@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://srv1278373.hstgr.cloud/</loc>
+    <loc>https://jadawel.azoz.cloud/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://srv1278373.hstgr.cloud/templates.html</loc>
+    <loc>https://jadawel.azoz.cloud/templates.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://srv1278373.hstgr.cloud/releases.html</loc>
+    <loc>https://jadawel.azoz.cloud/releases.html</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://srv1278373.hstgr.cloud/contact.html</loc>
+    <loc>https://jadawel.azoz.cloud/contact.html</loc>
     <priority>0.7</priority>
   </url>
 </urlset>

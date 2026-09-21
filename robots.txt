@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 
-Sitemap: http://srv1278373.hstgr.cloud/sitemap.xml
+Sitemap: https://jadawel.azoz.cloud/sitemap.xml
