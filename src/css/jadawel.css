@@ -583,6 +583,13 @@ section[id] { scroll-margin-top: 104px; }
    circled feature icons, and a full-width call to action. The blue outline is
    the design's, drawn with the brand blue.
    -------------------------------------------------------------------------- */
+/* With one option standing, the card is centred instead of stretched. */
+.offer-single {
+  display: grid;
+  max-width: 760px;
+  margin-inline: auto;
+}
+
 .offer-card {
   padding: 28px 26px 22px;
   gap: 20px;
@@ -633,6 +640,7 @@ section[id] { scroll-margin-top: 104px; }
 .offer-features { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .offer-features--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .offer-features--four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.offer-features--six { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 18px; }
 .offer-features li {
   display: grid;
   justify-items: center;
@@ -1473,7 +1481,8 @@ section[id] { scroll-margin-top: 104px; }
   .mock-table { min-width: 440px; }
   .mock-scroll { margin-inline: -10px; padding-inline: 10px; }
   .hero h1 { font-size: 1.95rem; }
-  .offer-features--four { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 16px; }
+  .offer-features--four,
+  .offer-features--six { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 16px; }
   .offer-features li { font-size: 14px; }
   .offer-cta { font-size: 15.5px; }
 }
