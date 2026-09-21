@@ -609,11 +609,18 @@ section[id] { scroll-margin-top: 104px; }
    circled feature icons, and a full-width call to action. The blue outline is
    the design's, drawn with the brand blue.
    -------------------------------------------------------------------------- */
-/* With one option standing, the card is centred instead of stretched. */
-.offer-single {
+/* One option stands, so the supporting pillars sit beside it on the left rather
+   than as a band underneath. In Arabic the card is the first column (right) and
+   the pillars the second (left); the row stacks on narrow screens. */
+.offer-row {
   display: grid;
-  max-width: 760px;
-  margin-inline: auto;
+  grid-template-columns: minmax(0, 1fr) 348px;
+  gap: 22px;
+  align-items: stretch;
+}
+.offer-row .pillars {
+  grid-template-columns: minmax(0, 1fr);
+  margin-block-start: 0;
 }
 
 .offer-card {
@@ -1490,6 +1497,9 @@ section[id] { scroll-margin-top: 104px; }
   .section { padding-block: 64px; }
   /* The cards stack here, so their illustrations can stay beside the copy. */
   .offer-card__art svg { max-width: 168px; }
+  /* The section's row stacks: the card first, then the pillars two-up. */
+  .offer-row { grid-template-columns: minmax(0, 1fr); }
+  .offer-row .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 720px) {
