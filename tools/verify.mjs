@@ -120,7 +120,7 @@ for (const path of PAGES) {
   await page.screenshot({ path: `${OUT}/${name}-ar-full.png`, fullPage: true });
 
   if (path === "index.html") {
-    const sectionIds = ["platform", "uses", "segments", "sovereignty", "faq"];
+    const sectionIds = ["platform", "lifecycle", "uses", "segments", "sovereignty", "faq"];
     await shoot(page, ".hero", `${OUT}/hero-ar.png`);
     for (const id of sectionIds) await shoot(page, `#${id}`, `${OUT}/sec-${id}-ar.png`);
     await shoot(page, ".cta-band", `${OUT}/cta-ar.png`);
