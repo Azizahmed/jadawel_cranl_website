@@ -1,7 +1,7 @@
 # Jadawel website
 
 A bilingual (Arabic-first) marketing site for **جداول**, built to the approved
-Jadawel Visual Identity v1.0. The Arabic content is a rewrite of the material on
+Jadawel Visual Identity **v1.1**. The Arabic content is a rewrite of the material on
 `jadawl.site`; the English is an authored parallel, not a back-translation.
 
 **Live on this VPS:** <http://76.13.5.113/> (also <http://srv1278373.hstgr.cloud/>).
@@ -62,7 +62,7 @@ the HTTP block can redirect.
 | `contact.html` | Walkthrough request form, contact channels, data-location note |
 | `404.html` | Branded not-found page, served by nginx with a real 404 status |
 
-Navigation collapses to a menu button below **1120 px**, where the language
+Navigation collapses to a menu button below **1140 px**, where the language
 switch moves inside the opened panel.
 
 ## Source layout
@@ -95,17 +95,26 @@ isolated and correctly ordered inside RTL prose.
 
 ## Brand application
 
-- **Logo.** The packaged master is used unmodified at 120 px width (its identity
-  minimum) in the header, and the white reverse version in the footer and on the
-  social card. Nothing is traced, recoloured, or given effects.
+- **Logo.** v1.1 replaced the plain wordmark with a composite lockup: the Arabic
+  wordmark plus the blue five-square grid symbol as one fixed unit. The header
+  and the social card carry the primary black-and-blue version; the footer
+  carries the approved white-and-blue reverse for Ink. Nothing is traced,
+  recoloured, re-spaced, or separated, and the grid symbol is never extracted on
+  its own.
+- **Logo size.** Displayed at **135 px**, which is the brand owner's instruction
+  and **below the 180 px minimum v1.1 sets for digital use**. See *Deviations*.
 - **Colour.** Jadawel Ink structures navigation, framing, and the footer; Jadawel
   Blue marks the one active action per view; Cloud and White carry reading
   surfaces; Mint, Amber, and Coral appear only as labelled states.
 - **Type.** `Thmanyah Sans` leads every font stack. See *Deviations* below for
   the fallback that is actually shipping.
+- **Colour.** Jadawel Blue moved from `#2563EB` to `#0059FC` in v1.1. That value
+  and its tints live in `src/css/jadawel-brand.css`, copied from the packaged
+  token file, and every derived tint was recomputed from it.
 - **Composition.** The section numbering, the vertical blue bar, and the diamond
-  device come from the identity system. The diamond only marks focus; it is never
-  used as a logo or an app icon.
+  device come from the identity system. The diamond still marks focus only, and
+  v1.1 confirms the five-square grid symbol is part of the logo rather than an
+  icon shape, so it is not used as a bullet or a standalone mark.
 
 ## The platform stage
 
@@ -155,9 +164,10 @@ What produced it:
   Sans Arabic to the 132 characters this site actually renders, keeping the
   variable weight axis and every Arabic shaping feature. The full-width
   originals live in `tools/fonts/` and are never deployed.
-- **The header logo: 115 kB to 9 kB.** It is displayed 120 px wide, so
-  `tools/optimize-logo.mjs` renders a 240 px asset for 2x screens. That script
-  also builds the favicon from the approved wordmark.
+- **The header logo: 184 kB master to 12 kB.** It is displayed 135 px wide, so
+  `tools/optimize-logo.mjs` renders a 270 px asset for 2x screens. That script
+  also builds the favicon from the full lockup, since v1.1 does not approve the
+  grid symbol as a standalone application icon.
 - **The deployed tree is 389 kB**, down from roughly 3.5 MB. Source material
   (`assets/photography/`, `tools/fonts/`, `docs/`) is excluded by
   `tools/deploy.sh` and stays in the repository.
@@ -214,7 +224,7 @@ Arabic RTL and English LTR:
 
 - no horizontal overflow at any breakpoint
 - no console errors, page errors, failed requests, or 4xx/5xx responses
-- the header stays on a single line, and the logo keeps its 120 px minimum width
+- the header stays on a single line from 1141 px up, and the lockup holds its 135 px size
 - the language switch flips `dir`, `lang`, translated content, and title
 - both fonts report `loaded`, and Arabic renders with the real Arabic subset
 - keyboard focus is visible on every interactive element (3 px blue outline)
@@ -241,23 +251,31 @@ npm run audit                             # WCAG AA contrast, alt text, heading 
    automatically. Shipping without a licensed Thmanyah Sans is a disclosed
    production exception, not a replacement identity. Every screenshot and
    rendered measurement in this repository was taken in the fallback face.
-3. **The logo is raster.** The packaged master is a 1774x887 PNG. It is placed
+3. **The logo is displayed below the identity minimum.** v1.1 sets a 180 px
+   minimum width in digital use; the brand owner asked for the lockup 25% smaller
+   than the 180 px it was first set to, which lands at 135 px. At that size the
+   five-square grid symbol is about 10 px per cell, still legible but tighter than
+   the identity intends. Raising it back is a one-line change in
+   `src/css/jadawel.css`.
+4. **The logo is raster.** The packaged master is a 1654x548 PNG. It is placed
    within its native dimensions, but true vector output needs the approved
    outlined SVG, AI, or PDF source.
-4. **The source site was not scraped.** The rewrite covers the positioning,
+5. **The source site was not scraped.** The rewrite covers the positioning,
    deployment options, lifecycle, sovereignty, FAQ, template, and release
    material. Claims were carried over, not invented or extended.
-5. **The contact form does not transmit.** It is a static demo: submitting shows
+6. **The contact form does not transmit.** It is a static demo: submitting shows
    a status message that points the visitor to `info@jadawl.site`. Wire it to a
    real endpoint before launch.
-6. **The fonts are trimmed to the copy that exists today.** Adding text needs
+7. **The fonts are trimmed to the copy that exists today.** Adding text needs
    `python3 tools/subset-fonts.py` before committing. Forgetting is not silent:
    the build fails and names the missing codepoint.
-7. **Not tested:** real screen readers, actual mobile browsers, and printing.
+8. **Not tested:** real screen readers, actual mobile browsers, and printing.
    `prefers-reduced-motion` and `prefers-color-scheme: light` are handled in CSS.
 
 ## Brand provenance
 
-`docs/brand/jadawel-visual-identity/` holds the installed brand kit: the editable
-source (`source/build_identity.mjs`), the identity guide PDF, the approved logo
-files, and the written identity rules used here.
+`docs/brand/jadawel-visual-identity/` holds the installed **v1.1** brand kit: the
+editable source (`source/build_identity.mjs`), the identity guide PDF and PPTX,
+the approved logos including the composite lockup, the token files, and the
+written identity rules used here. It is excluded from the deploy; the site only
+ships `assets/logos/` at the sizes it displays.

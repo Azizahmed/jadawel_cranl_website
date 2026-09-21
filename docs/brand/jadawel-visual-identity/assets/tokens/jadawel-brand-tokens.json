@@ -1,0 +1,30 @@
+{
+  "brand": "Jadawel",
+  "version": "1.1",
+  "direction": "rtl",
+  "fontFamily": "Thmanyah Sans",
+  "colors": {
+    "ink": "#0B0F19",
+    "blue": "#0059FC",
+    "blueDark": "#0046C7",
+    "blueLight": "#E6EEFF",
+    "cloud": "#F6F7FB",
+    "white": "#FFFFFF",
+    "slate": "#566072",
+    "mint": "#83D7C2",
+    "amber": "#F6C85F",
+    "coral": "#E35D6A"
+  },
+  "colorBalance": {
+    "lightSpace": 60,
+    "ink": 25,
+    "blue": 15
+  },
+  "logo": {
+    "digitalMinimumWidthPx": 180,
+    "printMinimumWidthMm": 45,
+    "clearSpaceUnit": "grid-cell-height",
+    "lockup": "arabic-wordmark-plus-five-square-grid",
+    "standaloneGridSymbolApproved": false
+  }
+}

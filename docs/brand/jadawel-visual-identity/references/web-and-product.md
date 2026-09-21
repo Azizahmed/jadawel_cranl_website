@@ -25,7 +25,7 @@ Start from `assets/tokens/jadawel-brand.css` or the JSON equivalent. Copy the re
 
 ## Logo placement
 
-Use the full logo in the header, authentication surface, primary navigation, footer, or campaign hero as appropriate. Keep the clear-space rule and minimum 120 px width. Provide `alt="جداول"` for meaningful instances and empty alt text only when the same adjacent text already names the brand.
+Use the full composite lockup in the header, authentication surface, primary navigation, footer, or campaign hero as appropriate. Keep the one-cell clear-space rule and minimum 180 px width. Provide `alt="جداول"` for meaningful instances and empty alt text only when the same adjacent text already names the brand. Do not extract the five-square grid symbol as an app icon without a separate identity decision.
 
 ## Accessibility and performance
 

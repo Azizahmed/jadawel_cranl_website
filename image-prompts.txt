@@ -56,12 +56,15 @@ rendered by `tools/render-og.mjs`.
 
 ## sovereignty.jpg
 - size: 1440x720
-- bytes: 61577
-- sha256: e574303ed4b48383
-- prompt: Minimal fine-art abstract illustration on a flat deep navy #0B0F19 background: layered translucent geometric planes and thin precise grid lines glowing in clear blue #2563EB, forming a wide horizontal composition that narrows to a single bright blue diamond point on the right. Clean vector-like geometry, generous dark space, soft blue atmospheric glow, calm and technical, no text, no people, no logos, no watermark.
+- bytes: 47774
+- sha256: a955c436420f0eef
+- prompt: Minimal fine-art abstract illustration on a flat deep navy #0B0F19 background: layered translucent geometric planes and thin precise grid lines glowing in clear blue #0059FC, forming a wide horizontal composition that narrows to a single bright blue diamond point on the right. Clean vector-like geometry, generous dark space, soft blue atmospheric glow, calm and technical, no text, no people, no logos, no watermark.
 
 ## og-cover.jpg
 - size: 1200x630
 - composed from: assets/logos/jadawel-logo-white-transparent.png, assets/img/sovereignty.jpg (texture field), tools/og-card.html
 - rendered by: tools/render-og.mjs (headless chromium, 1x)
 - note: hand-composed rather than model-generated, so the Arabic headline and the approved logo stay exact.
+
+## sovereignty.jpg
+Minimal fine-art abstract illustration on a flat deep navy #0B0F19 background: layered translucent geometric planes and thin precise grid lines glowing in clear blue #0059FC, forming a wide horizontal composition that narrows to a single bright blue diamond point on the right. Clean vector-like geometry, generous dark space, soft blue atmospheric glow, calm and technical, no text, no people, no logos, no watermark.

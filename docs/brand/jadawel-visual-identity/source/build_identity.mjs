@@ -1,22 +1,11 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { Presentation, PresentationFile } from "@oai/artifact-tool";
 
-// The kit is normally installed at <checkout>/docs/brand/jadawel-visual-identity
-// with its assets in <kit>/assets. Set JADAWEL_ROOT to a Jadawel checkout to read
-// that checkout's docs/brand/.../assets instead, or override JADAWEL_ASSETS and
-// JADAWEL_BUILD directly.
-const KIT_DIR = path.dirname(fileURLToPath(import.meta.url));
-const KIT_ROOT = path.resolve(KIT_DIR, "..");
-const ROOT = process.env.JADAWEL_ROOT ?? "";
-const BUILD = process.env.JADAWEL_BUILD ?? (ROOT
-  ? path.join(ROOT, ".codex-build/jadawel-identity")
-  : path.join(KIT_ROOT, ".build"));
-const ASSETS = process.env.JADAWEL_ASSETS ?? (ROOT
-  ? path.join(ROOT, "docs/brand/jadawel-visual-identity/assets")
-  : path.join(KIT_ROOT, "assets"));
-const RAW = path.join(BUILD, "Jadawel_Visual_Identity_Guidelines_AR_v1.0_raw.pptx");
+const ROOT = "/home/aziz/workspace/Jadawl.site/jadawel_cranl";
+const BUILD = path.join(ROOT, ".codex-build/jadawel-identity");
+const ASSETS = path.join(ROOT, "docs/brand/jadawel-visual-identity/assets");
+const RAW = path.join(BUILD, "Jadawel_Visual_Identity_Guidelines_AR_v1.1_raw.pptx");
 
 const W = 1280;
 const H = 720;
@@ -24,9 +13,9 @@ const FONT = "thmanyah sans";
 const C = {
   ink: "#0B0F19",
   black: "#000000",
-  blue: "#2563EB",
-  blueDark: "#1746B5",
-  blueLight: "#DCE7FF",
+  blue: "#0059FC",
+  blueDark: "#0046C7",
+  blueLight: "#E6EEFF",
   cloud: "#F6F7FB",
   white: "#FFFFFF",
   slate: "#566072",
@@ -165,17 +154,24 @@ function newSlide(bg = C.white) {
   return slide;
 }
 
+function fiveSquareMark(slide, x, y, size, gap, fill = C.blue) {
+  const cells = [[0, 0], [0, 1], [1, 1], [0, 2], [1, 2]];
+  for (const [column, row] of cells) {
+    rect(slide, x + column * (size + gap), y + row * (size + gap), size, size, fill, size * 0.16);
+  }
+}
+
 // 01 Cover
 {
-  const s = newSlide(C.blue);
-  addImage(s, img.logoWhite, 194, 188, 892, 280, "شعار جداول باللون الأبيض");
+  const s = newSlide(C.ink);
+  addImage(s, img.logoWhite, 194, 174, 892, 296, "شعار جداول المركب المعتمد");
   text(s, "دليل الهوية البصرية", 720, 500, 366, 56, { size: 28, bold: true, color: C.white });
   text(s, "الإصدار", 954, 558, 132, 34, { size: 16, color: "#FFFFFFCC" });
-  text(s, "1.0", 884, 558, 64, 34, { size: 16, color: "#FFFFFFCC", align: "center" });
+  text(s, "1.1", 884, 558, 64, 34, { size: 16, color: "#FFFFFFCC", align: "center" });
   text(s, "سبتمبر", 782, 558, 94, 34, { size: 16, color: "#FFFFFFCC", align: "center" });
   text(s, "2026", 720, 558, 62, 34, { size: 16, color: "#FFFFFFCC", align: "center" });
-  addImage(s, img.diamondBlack, 68, 54, 54, 54, "النقطة الماسية", "contain");
-  note(s, "المصدر: الشعار الذي اعتمده المستخدم في 19 سبتمبر 2026. جميع قواعد هذا الدليل مبنية على الأصل المرفق دون إعادة تصميمه.");
+  addImage(s, img.diamondBlue, 68, 54, 54, 54, "النقطة الماسية", "contain");
+  note(s, "المصدر: الشعار المركب الذي أكده مالك العلامة في 20 سبتمبر 2026. جميع قواعد هذا الدليل مبنية على الأصل المرفق دون إعادة رسمه.");
 }
 
 // 02 Guide purpose
@@ -218,11 +214,11 @@ function newSlide(bg = C.white) {
 {
   const s = newSlide(C.ink);
   title(s, "المبدأ البصري", 4, { color: C.white, ruleColor: "#FFFFFF2D", dark: true });
-  text(s, "الكتلة الواضحة تمنح الثقة. الفراغ المدروس يفتح المجال. اللمسة الزرقاء توجه الانتباه دون أن تسيطر.", 646, 176, 580, 150, { size: 30, bold: true, color: C.white });
-  text(s, "يظهر النظام من خلال توازن الاستقامة والانحناء في الشعار، مع استخدام محدود للخط الرأسي والنقطة الماسية كعناصر مساندة.", 646, 350, 580, 130, { size: 21, color: "#FFFFFFC9" });
-  rect(s, 92, 168, 76, 356, C.blue, 0);
-  addImage(s, img.diamondBlue, 224, 378, 126, 126, "النقطة الماسية الزرقاء");
-  rect(s, 394, 218, 76, 306, C.white, 0);
+  text(s, "الكتلة الواضحة تمنح الثقة. الفراغ المدروس يفتح المجال. وحدات الجدول الزرقاء تجعل معنى التنظيم حاضرًا فورًا.", 646, 176, 580, 150, { size: 30, bold: true, color: C.white });
+  text(s, "يتوازن الاسم العربي ذي الحضور القوي مع رمز جدولي هندسي. ويظل الأزرق محددًا للتركيز والعمل، لا لونًا يغطي كل المساحة.", 646, 350, 580, 130, { size: 21, color: "#FFFFFFC9" });
+  fiveSquareMark(s, 104, 174, 98, 12, C.blue);
+  rect(s, 396, 218, 64, 302, C.white, 0);
+  addImage(s, img.diamondBlue, 314, 414, 82, 82, "النقطة الماسية الزرقاء");
 }
 
 // 05 System overview
@@ -230,7 +226,7 @@ function newSlide(bg = C.white) {
   const s = newSlide(C.cloud);
   title(s, "مكونات النظام", 5);
   const items = [
-    ["01", "الشعار", "الأصل الثابت للهوية"],
+    ["01", "الشعار", "قفل مركب من الاسم والرمز الجدولي"],
     ["02", "اللون", "الأسود أساس والأزرق للإبراز"],
     ["03", "الخط", "Thmanyah Sans للعربية واللاتينية"],
     ["04", "التكوين", "مساحات هادئة ومحاور واضحة"],
@@ -250,22 +246,22 @@ function newSlide(bg = C.white) {
 {
   const s = newSlide(C.white);
   title(s, "الشعار المعتمد", 6);
-  addImage(s, img.logoBlack, 130, 192, 1020, 352, "شعار جداول الأسود المعتمد");
-  text(s, "يستخدم الشعار كاملًا بوصفه العلامة الأساسية. لا يعاد رسمه ولا تفصل حروفه ولا تُستبدل بخط جاهز.", 282, 566, 716, 62, { size: 20, color: C.slate, align: "center" });
-  note(s, "الأصل: ملف الشعار المرفق من المستخدم. هذه الصفحة تثبت الشعار دون تعديل.");
+  addImage(s, img.logoBlack, 130, 194, 1020, 338, "شعار جداول المركب المعتمد");
+  text(s, "يستخدم الاسم العربي ورمز المربعات الخمس كوحدة واحدة ثابتة. لا يفصل الرمز ولا يعاد ترتيب عناصر القفل.", 232, 558, 816, 62, { size: 20, color: C.slate, align: "center" });
+  note(s, "الأصل: ملف الشعار المركب المرفق من المستخدم. هذه الصفحة تثبت هندسته وألوانه دون تعديل.");
 }
 
 // 07 Anatomy
 {
   const s = newSlide(C.cloud);
   title(s, "خصائص الشعار", 7);
-  addImage(s, img.logoBlack, 72, 205, 760, 310, "شعار جداول مع شرح خصائصه");
-  line(s, 770, 180, 125, 80, C.blue, 2);
-  line(s, 610, 396, 285, 0, C.blue, 2);
-  line(s, 320, 456, 575, 94, C.blue, 2);
-  text(s, "تباين الاستقامة والانحناء", 900, 146, 326, 56, { size: 21, bold: true });
-  text(s, "الواو مركز إيقاع بصري", 900, 364, 326, 56, { size: 21, bold: true });
-  text(s, "النقطة الماسية توقيع مساند", 900, 526, 326, 56, { size: 21, bold: true });
+  addImage(s, img.logoBlack, 54, 218, 820, 272, "شعار جداول مع شرح خصائصه");
+  line(s, 742, 218, 153, 44, C.blue, 2);
+  line(s, 610, 384, 285, 0, C.blue, 2);
+  line(s, 322, 462, 573, 88, C.blue, 2);
+  text(s, "رمز الجداول الأزرق جزء من القفل", 900, 146, 326, 68, { size: 21, bold: true });
+  text(s, "الاسم العربي مركز العلامة", 900, 352, 326, 56, { size: 21, bold: true });
+  text(s, "النقطة الماسية جزء من رسم الجيم", 900, 518, 326, 68, { size: 21, bold: true });
   text(s, "الخصائص تشرح البناء ولا تبرر تعديله.", 900, 586, 326, 40, { size: 17, color: C.slate });
 }
 
@@ -279,7 +275,7 @@ function newSlide(bg = C.white) {
   text(s, "X", 1104, 358, 72, 48, { size: 24, bold: true, color: C.blue, align: "center" });
   text(s, "X", 604, 164, 72, 48, { size: 24, bold: true, color: C.blue, align: "center" });
   text(s, "X", 604, 540, 72, 48, { size: 24, bold: true, color: C.blue, align: "center" });
-  text(s, "X يساوي ارتفاع النقطة الماسية. اترك هذه المسافة خالية حول الشعار في جميع التطبيقات.", 260, 610, 760, 42, { size: 19, color: C.slate, align: "center" });
+  text(s, "X يساوي ارتفاع خلية زرقاء واحدة من رمز الجداول. اترك هذه المسافة خالية حول القفل كاملًا.", 230, 610, 820, 42, { size: 19, color: C.slate, align: "center" });
 }
 
 // 09 Minimum size
@@ -288,12 +284,12 @@ function newSlide(bg = C.white) {
   title(s, "الحجم الأدنى", 9);
   text(s, "رقمي", 1020, 150, 206, 40, { size: 20, bold: true, color: C.blue });
   addImage(s, img.logoBlack, 726, 212, 500, 176, "الشعار بالحجم الرقمي");
-  text(s, "العرض الأدنى الموصى به: مئة وعشرون بكسل", 726, 400, 500, 38, { size: 19, color: C.slate });
+  text(s, "العرض الأدنى الموصى به: مئة وثمانون بكسل", 726, 400, 500, 38, { size: 19, color: C.slate });
   text(s, "مطبوع", 432, 150, 206, 40, { size: 20, bold: true, color: C.blue });
   addImage(s, img.logoBlack, 138, 246, 500, 176, "الشعار بالحجم المطبوع");
-  text(s, "العرض الأدنى الموصى به: ثلاثون مليمترًا", 138, 434, 500, 38, { size: 19, color: C.slate });
+  text(s, "العرض الأدنى الموصى به: خمسة وأربعون مليمترًا", 138, 434, 500, 38, { size: 19, color: C.slate });
   line(s, 662, 158, 0, 390, C.line, 1);
-  text(s, "إذا فقدت النقطة الماسية وضوحها أو اندمجت الفراغات الداخلية، استخدم مساحة أكبر.", 264, 564, 752, 58, { size: 20, bold: true, align: "center" });
+  text(s, "إذا فقدت خلايا الرمز أو النقطة الماسية أو الفراغات الداخلية وضوحها، استخدم مساحة أكبر.", 264, 564, 752, 58, { size: 20, bold: true, align: "center" });
 }
 
 // 10 Variants
@@ -302,23 +298,23 @@ function newSlide(bg = C.white) {
   title(s, "نسخ الشعار", 10);
   rect(s, 54, 158, 558, 200, C.cloud, 18);
   addImage(s, img.logoBlack, 102, 206, 462, 108, "الشعار الأسود");
-  text(s, "النسخة الأساسية", 396, 358, 216, 36, { size: 17, bold: true });
+  text(s, "القفل الأساسي على الفاتح", 336, 358, 276, 36, { size: 17, bold: true });
   rect(s, 668, 158, 558, 200, C.blue, 18);
-  addImage(s, img.logoWhite, 716, 206, 462, 108, "الشعار الأبيض على الأزرق");
-  text(s, "خلفية زرقاء", 1010, 358, 216, 36, { size: 17, bold: true });
+  addImage(s, img.logoBlue, 716, 206, 462, 108, "الشعار الأبيض الأحادي على الأزرق");
+  text(s, "نسخة أحادية على الأزرق", 936, 358, 290, 36, { size: 17, bold: true });
   rect(s, 54, 426, 558, 178, C.ink, 18);
   addImage(s, img.logoWhite, 112, 464, 442, 100, "الشعار الأبيض على الأسود");
-  text(s, "خلفية داكنة", 396, 604, 216, 36, { size: 17, bold: true });
+  text(s, "قفل معكوس على الحبر", 336, 604, 276, 36, { size: 17, bold: true });
   rect(s, 668, 426, 558, 178, C.white, 18, { style: "solid", fill: C.line, width: 1 });
   addImage(s, img.logoBlack, 726, 464, 442, 100, "الشعار الأسود على الأبيض");
-  text(s, "خلفية بيضاء", 1010, 604, 216, 36, { size: 17, bold: true });
+  text(s, "القفل الأساسي على الأبيض", 936, 604, 290, 36, { size: 17, bold: true });
 }
 
 // 11 Misuse
 {
   const s = newSlide(C.cloud);
   title(s, "الاستخدامات غير الصحيحة", 11);
-  const labels = ["لا تمدد الشعار", "لا تغيّر التناسب", "لا تضف مؤثرات", "لا تفصل الحروف", "لا تستخدم تدرجًا", "لا تضعه على خلفية ضعيفة"];
+  const labels = ["لا تمدد الشعار", "لا تغيّر التناسب", "لا تضف مؤثرات", "لا تفصل الرمز عن الاسم", "لا تغيّر ألوان القفل", "لا تضعه على خلفية ضعيفة"];
   const xs = [54, 450, 846];
   for (let r = 0; r < 2; r++) {
     for (let c = 0; c < 3; c++) {
@@ -329,9 +325,9 @@ function newSlide(bg = C.white) {
       if (i === 1) addImage(s, img.logoBlack, x + 108, y + 18, 134, 94, labels[i]);
       if (i === 2) {
         addImage(s, img.logoBlack, x + 54, y + 26, 242, 78, labels[i]);
-        rect(s, x + 50, y + 22, 250, 86, "#2563EB22", 12);
+        rect(s, x + 50, y + 22, 250, 86, "#0059FC22", 12);
       }
-      if (i === 3) addImage(s, img.diamondBlack, x + 122, y + 18, 106, 106, labels[i]);
+      if (i === 3) fiveSquareMark(s, x + 140, y + 14, 28, 5, C.blue);
       if (i === 4) {
         rect(s, x + 74, y + 32, 202, 62, { type: "gradient", gradientKind: "linear", angleDeg: 0, stops: [{ offset: 0, color: C.blue }, { offset: 100000, color: C.mint }] }, 8);
       }
@@ -351,7 +347,7 @@ function newSlide(bg = C.white) {
   title(s, "لوحة الألوان الأساسية", 12);
   const swatches = [
     [C.ink, "حبر جداول", "#0B0F19", C.white],
-    [C.blue, "أزرق جداول", "#2563EB", C.white],
+    [C.blue, "أزرق جداول", "#0059FC", C.white],
     [C.cloud, "السحابة", "#F6F7FB", C.ink],
     [C.white, "الأبيض", "#FFFFFF", C.ink],
   ];
@@ -401,7 +397,7 @@ function newSlide(bg = C.white) {
   bulletList(s, [
     "تزيد نسبة الأزرق في الحملات وصفحات التسويق.",
     "تنخفض داخل جداول البيانات حتى تبقى القراءة مريحة.",
-    "يظهر الأسود في الشعار والعناوين والمعلومات ذات الأولوية.",
+    "يظهر الحبر في الاسم العربي والعناوين والمعلومات ذات الأولوية.",
   ], 334, 466, 820, 144, { size: 20 });
 }
 
@@ -428,12 +424,12 @@ function newSlide(bg = C.white) {
   rect(s, 54, 160, 558, 420, C.cloud, 20);
   text(s, "العربية تقود التكوين", 92, 198, 482, 52, { size: 29, bold: true });
   text(s, "نبدأ من اليمين، ونحافظ على سطر قصير ومسافة واضحة بين العنوان والنص.", 92, 270, 482, 96, { size: 21 });
-  text(s, "آخر تحديث: التاسع عشر من سبتمبر، عام ألفين وستة وعشرين", 92, 398, 482, 46, { size: 18, color: C.slate });
+  text(s, "آخر تحديث: العشرون من سبتمبر، عام ألفين وستة وعشرين", 92, 398, 482, 46, { size: 18, color: C.slate });
   text(s, "تُكتب المصطلحات التقنية الإنجليزية بحروفها الأصلية.", 92, 462, 482, 46, { size: 18, color: C.slate });
   rect(s, 668, 160, 558, 420, C.ink, 20);
   text(s, "English supports the system", 704, 198, 486, 52, { size: 28, bold: true, color: C.white, align: "left" });
   text(s, "Use clear sentence case, short lines and consistent spacing. Keep long English passages in separate left-to-right text boxes.", 704, 270, 486, 122, { size: 20, color: "#FFFFFFD9", align: "left" });
-  text(s, "Updated: 19 September 2026", 704, 420, 486, 46, { size: 17, color: "#FFFFFFAA", align: "left" });
+  text(s, "Updated: 20 September 2026", 704, 420, 486, 46, { size: 17, color: "#FFFFFFAA", align: "left" });
   text(s, "Product terms remain consistent.", 704, 484, 486, 46, { size: 17, color: "#FFFFFFAA", align: "left" });
 }
 
@@ -441,13 +437,12 @@ function newSlide(bg = C.white) {
 {
   const s = newSlide(C.ink);
   title(s, "العنصر البصري المساند", 17, { color: C.white, ruleColor: "#FFFFFF2D", dark: true });
-  rect(s, 92, 182, 72, 338, C.blue, 0);
-  rect(s, 224, 258, 72, 262, C.white, 0);
-  addImage(s, img.diamondBlue, 356, 392, 120, 120, "النقطة الماسية الزرقاء");
-  text(s, "الخط الرأسي", 688, 176, 538, 46, { size: 27, bold: true, color: C.white });
-  text(s, "مستمد من الألف واللام. يستخدم كحافة أو فاصل أو نقطة ارتكاز، ولا يتحول إلى نمط متكرر كثيف.", 688, 230, 538, 92, { size: 20, color: "#FFFFFFC9" });
-  text(s, "النقطة الماسية", 688, 360, 538, 46, { size: 27, bold: true, color: C.white });
-  text(s, "مستمدة من نقطة الجيم. تشير إلى قرار أو نقطة تركيز. لا تستخدم منفردة بدل الشعار.", 688, 414, 538, 92, { size: 20, color: "#FFFFFFC9" });
+  fiveSquareMark(s, 92, 182, 86, 10, C.blue);
+  addImage(s, img.diamondBlue, 360, 410, 94, 94, "النقطة الماسية الزرقاء");
+  text(s, "وحدات الجدول", 688, 176, 538, 46, { size: 27, bold: true, color: C.white });
+  text(s, "تستخدم المربعات المفردة أو الشبكات المفتوحة لتنظيم المعلومات والمساحات. لا يعاد بناء رمز الشعار منفردًا بوصفه علامة بديلة.", 688, 230, 538, 110, { size: 20, color: "#FFFFFFC9" });
+  text(s, "النقطة الماسية", 688, 382, 538, 46, { size: 27, bold: true, color: C.white });
+  text(s, "مستمدة من نقطة الجيم. تشير إلى قرار أو نقطة تركيز، ولا تستخدم منفردة بدل القفل المركب.", 688, 436, 538, 92, { size: 20, color: "#FFFFFFC9" });
 }
 
 // 18 Layout grid
@@ -455,8 +450,8 @@ function newSlide(bg = C.white) {
   const s = newSlide(C.cloud);
   title(s, "شبكة التكوين", 18);
   rect(s, 54, 152, 760, 454, C.white, 18);
-  for (let i = 1; i < 6; i++) line(s, 54 + i * 126.7, 152, 0, 454, "#2563EB33", 1);
-  for (let i = 1; i < 4; i++) line(s, 54, 152 + i * 113.5, 760, 0, "#2563EB33", 1);
+  for (let i = 1; i < 6; i++) line(s, 54 + i * 126.7, 152, 0, 454, "#0059FC33", 1);
+  for (let i = 1; i < 4; i++) line(s, 54, 152 + i * 113.5, 760, 0, "#0059FC33", 1);
   rect(s, 560, 188, 218, 72, C.blue, 0);
   rect(s, 92, 286, 452, 64, C.ink, 0);
   rect(s, 92, 384, 686, 156, C.blueLight, 0);
@@ -499,6 +494,7 @@ function newSlide(bg = C.white) {
     "سُمك موحد داخل المجموعة الواحدة.",
     "أشكال مفهومة دون استعارات تقنية مستهلكة.",
     "نسخة ممتلئة للحالات النشطة وخطية للحالات العادية.",
+    "رمز المربعات الخمس ليس أيقونة تطبيق مستقلة.",
   ], 664, 250, 562, 230, { size: 21 });
   rect(s, 54, 152, 472, 414, C.ink, 26);
   const ix = [104, 218, 332, 446];
@@ -539,7 +535,7 @@ function newSlide(bg = C.white) {
   title(s, "المنتج والموقع", 22);
   rect(s, 54, 152, 760, 456, C.white, 22, { style: "solid", fill: C.line, width: 1 });
   rect(s, 54, 152, 760, 42, C.ink, 22);
-  addImage(s, img.logoWhite, 606, 158, 164, 32, "شعار جداول في شريط المنتج");
+  addImage(s, img.logoWhite, 558, 155, 212, 36, "شعار جداول في شريط المنتج");
   rect(s, 54, 194, 160, 414, C.ink, 0);
   rect(s, 84, 236, 100, 16, "#FFFFFF33", 5);
   rect(s, 84, 278, 100, 16, C.blue, 5);
@@ -582,18 +578,18 @@ function newSlide(bg = C.white) {
   title(s, "الحوكمة والتسليم", 24, { color: C.white, ruleColor: "#FFFFFF33", dark: true });
   text(s, "الأصول المعتمدة", 842, 158, 384, 48, { size: 27, bold: true, color: C.white });
   bulletList(s, [
-    "الشعار الأسود الشفاف.",
-    "الشعار الأبيض الشفاف.",
-    "نسخ العرض على الأزرق والأسود والفاتح.",
+    "القفل الأساسي الأسود والأزرق بخلفية شفافة.",
+    "القفل المعكوس الأبيض والأزرق بخلفية شفافة.",
+    "نسخة أحادية بيضاء للاستخدام المحدود على الأزرق.",
     "لوحة الألوان والخطوط وقواعد الاستخدام.",
   ], 690, 224, 536, 214, { size: 20, color: C.white });
   text(s, "قرارات تحتاج اعتمادًا لاحقًا", 842, 470, 384, 48, { size: 27, bold: true, color: C.white });
-  text(s, "أيقونة التطبيق، الرمز المستقل، مكتبة الأيقونات الكاملة، الحركة، وقوالب المنتج التفصيلية.", 690, 526, 536, 72, { size: 20, color: "#FFFFFFD9" });
+  text(s, "استخدام رمز المربعات وحده، أيقونة التطبيق، مكتبة الأيقونات الكاملة، الحركة، وقوالب المنتج التفصيلية.", 690, 526, 536, 72, { size: 20, color: "#FFFFFFD9" });
   rect(s, 54, 156, 522, 442, C.white, 24);
   addImage(s, img.logoBlack, 102, 218, 426, 140, "شعار جداول المعتمد");
   text(s, "مالك الهوية", 104, 410, 420, 38, { size: 18, bold: true, color: C.blue, align: "center" });
   text(s, "فريق العلامة والتصميم", 104, 452, 420, 46, { size: 25, bold: true, align: "center" });
-  text(s, "الإصدار 1.0", 104, 518, 420, 34, { size: 17, color: C.slate, align: "center" });
+  text(s, "الإصدار 1.1", 104, 518, 420, 34, { size: 17, color: C.slate, align: "center" });
 }
 
 await (await PresentationFile.exportPptx(deck)).save(RAW);

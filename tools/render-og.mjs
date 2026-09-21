@@ -50,7 +50,7 @@ for (const [file, mime] of [
 ]) {
   html = html.replaceAll(`../${file}`, await dataUri(file, mime));
 }
-for (const file of ["assets/logos/jadawel-logo-white-240.png"]) {
+for (const file of ["assets/logos/jadawel-logo-white-270.png"]) {
   html = html.replaceAll(`../${file}`, await dataUri(file, "image/png"));
 }
 

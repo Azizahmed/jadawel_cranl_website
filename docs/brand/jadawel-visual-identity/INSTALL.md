@@ -1,9 +1,9 @@
-# Jadawel visual identity kit — install notes
+# Jadawel visual identity kit — install notes (v1.1)
 
 This kit is the editable source behind the Jadawel visual identity guide
-(`output/Jadawel_Visual_Identity_Guidelines_AR_v1.0.pptx|pdf`) plus the approved
-logo assets. The agent-facing rules live in the `jadawel-visual-identity` skill;
-this kit is what you drop into a repository.
+(`output/Jadawel_Visual_Identity_Guidelines_AR_v1.1.pptx|pdf|_editable.pptx`)
+plus the approved logo assets. The agent-facing rules live in the
+`jadawel-visual-identity` skill; this kit is what you drop into a repository.
 
 ## Layout
 
@@ -12,6 +12,20 @@ this kit is what you drop into a repository.
 - `output/` — الدليل النهائي بصيغة PDF و PPTX، وصورة معاينة.
 - `source/build_identity.mjs` — ملف بناء العرض لإعادة توليد الدليل.
 - `USAGE-NOTICE.txt` — قيود استخدام الأصول.
+
+## v1.1 changes
+
+- Brand blue is the logo-matched `#0059FC` (was `#2563EB`). Dark/light blue
+  variants are `#0046C7` and `#E6EEFF`.
+- The approved logo is one composite lockup: the Arabic wordmark plus the blue
+  five-square grid symbol. The grid symbol is never used standalone.
+- Logo variants: black-and-blue on light fields, white-and-blue reverse on
+  Jadawel Ink, monochrome white on Jadawel Blue when needed.
+- The deck ships in three forms: visual-safe PPTX (fixed page images), PDF, and
+  an editable PPTX with logical Arabic text and native RTL. Test the editable
+  file in the target application before sharing.
+- Clear space is one blue grid-cell height; minimum width 180 px digital and
+  45 mm print.
 
 ## Install into a project
 

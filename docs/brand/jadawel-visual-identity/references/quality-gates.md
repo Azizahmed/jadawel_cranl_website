@@ -5,7 +5,9 @@ Apply the relevant checks before calling a branded artifact complete.
 ## Brand fidelity
 
 - The supplied master logo file is used without redrawing, stretching, recoloring, or effects.
-- The selected black/white logo variant has sufficient contrast and clear space.
+- The selected composite logo variant has sufficient contrast and one-cell clear space.
+- The wordmark and five-square grid symbol remain one locked unit with their original spacing and color relationship.
+- The grid symbol is not presented alone as a logo or application icon.
 - The diamond remains a supporting device rather than a substitute logo.
 - Jadawel Ink, Blue, Cloud, White, and state colors retain their defined roles.
 - Thmanyah Sans is used when licensed and available; any fallback is disclosed.

@@ -1,6 +1,6 @@
 # Jadawel identity system
 
-This is the authority for visual decisions. The packaged master logo and these rules define version 1.0 of the approved identity.
+This is the authority for visual decisions. The packaged master logo and these rules define version 1.1 of the approved identity.
 
 ## Brand core
 
@@ -14,18 +14,19 @@ The identity should feel operational and modern rather than decorative. It shoul
 
 ## Approved logo
 
-The approved logo is the complete Arabic wordmark in the packaged files. The black wordmark is the default. The white wordmark is the reverse version for blue or dark backgrounds.
+The approved logo is the complete composite lockup in the packaged files: the Arabic wordmark plus the blue five-square grid symbol to its right. The black-and-blue lockup is the primary version. The white-and-blue lockup is the reverse version for Jadawel Ink and verified dark backgrounds. A monochrome white lockup is available for Jadawel Blue when the two-color version cannot meet contrast.
 
-- Preserve the artwork, proportions, internal spacing, curves, and diamond dot.
-- Keep a clear space of at least **X** on every side, where **X equals the height of the diamond dot**.
-- Recommended minimum width: **120 px** in digital use and **30 mm** in print.
-- Increase the size whenever the diamond, counters, or internal gaps lose clarity.
-- Place the black logo only on white, cloud, or another demonstrably high-contrast light field.
-- Place the white logo on Jadawel Blue or Jadawel Ink.
+- Preserve the artwork, proportions, internal spacing, curves, diamond dot, square geometry, and fixed relationship between wordmark and grid symbol.
+- Keep a clear space of at least **X** on every side, where **X equals the height of one blue square cell**.
+- Recommended minimum width: **180 px** in digital use and **45 mm** in print.
+- Increase the size whenever a blue square, the diamond, counters, or internal gaps lose clarity.
+- Place the primary black-and-blue lockup only on white, Cloud, or another demonstrably high-contrast light field.
+- Place the white-and-blue reverse lockup on Jadawel Ink or a comparably dark neutral field.
+- Place the monochrome white lockup on Jadawel Blue only when required by the background.
 
-Logo integrity means using the supplied file rather than typesetting the name. Keep the wordmark one color. Preserve aspect ratio. Keep effects, gradients, shadows, outlines, masks, and decorative containers away from the logo.
+Logo integrity means using the supplied file rather than typesetting the name or rebuilding the square symbol. Preserve aspect ratio and the supplied two-color relationship. Keep effects, added gradients, shadows, outlines, masks, and decorative containers away from the logo.
 
-The diamond may support layouts as a focus marker, list device, data point, or compositional accent. It does not replace the full logo and is not an approved app icon.
+The five-square grid symbol is integral to the approved lockup and is not approved as a standalone logo or application icon. Square modules may inspire grids and information containers only when they do not reproduce the isolated logo symbol as a substitute mark. The diamond may support layouts as a focus marker, list device, data point, or compositional accent; it also does not replace the full logo.
 
 ## Color system
 
@@ -34,7 +35,7 @@ CMYK values are production approximations. Confirm coated/uncoated profiles and 
 | Role | Name | HEX | RGB | Approx. CMYK |
 |---|---|---:|---:|---:|
 | Primary structure | Jadawel Ink | `#0B0F19` | 11, 15, 25 | 56, 40, 0, 90 |
-| Focus and action | Jadawel Blue | `#2563EB` | 37, 99, 235 | 84, 58, 0, 8 |
+| Focus and action | Jadawel Blue | `#0059FC` | 0, 89, 252 | 100, 65, 0, 1 |
 | Quiet background | Cloud | `#F6F7FB` | 246, 247, 251 | 2, 2, 0, 2 |
 | Base background | White | `#FFFFFF` | 255, 255, 255 | 0, 0, 0, 0 |
 | Secondary text | Slate | `#566072` | 86, 96, 114 | 25, 16, 0, 55 |
@@ -59,7 +60,8 @@ Use sentence case in English. Keep Arabic headings factual and direct. Avoid orn
 
 - Start Arabic layouts from the right and use a six-column grid when the format permits.
 - Use generous margins, clear alignment axes, and a small number of strong masses.
-- Use the vertical bar derived from the logo as a structural divider or emphasis block.
+- Use modular squares and open grids to organize information without reconstructing the standalone logo symbol.
+- Use the vertical bar derived from the wordmark as a structural divider or emphasis block.
 - Use the diamond sparingly as a focal marker.
 - Keep hierarchy visible through size, weight, spacing, and color rather than decoration.
 - Prefer one dominant message or product view per composition.
@@ -70,7 +72,7 @@ The product is the primary hero. Show interfaces, data structures, workflows, or
 
 ## Icons and data graphics
 
-Icons are functional, simple, and consistent in stroke weight. Use filled treatment for active states and line treatment for ordinary states. The diamond can mark focus but should not appear inside every icon.
+Icons are functional, simple, and consistent in stroke weight. Use filled treatment for active states and line treatment for ordinary states. The diamond can mark focus but should not appear inside every icon. The five-square grid symbol remains part of the logo and is not the default icon shape.
 
 Data graphics prioritize explanation:
 

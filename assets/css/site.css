@@ -1,8 +1,8 @@
 :root {
   --jadawel-ink: #0b0f19;
-  --jadawel-blue: #2563eb;
-  --jadawel-blue-dark: #1746b5;
-  --jadawel-blue-light: #dce7ff;
+  --jadawel-blue: #0059fc;
+  --jadawel-blue-dark: #0046c7;
+  --jadawel-blue-light: #e6eeff;
   --jadawel-cloud: #f6f7fb;
   --jadawel-white: #ffffff;
   --jadawel-slate: #566072;
@@ -26,7 +26,8 @@ html[lang="en"],
 
 /* ==========================================================================
    Jadawel — website stylesheet
-   Built on Jadawel Visual Identity v1.0 (assets/css/jadawel-brand.css).
+   Built on Jadawel Visual Identity v1.1 (src/css/jadawel-brand.css, copied from
+   the packaged assets/tokens/jadawel-brand.css).
    Arabic is the default direction. Latin technical tokens stay LTR.
    ========================================================================== */
 
@@ -211,7 +212,7 @@ p { margin: 0; }
   min-height: 86px;
 }
 .brand { display: flex; align-items: center; flex-shrink: 0; }
-.brand img { width: 120px; height: auto; }
+.brand img { width: 135px; height: auto; }
 
 .site-nav {
   display: flex;
@@ -277,7 +278,7 @@ p { margin: 0; }
 /* --- Hero ---------------------------------------------------------------- */
 .hero {
   background:
-    radial-gradient(1100px 480px at var(--accent-x, 92%) -10%, rgba(37, 99, 235, 0.09), transparent 68%),
+    radial-gradient(1100px 480px at var(--accent-x, 92%) -10%, rgba(0, 89, 252, 0.09), transparent 68%),
     var(--cloud);
   border-block-end: 1px solid var(--hairline);
   padding-block: 72px 84px;
@@ -600,8 +601,8 @@ section[id] { scroll-margin-top: 104px; }
 }
 .card-onink h3 { color: var(--white); }
 .card-onink p { color: rgba(255, 255, 255, 0.72); }
-.card-onink .card-mark { background: rgba(37, 99, 235, 0.28); }
-.card-onink .card-mark::after { background: #7aa2ff; }
+.card-onink .card-mark { background: rgba(0, 89, 252, 0.28); }
+.card-onink .card-mark::after { background: #6f9bff; }
 
 /* Deployment options */
 .option-card { padding: 30px 28px; gap: 16px; }
@@ -682,7 +683,7 @@ section[id] { scroll-margin-top: 104px; }
   margin-inline: auto;
   width: min(430px, 38%);
   height: auto;
-  fill: #c6d9f7;
+  fill: #c2d6fd;
   pointer-events: none;
 }
 .stage-bloom {
@@ -691,9 +692,9 @@ section[id] { scroll-margin-top: 104px; }
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(720px 320px at 50% 4%, rgba(37, 99, 235, 0.12), transparent 70%),
-    radial-gradient(420px 260px at 6% 92%, rgba(37, 99, 235, 0.09), transparent 72%),
-    radial-gradient(420px 260px at 96% 86%, rgba(37, 99, 235, 0.09), transparent 72%);
+    radial-gradient(720px 320px at 50% 4%, rgba(0, 89, 252, 0.12), transparent 70%),
+    radial-gradient(420px 260px at 6% 92%, rgba(0, 89, 252, 0.09), transparent 72%),
+    radial-gradient(420px 260px at 96% 86%, rgba(0, 89, 252, 0.09), transparent 72%);
 }
 
 .stage {
@@ -741,7 +742,7 @@ section[id] { scroll-margin-top: 104px; }
   width: 56px;
   height: 56px;
   border-radius: 10px;
-  background: linear-gradient(160deg, #f3f6fd, #e6eefc);
+  background: linear-gradient(160deg, #f4f7ff, #e9f0ff);
   display: grid;
   place-items: center;
 }
@@ -1041,13 +1042,28 @@ section[id] { scroll-margin-top: 104px; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.62;
+  opacity: 0.75;
 }
+
+/* The artwork's bright focal point sits on the right of the frame, which is
+   exactly where the Arabic text sits. Mirroring it under RTL moves the bright
+   area to the far side of the text in both directions, so the headline never
+   competes with it. */
+[dir="rtl"] .band img.band-bg { transform: scaleX(-1); }
+/* The scrim is bottom-weighted because the band text is bottom-aligned in both
+   directions, which keeps the headline legible over the artwork's bright focal
+   point without hiding the artwork itself. */
 .band::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(11, 15, 25, 0.94) 8%, rgba(11, 15, 25, 0.35) 68%, rgba(11, 15, 25, 0.5));
+  background: linear-gradient(
+    to top,
+    rgba(11, 15, 25, 0.9) 4%,
+    rgba(11, 15, 25, 0.42) 48%,
+    rgba(11, 15, 25, 0.18) 78%,
+    rgba(11, 15, 25, 0.38) 100%
+  );
 }
 .band-content { position: relative; z-index: 1; max-width: 62ch; }
 .band-content h3 { font-size: clamp(1.4rem, 1.1rem + 1vw, 1.95rem); color: var(--white); }
@@ -1059,12 +1075,12 @@ section[id] { scroll-margin-top: 104px; }
   font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #a9c2ff;
-  border: 1px solid rgba(122, 162, 255, 0.4);
+  color: #99b8ff;
+  border: 1px solid rgba(111, 155, 255, 0.4);
   border-radius: 999px;
   padding: 5px 13px;
   margin-block-end: 18px;
-  background: rgba(37, 99, 235, 0.16);
+  background: rgba(0, 89, 252, 0.16);
 }
 
 /* --- FAQ ----------------------------------------------------------------- */
@@ -1127,7 +1143,7 @@ section[id] { scroll-margin-top: 104px; }
   color: rgba(255, 255, 255, 0.62);
   margin-block-start: 6px;
 }
-.cta-mail a { color: #a9c2ff; text-decoration: underline; text-underline-offset: 3px; }
+.cta-mail a { color: #99b8ff; text-decoration: underline; text-underline-offset: 3px; }
 
 /* --- Page header (inner pages) ------------------------------------------ */
 .page-head {
@@ -1230,7 +1246,7 @@ section[id] { scroll-margin-top: 104px; }
 .field textarea { min-height: 130px; resize: vertical; }
 .field input:focus,
 .field select:focus,
-.field textarea:focus { border-color: var(--blue); outline: 3px solid rgba(37, 99, 235, 0.18); outline-offset: 0; }
+.field textarea:focus { border-color: var(--blue); outline: 3px solid rgba(0, 89, 252, 0.18); outline-offset: 0; }
 .form-note {
   font-size: 13.8px;
   color: var(--slate);
@@ -1273,7 +1289,7 @@ section[id] { scroll-margin-top: 104px; }
   padding-block-end: 34px;
   border-block-end: 1px solid var(--hairline-ink);
 }
-.footer-brand img { width: 120px; height: auto; }
+.footer-brand img { width: 135px; height: auto; }
 .footer-brand p { margin-block-start: 16px; max-width: 38ch; }
 .footer-col b {
   display: block;
@@ -1320,10 +1336,10 @@ section[id] { scroll-margin-top: 104px; }
   .tpl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-/* The full horizontal navigation needs roughly 1065 px of content width, so it
-   collapses into the menu button below that point and the language switch moves
-   inside the opened panel. */
-@media (max-width: 1120px) {
+/* The v1.1 lockup is wider than the old wordmark, so the full horizontal
+   navigation needs about 1080 px of content width. It collapses into the menu
+   button below that point and the language switch moves inside the panel. */
+@media (max-width: 1140px) {
   .site-nav { display: none; }
   .nav-toggle { display: block; }
   .header-actions .lang-toggle { display: none; }

@@ -5,10 +5,10 @@ Apply these rules to brochures, one-pagers, proposals, reports, manuals, letter-
 ## Composition
 
 - Put the main subject, outcome, or title before brand decoration.
-- Use the complete logo on the cover and, when needed, a smaller signature in the back page or footer.
+- Use the complete composite lockup on the cover and, when needed, a smaller signature in the back page or footer. Keep the wordmark and grid symbol together.
 - Build pages on a clear grid with generous margins. For Arabic, anchor headings and reading columns to the right.
 - Use blue for section openings, calls to action, or key figures; keep long reading surfaces white or Cloud.
-- Use the vertical bar and diamond as occasional navigation devices, not a repeating wallpaper.
+- Use modular squares, the vertical bar, and the diamond as occasional navigation devices, not a repeating wallpaper or replacement logo.
 
 ## Content hierarchy
 

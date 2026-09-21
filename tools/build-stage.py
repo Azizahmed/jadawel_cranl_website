@@ -26,30 +26,30 @@ SPRITE = f'''
       <svg class="sprite" aria-hidden="true" width="0" height="0" focusable="false">
         <defs>
           <symbol id="art-gov" viewBox="0 0 48 48">
-            <rect x="8" y="39" width="32" height="3.4" rx="1.2" fill="#c3d5fb"/>
-            <rect x="11" y="35" width="26" height="3.4" rx="1.2" fill="#dce7ff"/>
-            <rect x="12" y="21" width="3.6" height="14" rx=".8" fill="#2563eb"/>
-            <rect x="19" y="21" width="3.6" height="14" rx=".8" fill="#2563eb"/>
-            <rect x="26" y="21" width="3.6" height="14" rx=".8" fill="#2563eb"/>
-            <rect x="33" y="21" width="3.6" height="14" rx=".8" fill="#2563eb"/>
-            <path d="M12.6 19.4h23.4c-1.3-4.9-5.4-8.9-11.7-11.6-6.3 2.7-10.4 6.7-11.7 11.6z" fill="#2563eb"/>
-            <rect x="11" y="18.2" width="26.5" height="3" rx="1.2" fill="#1d4ed8"/>
+            <rect x="8" y="39" width="32" height="3.4" rx="1.2" fill="#bfd6fe"/>
+            <rect x="11" y="35" width="26" height="3.4" rx="1.2" fill="#e6eeff"/>
+            <rect x="12" y="21" width="3.6" height="14" rx=".8" fill="#0059fc"/>
+            <rect x="19" y="21" width="3.6" height="14" rx=".8" fill="#0059fc"/>
+            <rect x="26" y="21" width="3.6" height="14" rx=".8" fill="#0059fc"/>
+            <rect x="33" y="21" width="3.6" height="14" rx=".8" fill="#0059fc"/>
+            <path d="M12.6 19.4h23.4c-1.3-4.9-5.4-8.9-11.7-11.6-6.3 2.7-10.4 6.7-11.7 11.6z" fill="#0059fc"/>
+            <rect x="11" y="18.2" width="26.5" height="3" rx="1.2" fill="#0046c7"/>
             <path d="M23.4 7.6V3.2" stroke="#0b0f19" stroke-width="1.3" stroke-linecap="round"/>
             <path d="M23.9 2.4h5.4l-1.7 2 1.7 2h-5.4z" fill="#83d7c2"/>
           </symbol>
 
           <symbol id="art-shop" viewBox="0 0 48 48">
-            <rect x="7.5" y="21" width="33" height="18" rx="2" fill="#dce7ff"/>
+            <rect x="7.5" y="21" width="33" height="18" rx="2" fill="#e6eeff"/>
             <rect x="13" y="27" width="10" height="12" rx="1" fill="#ffffff"/>
-            <rect x="27" y="27" width="9" height="7.5" rx="1" fill="#2563eb"/>
-            <path d="M5.5 11.5h37l-3 8.6H8.5z" fill="#2563eb"/>
+            <rect x="27" y="27" width="9" height="7.5" rx="1" fill="#0059fc"/>
+            <path d="M5.5 11.5h37l-3 8.6H8.5z" fill="#0059fc"/>
             <path d="M5.5 11.5h9.2v8.6H8.5zM23.9 11.5h9.2l3 8.6H23.9z" fill="#ffffff" opacity=".38"/>
-            <rect x="19.5" y="32.5" width="1.6" height="6.5" rx=".8" fill="#94a8d8"/>
+            <rect x="19.5" y="32.5" width="1.6" height="6.5" rx=".8" fill="#94a6d0"/>
           </symbol>
 
           <symbol id="art-mid" viewBox="0 0 48 48">
-            <rect x="10" y="9" width="19" height="30" rx="2" fill="#2563eb"/>
-            <rect x="30" y="21" width="9" height="18" rx="2" fill="#c3d5fb"/>
+            <rect x="10" y="9" width="19" height="30" rx="2" fill="#0059fc"/>
+            <rect x="30" y="21" width="9" height="18" rx="2" fill="#bfd6fe"/>
             <g fill="#ffffff" opacity=".85">
               <rect x="13" y="14" width="4.6" height="3.4" rx="1"/>
               <rect x="20.4" y="14" width="4.6" height="3.4" rx="1"/>
@@ -58,17 +58,17 @@ SPRITE = f'''
               <rect x="13" y="28" width="4.6" height="3.4" rx="1"/>
               <rect x="20.4" y="28" width="4.6" height="3.4" rx="1"/>
             </g>
-            <g fill="#2563eb" opacity=".55">
+            <g fill="#0059fc" opacity=".55">
               <rect x="32.4" y="25" width="4.2" height="3" rx="1"/>
               <rect x="32.4" y="31" width="4.2" height="3" rx="1"/>
             </g>
-            <rect x="8" y="39" width="33" height="3" rx="1.2" fill="#dce7ff"/>
+            <rect x="8" y="39" width="33" height="3" rx="1.2" fill="#e6eeff"/>
           </symbol>
 
           <symbol id="art-tower" viewBox="0 0 48 48">
-            <rect x="7" y="16" width="10.5" height="23" rx="1.6" fill="#93b4f5"/>
-            <rect x="18.6" y="7" width="10.8" height="32" rx="1.6" fill="#2563eb"/>
-            <rect x="30.5" y="13" width="10.5" height="26" rx="1.6" fill="#c3d5fb"/>
+            <rect x="7" y="16" width="10.5" height="23" rx="1.6" fill="#8cb4fe"/>
+            <rect x="18.6" y="7" width="10.8" height="32" rx="1.6" fill="#0059fc"/>
+            <rect x="30.5" y="13" width="10.5" height="26" rx="1.6" fill="#bfd6fe"/>
             <g fill="#ffffff" opacity=".8">
               <rect x="21" y="11.5" width="6" height="2.6" rx=".8"/>
               <rect x="21" y="17" width="6" height="2.6" rx=".8"/>
@@ -83,11 +83,11 @@ SPRITE = f'''
               <rect x="33" y="22" width="5.4" height="2.4" rx=".8"/>
               <rect x="33" y="27" width="5.4" height="2.4" rx=".8"/>
             </g>
-            <rect x="5" y="39" width="38" height="3" rx="1.2" fill="#dce7ff"/>
+            <rect x="5" y="39" width="38" height="3" rx="1.2" fill="#e6eeff"/>
           </symbol>
 
           <symbol id="art-sector" viewBox="0 0 48 48">
-            <g fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <g fill="none" stroke="#0059fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M11 6v9M11 15l-4 6M11 15l4 6"/>
               <path d="M22 13h4l2.4 4-4.4 2.6L20 17z"/>
               <path d="M33 11v14M33 25c3 0 3.4-3.4 4.6-5M33 25c-3 0-3.4-3.4-4.6-5"/>
@@ -172,7 +172,7 @@ rows_html = "\n".join(
     for i, (ty, key, name, org, st, date) in enumerate(ROWS)
 )
 
-SECTION = f'''      <!-- ================= 02 Platform stage ================= -->
+SECTION = f'''      <!-- ================= 01 Platform stage ================= -->
       <section class="section section-cloud stage-section" id="segments">
 {SPRITE}
         <div class="shell stage-shell">
@@ -183,7 +183,7 @@ SECTION = f'''      <!-- ================= 02 Platform stage ================= -
           </svg>
 
           <div class="section-head reveal" style="margin-block-end: 0; text-align: center; max-width: none">
-            <p class="section-num" data-i18n="segments.num">02 — منصّة تناسب عملك في كل مرحلة</p>
+            <p class="section-num" data-i18n="segments.num">01 — منصّة تناسب عملك في كل مرحلة</p>
           </div>
 
           <h2 class="stage-title reveal" data-i18n="stage.title">منصّة بيانات سعودية للأعمال</h2>
@@ -280,10 +280,20 @@ SECTION = f'''      <!-- ================= 02 Platform stage ================= -
 # ------------------------------------------------------------------- patch
 p = 'src/pages/index.html'
 s = open(p, encoding='utf-8').read()
-# Locate the section by its boundaries rather than its label, so the generator
-# stays runnable after the section is renamed or reworked.
-start = s.index('      <!-- ================= 02 ')
-end = s.index('      <!-- ================= 03 Data lifecycle ================= -->')
+# Locate the stage by its own marker, never by a section number: the numbering
+# changed once already, and matching on it made this rewrite the section that
+# happened to hold that number instead.
+marker = re.search(r'      <!-- =+ \d+ Platform stage =+ -->', s)
+if not marker:
+    raise SystemExit('build-stage.py: no "Platform stage" marker found in src/pages/index.html')
+start = marker.start()
+end = s.index('      <!-- ================= 0', start + len(marker.group(0)))
+if s.count(marker.group(0)) != 1:
+    raise SystemExit('build-stage.py: more than one "Platform stage" marker found; refusing to guess')
+# The region must actually be the stage before anything is replaced.
+region = s[start:end]
+if 'id="segments"' not in region or 'class="appwin' not in region:
+    raise SystemExit('build-stage.py: the region after the marker is not the platform stage; refusing to rewrite it')
 s = s[:start] + SECTION + '\n' + s[end:]
 open(p, 'w', encoding='utf-8').write(s)
 print('stage section written:', len(SECTION), 'bytes of markup')
