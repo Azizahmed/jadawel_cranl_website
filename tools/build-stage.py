@@ -182,10 +182,6 @@ SECTION = f'''      <!-- ================= 01 Platform stage ================= -
             <path d="{SAUDI_PATH}"></path>
           </svg>
 
-          <div class="section-head reveal" style="margin-block-end: 0; text-align: center; max-width: none">
-            <p class="section-num" data-i18n="segments.num">01 — منصّة تناسب عملك في كل مرحلة</p>
-          </div>
-
           <h2 class="stage-title reveal" data-i18n="stage.title">منصّة بيانات سعودية للأعمال</h2>
 
           <div class="stage">

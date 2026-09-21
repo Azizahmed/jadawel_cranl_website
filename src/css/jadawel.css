@@ -501,7 +501,6 @@ section[id] { scroll-margin-top: 104px; }
   border-radius: 2px;
   flex-shrink: 0;
 }
-.section-ink .section-num { color: rgba(255, 255, 255, 0.74); }
 .section h2 { font-size: clamp(1.6rem, 1.2rem + 1.35vw, 2.3rem); }
 .section-lede {
   margin-block-start: 16px;
@@ -741,7 +740,6 @@ section[id] { scroll-margin-top: 104px; }
    and the Arabic stays crisp at any density.
    ------------------------------------------------------------------------ */
 .stage-section { position: relative; overflow: hidden; padding-block-start: 40px; }
-.stage-section .section-num { justify-content: center; }
 .stage-shell { position: relative; }
 
 .stage-title {

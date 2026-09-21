@@ -106,7 +106,6 @@ window.JADWEL_I18N = {
     "mock.owner3": "خدمة العملاء",
     "mock.owner4": "الشؤون المالية",
 
-    "options.num": "02 — خيارات النشر",
     "options.h2": "استضف منصتك بالطريقة الأنسب",
     "options.lede":
       "حلول الأعمال تغطّي الخدمة السحابية داخل المملكة والتركيب المحلي داخل مركز بيانات الجهة، بمرونة أعلى وتجربة موحدة.",
@@ -130,7 +129,6 @@ window.JADWEL_I18N = {
     "options.p4b": "واجهة عربية أصيلة",
     "options.p4s": "بنية عربية من اليمين إلى اليسار، مع عشر لغات تُختار لكل مستخدم على حدة.",
 
-    "segments.num": "01 — منصّة تناسب عملك في كل مرحلة",
     "uses.h2": "استخدامات البيانات داخل جداول",
     "uses.lede": "نظّم بياناتك، شغّل أعمالك، وشارك نتائجك من مساحة عمل واحدة.",
     "uses.t1": "إدخال البيانات",
@@ -149,7 +147,6 @@ window.JADWEL_I18N = {
     "uses.t6": "مشاركة المخرجات",
     "uses.p6": "تشارك الجداول والنتائج مع فريقك عبر روابط وواجهات مرنة وآمنة.",
 
-    "sov.num": "04 — السيادة الرقمية والنشر",
     "sov.h2": "مَن يملك الخوادم، يملك القرار",
     "sov.lede":
       "الاستضافة والتحكم ليست بندًا في العقد فقط، بل بنية قابلة للتحقّق. هذه الضوابط مطبَّقة في الخيار السحابي، ومكرّرة كما هي في التركيب المحلي.",
@@ -170,7 +167,6 @@ window.JADWEL_I18N = {
     "sov.i6b": "التركيب المحلي",
     "sov.i6s": "فريق «جداول» يركّب المنصّة داخل مركز بيانات الجهة، على خوادمها وضمن شبكتها.",
 
-    "faq.num": "05 — الأسئلة الشائعة",
     "faq.h2": "ما تحتاج إلى معرفته قبل البدء",
     "faq.lede": "كل إضافة أو تغيير يُوثَّق في",
     "faq.q1": "أين تُستضاف خدمة «جداول» السحابية؟",
@@ -403,7 +399,6 @@ window.JADWEL_I18N = {
     "mock.owner3": "Service",
     "mock.owner4": "Finance",
 
-    "options.num": "02 — Deployment options",
     "options.h2": "Host your platform whichever way suits you",
     "options.lede":
       "Business Solutions cover in-Kingdom cloud hosting and an on-premises install inside your own data centre, with more flexibility and one consistent experience.",
@@ -427,7 +422,6 @@ window.JADWEL_I18N = {
     "options.p4b": "A genuine Arabic interface",
     "options.p4s": "Arabic-first right-to-left structure, with ten languages chosen per user.",
 
-    "segments.num": "01 — Fits your work at every stage",
     "uses.h2": "What the data does inside Jadawel",
     "uses.lede": "Organise your data, run your work, and share results from one workspace.",
     "uses.t1": "Bring data in",
@@ -446,7 +440,6 @@ window.JADWEL_I18N = {
     "uses.t6": "Share the output",
     "uses.p6": "Share tables and results with your team through flexible, secure links and views.",
 
-    "sov.num": "04 — Digital sovereignty and deployment",
     "sov.h2": "Whoever owns the servers owns the decision",
     "sov.lede":
       "Hosting and control are not only contract clauses. They are verifiable infrastructure. These controls apply to the cloud option and are repeated identically in the on-premises install.",
@@ -467,7 +460,6 @@ window.JADWEL_I18N = {
     "sov.i6b": "On-premises install",
     "sov.i6s": "The Jadawel team installs the platform inside your data centre, on your servers and network.",
 
-    "faq.num": "05 — Frequently asked questions",
     "faq.h2": "What you need to know before starting",
     "faq.lede": "Every addition or change is documented in the",
     "faq.q1": "Where is the Jadawel cloud service hosted?",
