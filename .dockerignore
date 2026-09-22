@@ -1,0 +1,14 @@
+# Everything the image does not serve, so the build context stays small: the
+# brand guidelines alone are about 30 MB of PDF and PowerPoint.
+.git
+.github
+node_modules
+out
+src
+tools
+docs
+*.md
+package.json
+package-lock.json
+image-prompts.txt
+scratch

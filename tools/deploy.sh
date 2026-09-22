@@ -38,6 +38,9 @@ rsync -a --delete \
   --exclude 'tools' \
   --exclude 'docs' \
   --exclude 'assets/photography' \
+  --exclude 'Dockerfile' \
+  --exclude '.dockerignore' \
+  --exclude 'deploy' \
   --exclude 'package.json' \
   --exclude 'package-lock.json' \
   --exclude 'README.md' \

@@ -153,7 +153,7 @@ window.JADWEL_I18N = {
     "sov.badge": "الرياض · المملكة العربية السعودية",
     "sov.bandTitle": "لا تُنسخ بياناتك خارج المملكة",
     "sov.bandP":
-      "قواعد البيانات والمرفقات والنسخ الاحتياطية تبقى في مراكز بيانات داخل المملكة، وتخضع لإجراءات تصنيف واحتفاظ موثّقة يمكن مراجعتها مع فريقنا.",
+      "قواعد البيانات والمرفقات والنسخ الاحتياطية تبقى في مراكز بيانات داخل المملكة.",
     "sov.i1b": "موقع البيانات",
     "sov.i1s": "قواعد البيانات والمرفقات والنسخ الاحتياطية على خوادم داخل المملكة دون نسخ خارجها.",
     "sov.i2b": "التوافق النظامي",
@@ -459,7 +459,7 @@ window.JADWEL_I18N = {
     "sov.badge": "Riyadh · Saudi Arabia",
     "sov.bandTitle": "Your data is not copied outside the Kingdom",
     "sov.bandP":
-      "Databases, attachments, and backups stay in data centres inside the Kingdom under documented classification and retention procedures your team can review with ours.",
+      "Databases, attachments, and backups stay in data centres inside the Kingdom.",
     "sov.i1b": "Where the data lives",
     "sov.i1s": "Databases, attachments, and backups on servers inside the Kingdom, with no copies made outside it.",
     "sov.i2b": "Regulatory fit",

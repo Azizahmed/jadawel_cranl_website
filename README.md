@@ -4,17 +4,21 @@ A bilingual (Arabic-first) marketing site for **جداول**, built to the appro
 Jadawel Visual Identity **v1.1**. The Arabic content is a rewrite of the material on
 `jadawl.site`; the English is an authored parallel, not a back-translation.
 
-**Live on this VPS:** <https://jadawel.azoz.cloud/> — the host name that resolves
-to this machine for the site, over TLS. Plain HTTP still answers on
-<http://76.13.5.113/> and on any other name pointed here, because the `:80` block
-is the default server. nginx serves `/var/www/jadawel` and is enabled in the
-OpenRC `default` runlevel, so it comes back after a reboot.
+**Production:** <https://jadawl.site> — served by CranL from the image this
+repository builds (root `Dockerfile`, build type *Dockerfile*), hosted in Saudi
+Arabia.
 
-Deploy for that host name, so canonical URLs, `og:url`, the sitemap, and
-`robots.txt` name it:
+**Staging copy on this VPS:** <https://jadawel.azoz.cloud/> — the same build,
+served by nginx from `/var/www/jadawel`. Plain HTTP still answers on
+<http://76.13.5.113/> and on any other name pointed here, because the `:80`
+block is the default server, and the service is enabled in the OpenRC `default`
+runlevel so it comes back after a reboot.
+
+Deploy for the production host name, so canonical URLs, `og:url`, `og:image`,
+the sitemap, and `robots.txt` all name it:
 
 ```bash
-SITE_URL=https://jadawel.azoz.cloud bash tools/deploy.sh
+SITE_URL=https://jadawl.site bash tools/deploy.sh
 ```
 
 To view the site without nginx:
@@ -283,6 +287,33 @@ node tools/render-og.mjs http://127.0.0.1:8899     # social cover from tools/og-
 
 Both image scripts read `ZHIPU_API_KEY` from `/root/.config/jcode/zai.env`, which
 is specific to this machine. Supply the key another way if you move the project.
+
+## Deploying on CranL
+
+CranL hosts the site in Saudi Arabia, and it does not run this repository's
+build: the pages are built here and committed, so CranL's only job is to serve
+them.
+
+- **Repository:** `code92-dev/jadawel_website` (this one)
+- **Build type:** `Dockerfile` — the root `Dockerfile` lays the committed files
+  down behind nginx and answers on port 80
+- **Domain:** `jadawl.site` and `www`, fronted by the app's Bunny edge
+
+The container's server block is `deploy/cranl/nginx.conf`, the twin of
+`tools/nginx-jadawel-site.conf`: compression, cache lifetimes, the security
+headers, the branded 404, and the previous site's extensionless URLs
+(`/privacy`, `/terms`, `/security`, `/docs`, `/pricing`, `/en`) redirected to
+their new homes. Change one file and check the other.
+
+What ships is what is committed, so a deploy is:
+
+```bash
+SITE_URL=https://jadawl.site node tools/build.mjs   # rebuild for the production origin
+git commit -am "…" && git push                      # the committed HTML is the deliverable
+```
+
+then redeploy the app in CranL and purge the Bunny cache, because Bunny keeps
+serving the old HTML until it is told not to. Pushing alone changes nothing.
 
 ## Verification
 
