@@ -294,9 +294,11 @@ CranL hosts the site in Saudi Arabia, and it does not run this repository's
 build: the pages are built here and committed, so CranL's only job is to serve
 them.
 
-- **Repository:** `code92-dev/jadawel_website` (this one)
+- **Repository:** `Azizahmed/jadawel_cranl_website` — the source of truth for the
+  CranL app; `code92-dev/jadawel_website` carries the same history as a mirror
 - **Build type:** `Dockerfile` — the root `Dockerfile` pins the published image
-  (`ghcr.io/code92-dev/jadawel_website`) and does nothing else
+  (`ghcr.io/azizahmed/jadawel_cranl_website`, public so CranL can pull it) and
+  does nothing else
 - **Port:** 80 — CranL injects `PORT=80` for application routing, which is where
   nginx listens
 - **Domain:** `jadawl.site` and `www`, fronted by the app's Bunny edge
@@ -308,7 +310,7 @@ home page, a legacy redirect, an asset and the branded 404, and only then pushes
 it — so a broken site is never published. Publish with:
 
 ```bash
-gh workflow run publish-image.yml -f tag=latest
+gh workflow run publish-image.yml --repo Azizahmed/jadawel_cranl_website -f tag=latest
 ```
 
 The container's server block is `deploy/cranl/nginx.conf`, the twin of
