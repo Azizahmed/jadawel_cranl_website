@@ -1,0 +1,180 @@
+name: Publish website image
+
+# Builds the site's all-in-one image — nginx plus the committed pages, fonts,
+# logos and artwork — and pushes it to GHCR.
+#
+# This exists because the host should not have to build anything: CranL's root
+# Dockerfile pins the published image and only pulls the result, exactly as the
+# platform app's Dockerfile does. Publishing is also the moment the image is
+# proven: the job runs the container and checks the home page, a legacy redirect,
+# and the branded 404 before it pushes.
+#
+# Deploying a change is therefore: rebuild the site here, commit, push, publish a
+# tag, update the digest in the root Dockerfile, redeploy the app in CranL, and
+# purge the Bunny cache.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Image tag to publish (also pushed as :latest)"
+        required: true
+        default: "latest"
+      overwrite:
+        description: "Allow republishing a tag that already exists"
+        type: boolean
+        required: false
+        default: false
+  push:
+    tags:
+      - "v*"
+
+concurrency:
+  group: publish-website-image-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  publish:
+    name: Build and push website image
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Resolve image name and tag
+        id: meta
+        # The repository name and the dispatch input arrive through the
+        # environment rather than being interpolated into the script: a `${{ }}`
+        # expansion is pasted in as shell source before bash sees it, so a tag
+        # containing shell metacharacters would run as code on the runner.
+        env:
+          REPOSITORY: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_TAG: ${{ inputs.tag }}
+        run: |
+          repo=$(echo "$REPOSITORY" | tr '[:upper:]' '[:lower:]')
+          if [ "$EVENT_NAME" = "push" ]; then
+            tag="${GITHUB_REF_NAME#v}"
+          else
+            tag="$INPUT_TAG"
+          fi
+          case "$tag" in
+            ''|*[!A-Za-z0-9._-]*)
+              echo "Refusing tag '$tag': only A-Za-z0-9._- are allowed." >&2
+              exit 1
+              ;;
+          esac
+          echo "image=${REGISTRY}/${repo}" >> "$GITHUB_OUTPUT"
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+
+      - name: Refuse to overwrite an existing tag
+        # A tag that already exists is already pinned somewhere. Rebuilding it
+        # repoints it, so the digest a Dockerfile holds no longer matches what
+        # the tag serves and two hosts on "the same version" run different
+        # content. `latest` is exempt: it is mutable by definition.
+        env:
+          IMAGE: ${{ steps.meta.outputs.image }}
+          TAG: ${{ steps.meta.outputs.tag }}
+          OVERWRITE: ${{ inputs.overwrite }}
+        run: |
+          if [ "$TAG" = "latest" ] || [ "$OVERWRITE" = "true" ]; then
+            echo "Skipping the check for tag '$TAG'."
+            exit 0
+          fi
+          if docker manifest inspect "$IMAGE:$TAG" >/dev/null 2>&1; then
+            echo "::error::$IMAGE:$TAG already exists. Publish a new tag, or re-run with 'overwrite' checked." >&2
+            exit 1
+          fi
+          echo "Tag '$TAG' is free."
+
+      - name: Build the image
+        env:
+          IMAGE: ${{ steps.meta.outputs.image }}
+          TAG: ${{ steps.meta.outputs.tag }}
+        run: |
+          docker build \
+            -f deploy/cranl/Dockerfile \
+            -t "$IMAGE:$TAG" \
+            -t "$IMAGE:latest" \
+            .
+
+      - name: Prove the image serves the site
+        # The image is the deliverable, so it is exercised before it is pushed:
+        # the home page in Arabic, an asset, a legacy redirect, and the branded
+        # 404 with a real 404 status. A site that fails any of these does not get
+        # published.
+        env:
+          IMAGE: ${{ steps.meta.outputs.image }}
+          TAG: ${{ steps.meta.outputs.tag }}
+        run: |
+          set -euo pipefail
+          docker run -d --name smoke -p 8080:80 "$IMAGE:$TAG"
+          trap 'docker rm -f smoke >/dev/null 2>&1 || true' EXIT
+          for _ in $(seq 1 30); do
+            curl -fsS -o /dev/null http://127.0.0.1:8080/ && break
+            sleep 0.5
+          done
+
+          code() { curl -s -o /dev/null -w '%{http_code}' "http://127.0.0.1:8080$1"; }
+
+          echo "home:            $(code /)"
+          echo "privacy:         $(code /privacy) $(curl -sI http://127.0.0.1:8080/privacy | tr -d '\r' | awk -F': ' 'tolower($1)=="location"{print $2}')"
+          echo "assets:          $(code /assets/css/site.css)"
+          echo "missing page:    $(code /does-not-exist)"
+
+          test "$(code /)" = "200"
+          test "$(code /privacy)" = "301"
+          test "$(code /privacy.html)" = "200"
+          test "$(code /assets/css/site.css)" = "200"
+          test "$(code /does-not-exist)" = "404"
+
+          curl -fsS http://127.0.0.1:8080/ | grep -q "منصّة سعودية للأعمال\|جداول"
+          curl -fsS http://127.0.0.1:8080/does-not-exist | grep -q "لم نجد هذه الصفحة"
+          curl -fsS http://127.0.0.1:8080/assets/css/site.css | grep -q "jadawel"
+          echo "The image serves the site."
+
+      - name: Push
+        env:
+          IMAGE: ${{ steps.meta.outputs.image }}
+          TAG: ${{ steps.meta.outputs.tag }}
+        run: |
+          docker push "$IMAGE:$TAG"
+          docker push "$IMAGE:latest"
+
+      - name: Summary
+        env:
+          IMAGE: ${{ steps.meta.outputs.image }}
+          TAG: ${{ steps.meta.outputs.tag }}
+        run: |
+          digest=$(docker inspect --format='{{index .RepoDigests 0}}' "$IMAGE:$TAG" 2>/dev/null || true)
+          {
+            echo "Pushed \`$IMAGE:$TAG\`"
+            echo ""
+            if [ -n "$digest" ]; then
+              # The digest, not the tag: `:latest` is republished on every run
+              # and a version tag can be repointed, so only the digest names a
+              # fixed image.
+              echo "Pin this in the root \`Dockerfile\` to deploy it:"
+              echo ""
+              echo '```'
+              echo "ARG JADAWEL_WEBSITE_IMAGE=$digest"
+              echo '```'
+            else
+              echo "Could not read the digest; read it from \`docker buildx imagetools inspect $IMAGE:$TAG\`."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

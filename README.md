@@ -295,9 +295,21 @@ build: the pages are built here and committed, so CranL's only job is to serve
 them.
 
 - **Repository:** `code92-dev/jadawel_website` (this one)
-- **Build type:** `Dockerfile` — the root `Dockerfile` lays the committed files
-  down behind nginx and answers on port 80
+- **Build type:** `Dockerfile` — the root `Dockerfile` pins the published image
+  (`ghcr.io/code92-dev/jadawel_website`) and does nothing else
+- **Port:** 80 — CranL injects `PORT=80` for application routing, which is where
+  nginx listens
 - **Domain:** `jadawl.site` and `www`, fronted by the app's Bunny edge
+
+The site image itself is `deploy/cranl/Dockerfile`: nginx plus the committed
+pages, fonts, logos and artwork, with no build step and no external requests at
+runtime. `.github/workflows/publish-image.yml` builds it, runs it, checks the
+home page, a legacy redirect, an asset and the branded 404, and only then pushes
+it — so a broken site is never published. Publish with:
+
+```bash
+gh workflow run publish-image.yml -f tag=latest
+```
 
 The container's server block is `deploy/cranl/nginx.conf`, the twin of
 `tools/nginx-jadawel-site.conf`: compression, cache lifetimes, the security
