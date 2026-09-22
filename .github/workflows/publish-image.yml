@@ -144,7 +144,8 @@ jobs:
           test "$(code /does-not-exist)" = "404"
 
           curl -fsS http://127.0.0.1:8080/ | grep -q "منصّة سعودية للأعمال\|جداول"
-          curl -fsS http://127.0.0.1:8080/does-not-exist | grep -q "لم نجد هذه الصفحة"
+          # No -f here: the page being checked is a 404 by design.
+          curl -sS http://127.0.0.1:8080/does-not-exist | grep -q "لم نجد هذه الصفحة"
           curl -fsS http://127.0.0.1:8080/assets/css/site.css | grep -q "jadawel"
           echo "The image serves the site."
 
