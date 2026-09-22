@@ -1,14 +1,16 @@
-# Everything the image does not serve, so the build context stays small: the
-# brand guidelines alone are about 30 MB of PDF and PowerPoint.
+# What a build of this repository does not need.
+#
+# Two build paths read this file: the site image built from
+# deploy/cranl/Dockerfile, and Railpack, which honours ignore files when it
+# assembles the build context and then runs `npm run build`. So nothing the
+# build itself reads may be listed here — `src/`, `tools/` and the manifests are
+# deliberately absent. Only what neither path needs is ignored, which keeps the
+# context small without breaking the build: the brand guidelines alone are about
+# 30 MB of PDF and PowerPoint.
 .git
 .github
 node_modules
 out
-src
-tools
 docs
-*.md
-package.json
-package-lock.json
-image-prompts.txt
 scratch
+image-prompts.txt

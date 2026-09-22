@@ -301,6 +301,15 @@ them.
   does nothing else
 - **Port:** 80 — CranL injects `PORT=80` for application routing, which is where
   nginx listens
+
+Left on Railpack instead — which is what happens when the build type is never
+changed — the repository also builds and runs, because `npm run build` regenerates
+the pages from `src/` and `npm start` serves them with `tools/serve.mjs`: same
+redirects, same security headers, same cache lifetimes, same branded 404, no
+dependencies. Two consequences worth knowing: the `.dockerignore` must never list
+`src/`, `tools/` or the manifests, since Railpack honours it while assembling the
+build context, and a bare build names `jadawl.site` in the canonical URLs because
+that is the default `SITE_URL`.
 - **Domain:** `jadawl.site` and `www`, fronted by the app's Bunny edge
 
 The site image itself is `deploy/cranl/Dockerfile`: nginx plus the committed

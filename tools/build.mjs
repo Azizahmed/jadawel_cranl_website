@@ -20,10 +20,16 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 /**
  * Absolute origin used for canonical URLs, the sitemap, and social previews.
  * A deployed site must not ship a relative `og:image`, because scrapers resolve
- * it against their own host. Override per environment:
- *   SITE_URL=https://jadawl.site node tools/build.mjs
+ * it against their own host.
+ *
+ * The default is the production host on purpose: a host that builds this
+ * repository itself — Railpack on CranL, or a plain `npm run build` — sets no
+ * environment, and the pages it produces must still point at jadawl.site rather
+ * than at whatever name the builder happens to run under.
+ *
+ *   SITE_URL=https://jadawel.azoz.cloud node tools/build.mjs   # the staging copy
  */
-const SITE_URL = (process.env.SITE_URL || "http://srv1278373.hstgr.cloud").replace(/\/+$/, "");
+const SITE_URL = (process.env.SITE_URL || "https://jadawl.site").replace(/\/+$/, "");
 
 /**
  * The legal documents are generated from tools/legal/*.mjs, so their entries are
