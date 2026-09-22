@@ -1311,6 +1311,24 @@ section[id] { scroll-margin-top: 104px; }
   transform: rotate(45deg);
   flex-shrink: 0;
 }
+/* The documents a release ships, linked where the release is read. */
+.release-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+  margin: 18px 0 0;
+  font-size: 14.5px;
+}
+.release-links span { color: var(--slate); }
+.release-links a {
+  color: var(--blue-dark);
+  font-weight: 600;
+  text-decoration: none;
+  border-block-end: 1px solid rgba(0, 70, 199, 0.28);
+  padding-block-end: 1px;
+}
+.release-links a:hover { border-block-end-color: var(--blue-dark); }
 
 /* --- Forms --------------------------------------------------------------- */
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
