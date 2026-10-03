@@ -17,7 +17,7 @@ window.JADWEL_I18N = {
     "nf.openContact": "تواصل مع الفريق",
     "nf.home": "العودة إلى الصفحة الرئيسية",
 
-    "stage.title": "أول منصة محلية لتعاون وإدارة البيانات",
+    "hero.title": "أول منصة محلية لتعاون وإدارة البيانات",
     "stage.govt": "الجهات الحكومية",
     "stage.govs": "بيانات تدعم اتخاذ القرار",
     "stage.smallt": "المنشآت الصغيرة",
@@ -296,7 +296,7 @@ window.JADWEL_I18N = {
     "nf.openContact": "Contact the team",
     "nf.home": "Back to the home page",
 
-    "stage.title": "The first local platform to share and manage data",
+    "hero.title": "The first local platform to share and manage data",
     "stage.govt": "Public entities",
     "stage.govs": "Data that supports decisions",
     "stage.smallt": "Small businesses",

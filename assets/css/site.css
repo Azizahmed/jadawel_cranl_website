@@ -307,8 +307,15 @@ p { margin: 0; }
 /* --- Hero video ----------------------------------------------------------
    The hero is the product tour alone, at the full width of the page. Poster
    first: no video bytes load until the visitor presses play, and the 16:9
-   box is reserved up front so nothing shifts. The page's h1 is the stage
-   title in the next section. */
+   box is reserved up front so nothing shifts. The page's one sentence sits
+   above it. */
+.hero-title {
+  text-align: center;
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.35rem);
+  max-width: 22ch;
+  margin: 0 auto 32px;
+  text-wrap: balance;
+}
 .hero-video {
   position: relative;
   margin: 0;
@@ -658,17 +665,11 @@ section[id] { scroll-margin-top: 104px; }
    and the Arabic stays crisp at any density.
    ------------------------------------------------------------------------ */
 .stage-section { position: relative; overflow: hidden; padding-block-start: 40px; }
-.stage-shell { position: relative; }
+/* The top padding is the room the section title used to fill before the
+   sentence moved into the hero: it keeps the map's upper part visible above
+   the product window, so it reads as the country rather than a fragment. */
+.stage-shell { position: relative; padding-block-start: 120px; }
 
-.stage-title {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.35rem);
-  max-width: 22ch;
-  margin-inline: auto;
-  text-wrap: balance;
-}
 
 /* Decorative field behind the whole composition. */
 /* Sized and placed so the country reads as a country. The product window
@@ -677,7 +678,7 @@ section[id] { scroll-margin-top: 104px; }
 .stage-map {
   position: absolute;
   z-index: 0;
-  inset-block-start: -68px;
+  inset-block-start: -36px;
   inset-inline: 0;
   margin-inline: auto;
   width: min(430px, 38%);
@@ -953,8 +954,8 @@ section[id] { scroll-margin-top: 104px; }
   }
     .appwin { grid-column: 1 / -1; order: -1; }
   .stage-side { display: contents; }
-  .stage-title { margin-block-end: 6px; }
-  .stage-map { width: 92%; inset-block-start: -6%; }
+  .stage-shell { padding-block-start: 80px; }
+  .stage-map { width: 92%; inset-block-start: -36px; }
   .trust-strip { flex-direction: column; gap: 0; padding: 8px 20px; }
   .trust-item { justify-content: flex-start; padding: 14px 0; }
   .trust-item + .trust-item { border-inline-start: 0; border-block-start: 1px solid var(--hairline); }

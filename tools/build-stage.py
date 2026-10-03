@@ -182,8 +182,6 @@ SECTION = f'''      <!-- ================= 01 Platform stage ================= -
             <path d="{SAUDI_PATH}"></path>
           </svg>
 
-          <h1 class="stage-title reveal" data-i18n="stage.title">أول منصة محلية لتعاون وإدارة البيانات</h1>
-
           <div class="stage">
             <div class="stage-side">
 {card(*by_key("gov"))}
