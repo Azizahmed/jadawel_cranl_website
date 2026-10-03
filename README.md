@@ -255,11 +255,20 @@ visitor gets fresh markup against a week-old stylesheet, and the page renders
 with mismatched CSS.
 
 Every asset reference is therefore stamped with a short content hash at build
-time, `assets/css/site.css?v=e1e2963424`, and the font URLs inside the
-stylesheet are stamped the same way. Changing an asset changes its URL, so a
+time, in the file name: `assets/css/site.a1beab4a5f.css`. The font URLs inside
+the stylesheet are stamped the same way. Changing an asset changes its URL, so a
 deploy can never serve a stale one and the long `max-age` becomes safe. The
 `og:image` is deliberately left unversioned because social scrapers cache by
 URL and it does not affect rendering.
+
+The hash used to be a query string, `site.css?v=…`, and that broke behind
+Bunny: the pull zone caches by path and ignores the query, so after a deploy the
+new HTML was answered with the old stylesheet and scripts. Only the URLs carry
+the hash. The files on disk keep their plain names, and every server strips the
+hash before looking the file up: the `location ~ \.[0-9a-f]{10}\.` block in
+`deploy/cranl/nginx.conf` and `tools/nginx-jadawel-site.conf`, and
+`HASHED_ASSET` in `tools/serve.mjs`. The publish workflow requests a hashed URL
+before it pushes the image.
 
 A trimmed font can silently drop a glyph, so that risk is closed mechanically:
 every build re-reads the pages, extracts the characters they render, and fails

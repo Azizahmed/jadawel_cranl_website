@@ -83,6 +83,11 @@ function markCurrent(nav, current) {
 // bytes do. Without this a returning visitor keeps an old stylesheet for a week
 // while the HTML revalidates, which renders the page with mismatched CSS. Every
 // asset reference is stamped with a short content hash at build time.
+//
+// The hash goes into the file name, not a query string: the Bunny edge in front
+// of jadawl.site caches by path and ignores the query, so `site.css?v=<new>` was
+// answered with the stylesheet it already held. The files on disk keep their
+// plain names; nginx and tools/serve.mjs strip the hash before serving.
 
 const hashCache = new Map();
 
@@ -99,7 +104,10 @@ async function assetVersion(relPath) {
   return version;
 }
 
-/** Stamps every relative assets/... reference with ?v=<content hash>. */
+/** assets/js/site.js → assets/js/site.<hash>.js */
+const versioned = (ref, version) => ref.replace(/(\.[A-Za-z0-9]+)$/, `.${version}$1`);
+
+/** Stamps every relative assets/... reference with its content hash. */
 async function stampAssets(html) {
   const refs = new Set();
   for (const m of html.matchAll(/(?:src|href|poster)="(assets\/[^"?#]+)"/g)) refs.add(m[1]);
@@ -109,10 +117,11 @@ async function stampAssets(html) {
   for (const ref of refs) {
     const version = await assetVersion(ref);
     if (!version) continue;
-    out = out.split(`"${ref}"`).join(`"${ref}?v=${version}"`);
-    out = out.split(`url("${ref}")`).join(`url("${ref}?v=${version}")`);
-    out = out.split(`url('${ref}')`).join(`url('${ref}?v=${version}')`);
-    out = out.split(`url(${ref})`).join(`url(${ref}?v=${version})`);
+    const stamped = versioned(ref, version);
+    out = out.split(`"${ref}"`).join(`"${stamped}"`);
+    out = out.split(`url("${ref}")`).join(`url("${stamped}")`);
+    out = out.split(`url('${ref}')`).join(`url('${stamped}')`);
+    out = out.split(`url(${ref})`).join(`url(${stamped})`);
   }
   return out;
 }
@@ -134,9 +143,10 @@ async function buildStylesheet() {
   for (const ref of fontRefs) {
     const version = await assetVersion(path.posix.normalize(path.posix.join("assets/css", ref)));
     if (!version) continue;
-    css = css.split(`url("${ref}")`).join(`url("${ref}?v=${version}")`);
-    css = css.split(`url('${ref}')`).join(`url('${ref}?v=${version}')`);
-    css = css.split(`url(${ref})`).join(`url(${ref}?v=${version})`);
+    const stamped = versioned(ref, version);
+    css = css.split(`url("${ref}")`).join(`url("${stamped}")`);
+    css = css.split(`url('${ref}')`).join(`url('${stamped}')`);
+    css = css.split(`url(${ref})`).join(`url(${stamped})`);
   }
 
   await writeFile(path.join(root, "assets/css/site.css"), css, "utf8");

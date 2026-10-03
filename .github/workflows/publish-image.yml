@@ -135,12 +135,15 @@ jobs:
           echo "home:            $(code /)"
           echo "privacy:         $(code /privacy) $(curl -sI http://127.0.0.1:8080/privacy | tr -d '\r' | awk -F': ' 'tolower($1)=="location"{print $2}')"
           echo "assets:          $(code /assets/css/site.css)"
+          echo "hashed asset:    $(code /assets/css/site.0123456789.css)"
           echo "missing page:    $(code /does-not-exist)"
 
           test "$(code /)" = "200"
           test "$(code /privacy)" = "301"
           test "$(code /privacy.html)" = "200"
           test "$(code /assets/css/site.css)" = "200"
+          # Pages name assets by content hash; nginx must map them to the file.
+          test "$(code /assets/css/site.0123456789.css)" = "200"
           test "$(code /does-not-exist)" = "404"
 
           curl -fsS http://127.0.0.1:8080/ | grep -q "منصّة سعودية للأعمال\|جداول"

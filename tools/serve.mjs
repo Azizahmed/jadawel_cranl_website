@@ -70,6 +70,12 @@ const TYPES = {
   ".mp4": "video/mp4",
 };
 
+/**
+ * Asset URLs carry their content hash in the file name, site.<hash>.css, and
+ * the file on disk has none. The nginx server blocks strip it the same way.
+ */
+const HASHED_ASSET = /^(\/assets\/.+)\.[0-9a-f]{10}(\.[A-Za-z0-9]+)$/;
+
 /** Only text is worth compressing; the fonts and artwork are already packed. */
 const compressible = (type) => /^(text\/|application\/(javascript|json|xml))/.test(type);
 
@@ -136,7 +142,7 @@ const server = createServer(async (req, res) => {
     return;
   }
 
-  const found = await resolveFile(pathname);
+  const found = await resolveFile(pathname.replace(HASHED_ASSET, "$1$2"));
   if (!found) {
     const notFound = await resolveFile("/404.html");
     if (!notFound) {
