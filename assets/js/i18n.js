@@ -17,7 +17,7 @@ window.JADWEL_I18N = {
     "nf.openContact": "تواصل مع الفريق",
     "nf.home": "العودة إلى الصفحة الرئيسية",
 
-    "stage.title": "منصّة بيانات سعودية للأعمال",
+    "stage.title": "أول منصة محلية لتعاون وإدارة البيانات",
     "stage.govt": "الجهات الحكومية",
     "stage.govs": "بيانات تدعم اتخاذ القرار",
     "stage.smallt": "المنشآت الصغيرة",
@@ -75,8 +75,6 @@ window.JADWEL_I18N = {
     "nav.menu": "القائمة",
     "nav.langLabel": "اختيار اللغة",
 
-    "hero.h1a": "أول منصة محلية",
-    "hero.h1b": "للتعاون وإدارة البيانات",
     "hero.video": "فيديو تعريفي بمنصة جداول",
     "hero.play": "تشغيل الفيديو التعريفي",
 
@@ -298,7 +296,7 @@ window.JADWEL_I18N = {
     "nf.openContact": "Contact the team",
     "nf.home": "Back to the home page",
 
-    "stage.title": "A Saudi data platform for business",
+    "stage.title": "The first local platform to share and manage data",
     "stage.govt": "Public entities",
     "stage.govs": "Data that supports decisions",
     "stage.smallt": "Small businesses",
@@ -356,8 +354,6 @@ window.JADWEL_I18N = {
     "nav.menu": "Menu",
     "nav.langLabel": "Choose language",
 
-    "hero.h1a": "The first local platform",
-    "hero.h1b": "to share and manage data",
     "hero.video": "An introduction to Jadawel (video, in Arabic)",
     "hero.play": "Play the introduction video",
 

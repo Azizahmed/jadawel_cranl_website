@@ -258,12 +258,6 @@ p { margin: 0; }
   padding-block: 72px 84px;
   overflow: hidden;
 }
-.hero-grid {
-  display: grid;
-  grid-template-columns: max-content minmax(0, 1fr);
-  gap: 48px;
-  align-items: center;
-}
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -284,20 +278,11 @@ p { margin: 0; }
   transform: rotate(45deg);
   flex-shrink: 0;
 }
-/* The headline column is only as wide as its two lines, so the video takes
-   the rest of the row. */
-.hero h1 {
-  font-size: clamp(1.4rem, 0.3rem + 1.8vw, 1.65rem);
-  font-weight: 800;
-  line-height: 1.3;
-  margin: 0;
-}
-.hero h1 span { display: block; white-space: nowrap; }
-.hero h1 .accent { color: var(--blue); }
-
 /* --- Hero video ----------------------------------------------------------
-   The product tour, poster first: no video bytes load until the visitor
-   presses play. The 16:9 box is reserved up front so nothing shifts. */
+   The hero is the product tour alone, at the full width of the page. Poster
+   first: no video bytes load until the visitor presses play, and the 16:9
+   box is reserved up front so nothing shifts. The page's h1 is the stage
+   title in the next section. */
 .hero-video {
   position: relative;
   margin: 0;
@@ -656,6 +641,7 @@ section[id] { scroll-margin-top: 104px; }
   font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.35rem);
   max-width: 22ch;
   margin-inline: auto;
+  text-wrap: balance;
 }
 
 /* Decorative field behind the whole composition. */
@@ -1314,7 +1300,6 @@ section[id] { scroll-margin-top: 104px; }
 
 /* --- Responsive ---------------------------------------------------------- */
 @media (max-width: 1080px) {
-  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 44px; }
   .hero { padding-block: 56px 68px; }
   .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .footer-top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
