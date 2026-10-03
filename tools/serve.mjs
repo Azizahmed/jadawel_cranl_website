@@ -67,6 +67,7 @@ const TYPES = {
   ".ico": "image/x-icon",
   ".woff2": "font/woff2",
   ".pdf": "application/pdf",
+  ".mp4": "video/mp4",
 };
 
 /** Only text is worth compressing; the fonts and artwork are already packed. */
@@ -153,6 +154,7 @@ const server = createServer(async (req, res) => {
     "Content-Type": type,
     "Cache-Control": cacheControl(pathname),
     "Last-Modified": new Date(found.stat.mtimeMs).toUTCString(),
+    ...(compressible(type) ? {} : { "Accept-Ranges": "bytes" }),
   };
 
   if (req.method === "HEAD") {
@@ -163,6 +165,28 @@ const server = createServer(async (req, res) => {
   // Streamed rather than read: the artwork runs to a few hundred kilobytes and
   // there is no reason to hold it in memory for every request.
   const stat = found.stat;
+
+  // Byte ranges, as nginx serves them: Safari will not play an MP4 without a
+  // 206 answer, and seeking in any browser asks for one. A single range only.
+  const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || "");
+  if (range && !compressible(type)) {
+    const suffix = range[1] === "";
+    const start = suffix ? Math.max(stat.size - Number(range[2]), 0) : Number(range[1]);
+    const end = suffix || range[2] === "" ? stat.size - 1 : Math.min(Number(range[2]), stat.size - 1);
+    if ((suffix && range[2] === "") || start > end) {
+      res.writeHead(416, { ...headers, "Content-Range": `bytes */${stat.size}` });
+      res.end();
+      return;
+    }
+    res.writeHead(206, {
+      ...headers,
+      "Content-Range": `bytes ${start}-${end}/${stat.size}`,
+      "Content-Length": end - start + 1,
+    });
+    createReadStream(found.file, { start, end }).pipe(res);
+    return;
+  }
+
   const wantsGzip = /\bgzip\b/.test(req.headers["accept-encoding"] || "");
   const gz = wantsGzip && compressible(type) && stat.size > 512;
   res.writeHead(200, {

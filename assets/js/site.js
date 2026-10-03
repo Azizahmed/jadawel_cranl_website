@@ -1,7 +1,7 @@
 /* ==========================================================================
    Jadawel — site behaviour
-   Language/direction switching, mobile navigation, scroll reveal,
-   and the static contact form acknowledgement.
+   Language/direction switching, mobile navigation, scroll reveal, the hero
+   video's play button, and the static contact form acknowledgement.
    No third-party dependencies, no network requests.
    ========================================================================== */
 (function () {
@@ -119,6 +119,29 @@
     });
   }
 
+  /* --- Hero video --------------------------------------------------------- */
+  // The markup ships native controls so the video plays without scripts. With
+  // scripts, the poster gets one large play button instead, and the native
+  // controls come back once playback starts.
+  function initHeroVideo() {
+    var frame = document.querySelector("[data-hero-video]");
+    if (!frame) return;
+    var video = frame.querySelector("video");
+    var play = frame.querySelector(".hero-video-play");
+    if (!video || !play) return;
+
+    video.removeAttribute("controls");
+    play.hidden = false;
+
+    play.addEventListener("click", function () {
+      play.hidden = true;
+      video.setAttribute("controls", "");
+      video.focus();
+      var started = video.play();
+      if (started && typeof started.catch === "function") started.catch(function () { /* controls remain */ });
+    });
+  }
+
   /* --- Contact form (static demo, no transmission) ------------------------ */
   function initForm() {
     var form = document.querySelector("[data-jadawel-form]");
@@ -140,6 +163,7 @@
     applyLanguage(initialLanguage());
     initNav();
     initReveal();
+    initHeroVideo();
     initForm();
 
     document.querySelectorAll("[data-lang-set]").forEach(function (btn) {

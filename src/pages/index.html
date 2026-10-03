@@ -1,103 +1,37 @@
       <!-- ================= Hero ================= -->
       <section class="hero">
         <div class="shell hero-grid">
-          <div>
+          <div class="hero-copy">
             <h1>
-              <span data-i18n="hero.h1a">بياناتك بالعربية...</span>
-              <span class="accent" data-i18n="hero.h1b">باستضافة محلية آمنة</span>
+              <span data-i18n="hero.h1a">أول منصة محلية</span>
+              <span class="accent" data-i18n="hero.h1b">لإدارة البيانات</span>
             </h1>
-            <p class="hero-lede" data-i18n="hero.lede">
-              تُمكّن منصة «جداول» الفرق من التعاون في إدارة البيانات وابتكار لوحات المعلومات
-              ومسارات العمل الخاصة بكل سهولة. نضمن لك سيادة وأمان البيانات عبر استضافة سحابية
-              داخل المملكة، أو خيار التشغيل المباشر داخل البنية التحتية لمنشأتك.
-            </p>
           </div>
 
-          <figure class="mock" style="margin: 0">
-            <div class="mock-bar">
-              <span class="mock-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="mock-title" data-i18n="mock.workspace">إدارة العمل · المشاريع</span>
-            </div>
-            <div class="mock-body">
-              <aside class="mock-side" aria-hidden="true">
-                <b data-i18n="mock.workspaceLabel">مساحة العمل</b>
-                <ul>
-                  <li class="is-active"><span class="d"></span><span data-i18n="mock.side1">المبادرات</span></li>
-                  <li><span class="d"></span><span data-i18n="mock.side2">المشاريع</span></li>
-                  <li><span class="d"></span><span data-i18n="mock.side3">مؤشرات الأداء</span></li>
-                  <li><span class="d"></span><span data-i18n="mock.side4">المراسلات</span></li>
-                  <li><span class="d"></span><span data-i18n="mock.side5">التقارير</span></li>
-                </ul>
-              </aside>
-              <div class="mock-main">
-                <div class="mock-toolbar">
-                  <span class="chip chip-blue" data-i18n="mock.table">جدول المبادرات</span>
-                  <span class="chip chip-mint" data-i18n="mock.newRow">صف جديد</span>
-                </div>
-                <div class="mock-scroll">
-                  <table class="mock-table">
-                    <caption class="sr-only" data-i18n="mock.table">جدول المبادرات</caption>
-                    <colgroup>
-                      <col class="c1" /><col class="c2" /><col class="c3" /><col class="c4" />
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th scope="col" data-i18n="mock.col1">المبادرة</th>
-                        <th scope="col" data-i18n="mock.col2">الجهة</th>
-                        <th scope="col" data-i18n="mock.col3">الإنجاز</th>
-                        <th scope="col" data-i18n="mock.col4">الحالة</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td data-i18n="mock.r1">الخدمات الموحّدة</td>
-                        <td class="muted" data-i18n="mock.owner2">التحول الرقمي</td>
-                        <td class="num">
-                          <span class="progress" aria-hidden="true"><i style="width: 78%"></i></span>
-                          <span class="ltr">78%</span>
-                        </td>
-                        <td><span class="chip chip-amber" data-i18n="mock.state1">قيد التنفيذ</span></td>
-                      </tr>
-                      <tr>
-                        <td data-i18n="mock.r2">ربط الفروع</td>
-                        <td class="muted" data-i18n="mock.owner1">إدارة المشاريع</td>
-                        <td class="num">
-                          <span class="progress" aria-hidden="true"><i style="width: 45%"></i></span>
-                          <span class="ltr">45%</span>
-                        </td>
-                        <td><span class="chip chip-amber" data-i18n="mock.state1">قيد التنفيذ</span></td>
-                      </tr>
-                      <tr>
-                        <td data-i18n="mock.r3">مؤشرات الأداء</td>
-                        <td class="muted" data-i18n="mock.owner4">الشؤون المالية</td>
-                        <td class="num">
-                          <span class="progress" aria-hidden="true"><i style="width: 92%"></i></span>
-                          <span class="ltr">92%</span>
-                        </td>
-                        <td><span class="chip chip-mint" data-i18n="mock.state2">مكتملة</span></td>
-                      </tr>
-                      <tr>
-                        <td data-i18n="mock.r4">أتمتة الموافقات</td>
-                        <td class="muted" data-i18n="mock.owner3">خدمة العملاء</td>
-                        <td class="num">
-                          <span class="progress" aria-hidden="true"><i style="width: 61%"></i></span>
-                          <span class="ltr">61%</span>
-                        </td>
-                        <td><span class="chip chip-plain" data-i18n="mock.state3">قيد المراجعة</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <figcaption class="mock-foot">
-              <span data-i18n="mock.footRows">4 من 128 صفًا</span>
-              <span data-i18n="mock.footSync">آخر مزامنة قبل 4 دقائق</span>
-              <span class="mock-bar-chart" aria-hidden="true">
-                <i style="height: 40%"></i><i style="height: 62%"></i><i style="height: 48%"></i>
-                <i class="on" style="height: 88%"></i><i style="height: 70%"></i><i style="height: 54%"></i>
-              </span>
-            </figcaption>
+          <!-- Native controls until site.js swaps in the play button, so the
+               video still plays with scripts off. Nothing loads before a click. -->
+          <figure class="hero-video" data-hero-video>
+            <video
+              controls
+              playsinline
+              preload="none"
+              width="1920"
+              height="1080"
+              poster="assets/video/jadawel-excel-alternative-ar.jpg"
+              aria-label="فيديو تعريفي بمنصة جداول"
+              data-i18n-attr="aria-label:hero.video"
+            >
+              <source src="assets/video/jadawel-excel-alternative-ar.mp4" type="video/mp4" />
+            </video>
+            <button
+              class="hero-video-play"
+              type="button"
+              hidden
+              aria-label="تشغيل الفيديو التعريفي"
+              data-i18n-attr="aria-label:hero.play"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.5 5.6v12.8l10-6.4z" /></svg>
+            </button>
           </figure>
         </div>
       </section>

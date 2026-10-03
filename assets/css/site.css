@@ -286,8 +286,8 @@ p { margin: 0; }
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.18fr);
-  gap: 56px;
+  grid-template-columns: minmax(0, 0.74fr) minmax(0, 1.26fr);
+  gap: 48px;
   align-items: center;
 }
 .eyebrow {
@@ -310,97 +310,73 @@ p { margin: 0; }
   transform: rotate(45deg);
   flex-shrink: 0;
 }
+/* The headline is sized from its own column, so each of its two lines stays
+   whole at any width: the longer one is about 7.4 em wide at weight 800. The
+   vw value is the fallback where container units are unsupported. */
+.hero-copy { container-type: inline-size; }
 .hero h1 {
-  font-size: clamp(2.15rem, 1.35rem + 2.6vw, 3.35rem);
+  font-size: clamp(2.25rem, 0.6rem + 3.6vw, 3.3rem);
+  font-size: clamp(2.25rem, 13cqi, 3.3rem);
   font-weight: 800;
-  margin-block: 22px 20px;
+  line-height: 1.3;
+  margin: 0;
 }
-.hero h1 .accent {
-  color: var(--blue);
-  display: block;
-  text-wrap: balance;
-}
-.hero-lede {
-  font-size: 18px;
-  color: var(--slate);
-  max-width: 56ch;
-}
-/* --- Product mock (hero visual) ----------------------------------------- */
-.mock {
+.hero h1 span { display: block; }
+.hero h1 .accent { color: var(--blue); }
+
+/* --- Hero video ----------------------------------------------------------
+   The product tour, poster first: no video bytes load until the visitor
+   presses play. The 16:9 box is reserved up front so nothing shifts. */
+.hero-video {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 16 / 9;
   background: var(--white);
   border: 1px solid var(--hairline);
   border-radius: var(--radius);
   box-shadow: var(--shadow-float);
   overflow: hidden;
-  font-size: 13px;
-  line-height: 1.6;
 }
-.mock-bar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 11px 14px;
-  border-block-end: 1px solid var(--hairline);
-  background: var(--cloud);
-}
-.mock-dots { display: flex; gap: 5px; }
-.mock-dots i {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--hairline);
+.hero-video video {
   display: block;
-}
-.mock-dots i:first-child { background: var(--coral); }
-.mock-dots i:nth-child(2) { background: var(--amber); }
-.mock-dots i:nth-child(3) { background: var(--mint); }
-.mock-title {
-  font-weight: 700;
-  font-size: 12.5px;
-  color: var(--slate);
-  margin-inline-start: 6px;
-}
-.mock-body { display: grid; grid-template-columns: 138px minmax(0, 1fr); }
-.mock-side {
-  border-inline-end: 1px solid var(--hairline);
-  padding: 14px 12px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   background: var(--white);
 }
-.mock-side b {
-  display: block;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--slate);
-  letter-spacing: 0.04em;
-  margin-block-end: 8px;
+.hero-video-play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
-.mock-side ul { list-style: none; margin: 0; padding: 0; }
-.mock-side li {
-  padding: 6px 9px;
-  border-radius: 7px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--slate);
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.hero-video-play[hidden] { display: none; }
+.hero-video-play svg {
+  width: clamp(64px, 9vw, 92px);
+  height: auto;
+  padding: clamp(16px, 2.2vw, 24px);
+  border-radius: 50%;
+  background: var(--blue);
+  fill: var(--white);
+  box-shadow: 0 0 0 10px rgba(0, 89, 252, 0.16), 0 16px 36px rgba(0, 89, 252, 0.32);
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
-.mock-side li.is-active { background: var(--blue-light); color: var(--blue-dark); }
-.mock-side li span.d {
-  width: 6px;
-  height: 6px;
-  background: currentColor;
-  transform: rotate(45deg);
-  flex-shrink: 0;
-  opacity: 0.75;
+.hero-video-play:hover { background: rgba(11, 15, 25, 0.04); }
+.hero-video-play:hover svg { transform: scale(1.06); background: var(--blue-dark); }
+/* The frame clips overflow, so the focus ring is drawn inside it. */
+.hero-video-play:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: -3px;
+  border-radius: var(--radius);
 }
-.mock-main { padding: 14px 14px 16px; min-width: 0; }
-.mock-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-block-end: 12px;
-}
+
+/* --- Chips (labelled states) -------------------------------------------- */
 .chip {
   display: inline-flex;
   align-items: center;
@@ -420,57 +396,6 @@ p { margin: 0; }
 .chip-coral { background: rgba(227, 93, 106, 0.16); border-color: rgba(178, 52, 66, 0.28); color: #97303c; }
 .chip-plain { background: var(--cloud); }
 
-.mock-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-.mock-table th,
-.mock-table td {
-  text-align: start;
-  padding: 9px 8px;
-  border-block-end: 1px solid var(--hairline);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.mock-table th {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--slate);
-  background: var(--cloud);
-}
-.mock-table td { font-size: 12.5px; font-weight: 500; }
-.mock-table col.c1 { width: 28%; }
-.mock-table col.c2 { width: 23%; }
-.mock-table col.c3 { width: 24%; }
-.mock-table col.c4 { width: 27%; }
-.mock-table .chip {
-  font-size: 10.5px;
-  padding: 3px 8px;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-block;
-  vertical-align: middle;
-}
-.mock-table tr:last-child td { border-block-end: 0; }
-.mock-table td.num { font-variant-numeric: tabular-nums; }
-.mock-table td.muted { color: var(--slate); }
-.mock-table .progress {
-  display: inline-block;
-  vertical-align: middle;
-  width: 30px;
-  height: 6px;
-  border-radius: 3px;
-  background: var(--blue-light);
-  overflow: hidden;
-  margin-inline-end: 6px;
-}
-.mock-table .progress i {
-  display: block;
-  height: 100%;
-  background: var(--blue);
-  border-radius: 3px;
-}
-.mock-scroll { overflow-x: auto; margin-inline: -2px; }
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -482,21 +407,6 @@ p { margin: 0; }
   white-space: nowrap;
   border: 0;
 }
-
-.mock-foot {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-block-start: 1px solid var(--hairline);
-  background: var(--cloud);
-  font-size: 11.5px;
-  color: var(--slate);
-  font-weight: 600;
-}
-.mock-bar-chart { display: flex; align-items: flex-end; gap: 5px; height: 26px; margin-inline-start: auto; }
-.mock-bar-chart i { width: 7px; background: var(--blue-light); border-radius: 2px 2px 0 0; display: block; }
-.mock-bar-chart i.on { background: var(--blue); }
 
 /* --- Section scaffolding ------------------------------------------------- */
 .section { padding-block: 84px; }
@@ -1497,11 +1407,6 @@ section[id] { scroll-margin-top: 104px; }
   .form-grid { grid-template-columns: minmax(0, 1fr); }
   .form-grid .field { grid-column: 1 / -1; }
   .release { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .mock-body { grid-template-columns: minmax(0, 1fr); }
-  .mock-side { display: none; }
-  .mock-table { min-width: 440px; }
-  .mock-scroll { margin-inline: -10px; padding-inline: 10px; }
-  .hero h1 { font-size: 1.95rem; }
   .offer-features--four,
   .offer-features--six { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 16px; }
   .offer-features li { font-size: 14px; }

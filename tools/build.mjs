@@ -102,7 +102,7 @@ async function assetVersion(relPath) {
 /** Stamps every relative assets/... reference with ?v=<content hash>. */
 async function stampAssets(html) {
   const refs = new Set();
-  for (const m of html.matchAll(/(?:src|href)="(assets\/[^"?#]+)"/g)) refs.add(m[1]);
+  for (const m of html.matchAll(/(?:src|href|poster)="(assets\/[^"?#]+)"/g)) refs.add(m[1]);
   for (const m of html.matchAll(/url\((['"]?)(assets\/[^'")?#]+)\1\)/g)) refs.add(m[2]);
 
   let out = html;

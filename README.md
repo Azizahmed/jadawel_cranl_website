@@ -87,7 +87,7 @@ redeploy.
 
 | File | Content |
 | --- | --- |
-| `index.html` | Hero with a live product mock, who it fits, what the data does, digital sovereignty, deployment options, FAQ, closing band |
+| `index.html` | Hero with the headline and the product tour video, who it fits, what the data does, digital sovereignty, deployment options, FAQ, closing band |
 | `templates.html` | Template library, nine ready-to-copy bases with structure previews |
 | `releases.html` | Documented release notes for three releases |
 | `privacy.html` | Privacy and data protection, under the Saudi personal data protection law |
@@ -265,6 +265,28 @@ A trimmed font can silently drop a glyph, so that risk is closed mechanically:
 every build re-reads the pages, extracts the characters they render, and fails
 with the offending codepoint and the fix if any of them is missing from
 `assets/fonts/coverage.txt`.
+
+### Hero video
+
+The home page hero plays the product tour, `assets/video/jadawel-excel-alternative-ar.mp4`
+(1920×1080 H.264/AAC, 2:34, 23 MB, Arabic narration), with a poster rendered from
+its dashboard scene at 1:21:
+
+```bash
+ffmpeg -ss 81 -i assets/video/jadawel-excel-alternative-ar.mp4 -frames:v 1 \
+  -vf scale=1600:-1 -q:v 4 assets/video/jadawel-excel-alternative-ar.jpg
+```
+
+- `preload="none"`: the video costs nothing until play is pressed; only the
+  64 kB poster loads with the page.
+- The file is already fast-start (`moov` before `mdat`), so playback begins
+  before the download ends. Keep it that way if the video is replaced
+  (`ffmpeg -i in.mp4 -c copy -movflags +faststart out.mp4`).
+- Safari plays MP4 only over byte ranges. nginx answers them on its own;
+  `tools/serve.mjs` implements single ranges for the same reason.
+- The markup carries native `controls`, so the video plays with scripts off;
+  `site.js` swaps them for one large play button and restores them on play.
+- The CSP needs no change: `default-src 'self'` covers same-origin media.
 
 ## Imagery
 
