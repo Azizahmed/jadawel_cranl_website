@@ -172,7 +172,7 @@ stated in the text and can be changed in the source file alone.
   carries the approved white-and-blue reverse for Ink. Nothing is traced,
   recoloured, re-spaced, or separated, and the grid symbol is never extracted on
   its own.
-- **Logo size.** Displayed at **135 px**, which is the brand owner's instruction
+- **Logo size.** Displayed at **81 px**, which is the brand owner's instruction
   and **below the 180 px minimum v1.1 sets for digital use**. See *Deviations*.
 - **Colour.** Jadawel Ink structures navigation, framing, and the footer; Jadawel
   Blue marks the one active action per view; Cloud and White carry reading
@@ -235,8 +235,9 @@ What produced it:
   Sans Arabic to the 132 characters this site actually renders, keeping the
   variable weight axis and every Arabic shaping feature. The full-width
   originals live in `tools/fonts/` and are never deployed.
-- **The header logo: 184 kB master to 12 kB.** It is displayed 135 px wide, so
-  `tools/optimize-logo.mjs` renders a 270 px asset for 2x screens. That script
+- **The header logo: 184 kB master to 12 kB.** It was displayed 135 px wide, so
+  `tools/optimize-logo.mjs` renders a 270 px asset for 2x screens; at today's
+  81 px that asset covers 3x screens. That script
   also builds the favicon from the full lockup, since v1.1 does not approve the
   grid symbol as a standalone application icon.
 - **The deployed tree is 389 kB**, down from roughly 3.5 MB. Source material
@@ -376,7 +377,7 @@ Arabic RTL and English LTR:
 
 - no horizontal overflow at any breakpoint
 - no console errors, page errors, failed requests, or 4xx/5xx responses
-- the header stays on a single line from 1141 px up, and the lockup holds its 135 px size
+- the header stays on a single line from 1141 px up, and the lockup holds its 81 px size
 - the language switch flips `dir`, `lang`, translated content, and title
 - both fonts report `loaded`, and Arabic renders with the real Arabic subset
 - keyboard focus is visible on every interactive element (3 px blue outline)
@@ -406,10 +407,12 @@ npm run audit                             # WCAG AA contrast, alt text, heading 
    rendered measurement in this repository was taken in the fallback face.
 3. **The logo is displayed below the identity minimum.** v1.1 sets a 180 px
    minimum width in digital use; the brand owner asked for the lockup 25% smaller
-   than the 180 px it was first set to, which lands at 135 px. At that size the
-   five-square grid symbol is about 10 px per cell, still legible but tighter than
-   the identity intends. Raising it back is a one-line change in
-   `src/css/jadawel.css`.
+   than the 180 px it was first set to, which landed at 135 px, and on 2026-10-03
+   a further 40% smaller, which lands at 81 px, 45% of the minimum. At that size
+   the five-square grid symbol is about 6 px per cell, tighter than the identity
+   intends. Raising it back is two lines in `src/css/jadawel.css` (`.brand img`,
+   `.footer-brand img`) and the `width`/`height` in the header and footer
+   partials.
 4. **The logo is raster.** The packaged master is a 1654x548 PNG. It is placed
    within its native dimensions, but true vector output needs the approved
    outlined SVG, AI, or PDF source.

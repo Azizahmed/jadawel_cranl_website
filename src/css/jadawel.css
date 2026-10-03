@@ -186,7 +186,7 @@ p { margin: 0; }
   min-height: 86px;
 }
 .brand { display: flex; align-items: center; flex-shrink: 0; }
-.brand img { width: 135px; height: auto; }
+.brand img { width: 81px; height: auto; }
 
 .site-nav {
   display: flex;
@@ -1262,7 +1262,7 @@ section[id] { scroll-margin-top: 104px; }
   padding-block-end: 34px;
   border-block-end: 1px solid var(--hairline-ink);
 }
-.footer-brand img { width: 135px; height: auto; }
+.footer-brand img { width: 81px; height: auto; }
 .footer-brand p { margin-block-start: 16px; max-width: 38ch; }
 .footer-col b {
   display: block;

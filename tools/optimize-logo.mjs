@@ -29,7 +29,7 @@ const OUT = path.join(root, "assets/logos");
 const MASTER_W = 1654;
 const MASTER_H = 548;
 
-// 2x the 135 px the site displays.
+// 2x the 135 px the site first displayed; 3x today's 81 px.
 const LOGO_WIDTH = 270;
 const LOGO_HEIGHT = Math.round((LOGO_WIDTH * MASTER_H) / MASTER_W);
 
