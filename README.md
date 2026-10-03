@@ -279,7 +279,7 @@ with the offending codepoint and the fix if any of them is missing from
 ### Hero video
 
 The home page hero plays the product tour, `assets/video/jadawel-excel-alternative-ar.mp4`
-(1920×1080 H.264/AAC, 2:34, 23 MB, Arabic narration), with a poster rendered from
+(1920×1080 H.264/AAC, 2:38, 24 MB, Arabic narration), with a poster rendered from
 its dashboard scene at 1:21:
 
 ```bash
