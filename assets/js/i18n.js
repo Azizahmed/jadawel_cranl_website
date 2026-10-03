@@ -76,7 +76,7 @@ window.JADWEL_I18N = {
     "nav.langLabel": "اختيار اللغة",
 
     "hero.h1a": "أول منصة محلية",
-    "hero.h1b": "لإدارة البيانات",
+    "hero.h1b": "للتعاون وإدارة البيانات",
     "hero.video": "فيديو تعريفي بمنصة جداول",
     "hero.play": "تشغيل الفيديو التعريفي",
 
@@ -356,8 +356,8 @@ window.JADWEL_I18N = {
     "nav.menu": "Menu",
     "nav.langLabel": "Choose language",
 
-    "hero.h1a": "The first local",
-    "hero.h1b": "data platform",
+    "hero.h1a": "The first local platform",
+    "hero.h1b": "to share and manage data",
     "hero.video": "An introduction to Jadawel (video, in Arabic)",
     "hero.play": "Play the introduction video",
 
