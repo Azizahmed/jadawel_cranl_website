@@ -146,10 +146,16 @@ jobs:
           test "$(code /assets/css/site.0123456789.css)" = "200"
           test "$(code /does-not-exist)" = "404"
 
-          curl -fsS http://127.0.0.1:8080/ | grep -q "منصّة سعودية للأعمال\|جداول"
+          # Each body is read in full before grep looks at it: `curl | grep -q`
+          # fails under pipefail whenever grep matches and exits before curl
+          # has finished writing (curl exit 23).
+          home=$(curl -fsS http://127.0.0.1:8080/)
+          grep -q "جداول" <<<"$home"
           # No -f here: the page being checked is a 404 by design.
-          curl -sS http://127.0.0.1:8080/does-not-exist | grep -q "لم نجد هذه الصفحة"
-          curl -fsS http://127.0.0.1:8080/assets/css/site.css | grep -q "jadawel"
+          missing=$(curl -sS http://127.0.0.1:8080/does-not-exist)
+          grep -q "لم نجد هذه الصفحة" <<<"$missing"
+          css=$(curl -fsS http://127.0.0.1:8080/assets/css/site.css)
+          grep -q "jadawel" <<<"$css"
           echo "The image serves the site."
 
       - name: Push
