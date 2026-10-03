@@ -12,6 +12,6 @@
 # a tag does not identify a fixed image. Replacing the digest below is what makes
 # CranL pull the new build, and CranL can keep serving the previous image from
 # its cache until the app is redeployed.
-ARG JADAWEL_WEBSITE_IMAGE=ghcr.io/azizahmed/jadawel_cranl_website@sha256:99dd0fdde6f4a3ad4fa6319ae874cbe2b9c3ee442f056265a828a6ce84d2d20b
+ARG JADAWEL_WEBSITE_IMAGE=ghcr.io/azizahmed/jadawel_cranl_website@sha256:7856754565f36030c541d1ebc10eb82dc3fac4a0d31a8feee8e873bca6c4170c
 
 FROM ${JADAWEL_WEBSITE_IMAGE}
